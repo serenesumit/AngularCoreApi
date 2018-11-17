@@ -1,0 +1,166 @@
+<alert *ngIf="isStep1Valid" type="danger">
+    You have checked one or more field that make you ineligible to register. Please contact your county Supervisor of Elections.
+  </alert>
+<div class="form-group" [ngClass]="{'has-error' : formErrors.IsCitizen}">
+<label class="col-md-3 control-label" for="IsCitizen">Are you a USA citizen?</label>
+<div class="col-md-4">
+  <label class="radio-inline">
+    <input id="IsCitizen" type="radio" value="1" formControlName="IsCitizen" (blur)="logValidationErrors()">Yes
+  </label>
+  <label class="radio-inline">
+    <input id="IsCitizen" type="radio" value="0" formControlName="IsCitizen" (blur)="logValidationErrors()">No
+  </label>
+  <span class="help-block" *ngIf="formErrors.IsCitizen">
+    {{formErrors.IsCitizen}}
+  </span>
+</div>
+</div>
+<div class="form-group" [ngClass]="{'has-error' : formErrors.IsFelon}">
+<label class="col-md-3 control-label" for="IsFelon">I am not a convicted felon</label>
+<div class="col-md-8">
+  <label class="radio-inline">
+    <input name="IsFelon" type="radio" value="1" formControlName="IsFelon" (blur)="logValidationErrors()">Yes
+  </label>
+  <label class="radio-inline">
+    <input name="IsFelon" type="radio" value="0" formControlName="IsFelon" (blur)="logValidationErrors()">No
+  </label>
+  <span class="help-block" *ngIf="formErrors.IsFelon">
+    {{formErrors.IsFelon}}
+  </span>
+</div>
+</div>
+<div class="form-group" [ngClass]="{'has-error' : formErrors.IsMentalIncomp}">
+<label class="col-md-3 control-label" for="IsMentalIncomp">I have not been adjudicated mentally
+  incapacitated</label>
+<div class="col-md-8">
+  <label class="radio-inline">
+    <input name="IsMentalIncomp" id="IsMentalIncomp" type="radio" value="1" formControlName="IsMentalIncomp"
+      (blur)="logValidationErrors()">Yes
+  </label>
+  <label class="radio-inline">
+    <input name="IsMentalIncomp" id="IsMentalIncomp" type="radio" value="0" formControlName="IsMentalIncomp"
+      (blur)="logValidationErrors()">No
+  </label>
+  <span class="help-block" *ngIf="formErrors.IsMentalIncomp">
+    {{formErrors.IsMentalIncomp}}
+  </span>
+</div>
+</div>
+
+<div class="form-group" id="div1">
+<div class="col-md-1"></div>
+<div class="col-md-11">
+  <label>
+    <input name="NewRegistration" id="NewRegistration" [attr.disabled]="isNewRegistration == true ? true : null"
+      type="checkbox" (change)="setNewRegistrationStatus()" formControlName="NewRegistration"> New
+    Registration
+  </label>
+</div>
+</div>
+<div id="div2">
+<div class="form-group">
+  <div class="col-md-1"></div>
+  <div class="col-md-11">
+    <label>
+      <input name="RecordUpdate" id="RecordUpdate" [attr.disabled]="isNewrecordUpdate == true ? true : null"
+        type="checkbox" (change)="setNewRegistrationStatusFalse()" formControlName="RecordUpdate">
+      Record Update/Change (e.g., Address, Party Affiliation, Name, Signature)
+    </label>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-md-1"></div>
+  <div class="col-md-11">
+    <label>
+      <input name="RequesttoReplace" [attr.disabled]="isNewrecordUpdate == true ? true : null" id="RequesttoReplace"
+        (change)="setNewRegistrationStatusFalse()" type="checkbox" formControlName="RequesttoReplace">
+      Request to Replace Voter Information Card
+    </label>
+  </div>
+</div>
+</div>
+
+<div class="form-group" [ngClass]="{'has-error' : formErrors.DLNumber}">
+<label class="col-sm-2 control-label" for="DLNumber">DL Number</label>
+<div class="col-sm-8">
+  <input id="DLNumber" type="text" class="form-control" formControlName="DLNumber" (blur)="logValidationErrors()"
+    [patterns]="DLPattern" mask="A000-000-00-000-0">
+  <span class="help-block" *ngIf="formErrors.DLNumber">
+    {{formErrors.DLNumber}}
+  </span>
+</div>
+</div>
+
+<!-- <div [hidden]="!eligibilityFrm.controls.LastSSN.valid">
+                      <div class="form-group" [ngClass]="{'has-error' : formErrors.LastName}">
+                          <label class="col-sm-2 control-label" for="LastName">Last Name</label>
+                          <div class="col-sm-8">
+                            <input id="LastName" type="text" class="form-control" formControlName="LastName" (blur)="logValidationErrors()">
+                            <span class="help-block" *ngIf="formErrors.LastName">
+                              {{formErrors.LastName}}
+                            </span>
+                          </div>
+                        </div>
+                    Hello from div, Last SSN is Valid
+                  </div> -->
+
+<div class="form-group" [ngClass]="{'has-error' : formErrors.LastSSN}">
+<label class="col-sm-2 control-label" for="LastSSN">Last SSN</label>
+<div class="col-sm-8">
+  <input name="LastSSN" id="LastSSN" type="text" class="form-control" formControlName="LastSSN" (blur)="logValidationErrors()"
+    [patterns]="SSNPattern" mask="0000">
+  <span class="help-block" *ngIf="formErrors.LastSSN">
+    {{formErrors.LastSSN}}
+  </span>
+</div>
+</div>
+
+<div class="form-group" [ngClass]="{'has-error' : formErrors.LastName}">
+<label class="col-sm-2 control-label" for="LastName">Last Name</label>
+<div class="col-sm-8">
+  <input id="LastName" type="text" class="form-control" formControlName="LastName" (blur)="logValidationErrors()">
+  <span class="help-block" *ngIf="formErrors.LastName">
+    {{formErrors.LastName}}
+  </span>
+</div>
+</div>
+<div class="form-group" [ngClass]="{'has-error' : formErrors.FirstName}">
+<label class="col-sm-2 control-label" for="FirstName">First Name </label>
+<div class="col-sm-8">
+  <input id="FirstName" type="text" class="form-control" formControlName="FirstName" (blur)="logValidationErrors()">
+  <span class="help-block" *ngIf="formErrors.FirstName">
+    {{formErrors.FirstName}}
+  </span>
+</div>
+</div>
+<div class="form-group" [ngClass]="{'has-error' : formErrors.MiddleName}">
+<label class="col-sm-2 control-label" for="MiddleName">Middle Name </label>
+<div class="col-sm-8">
+  <input id="MiddleName" type="text" class="form-control" formControlName="MiddleName" (blur)="logValidationErrors()">
+  <span class="help-block" *ngIf="formErrors.MiddleName">
+    {{formErrors.MiddleName}}
+  </span>
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-sm-2 control-label" for="Dob">Date of Birth </label>
+<mat-form-field appearance="outline" class="col-sm-8">
+  <input matInput [matDatepicker]="picker" placeholder="Date of Birth" formControlName="Dob">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+  <!-- <mat-error *ngIf="formErrors.Dob ">
+                          {{ formErrors.Dob }}
+                        </mat-error> -->
+  <mat-error style="color:#a94442; font-size: 14px;">
+    Date of birth is required
+  </mat-error>
+</mat-form-field>
+</div>
+
+<div class="form-group" id="div4">
+  <div class="col-md-1"></div>
+  <div class="col-md-11">
+      <re-captcha   (resolved)="resolvedCaptcha($event)" #reCaptcha [siteKey]="RecaptaSiteKey"></re-captcha>                      
+  </div>
+</div>

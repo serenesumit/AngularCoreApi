@@ -9,7 +9,7 @@ export interface IEligibility {
   DLNumber: string;
   LastSSN: string;
   FirstName :string;
-  // IssueDate: string;
+  IssueDate: string;
   LastName: string;
   Firstname: string;
   MiddleName: string;
