@@ -35,14 +35,12 @@ export class EligibilityreactiveComponent implements OnInit {
   @ViewChild('staticTabs') staticTabs: TabsetComponent;
   @ViewChild('reCaptcha') reCaptcha: RecaptchaComponent;
 
-  constructor(private fb: FormBuilder, private service: EligibilityService, private route: ActivatedRoute,
-    private router: Router, private modalService: BsModalService, private sessionEService: LocalStorageService) {
-
-
-
-
-
-
+  constructor(private fb: FormBuilder
+    , private service: EligibilityService
+    , private route: ActivatedRoute,
+    private router: Router
+    , private modalService: BsModalService
+    , private sessionEService: LocalStorageService) {
 
   }
   disableEnable() {
@@ -382,7 +380,7 @@ export class EligibilityreactiveComponent implements OnInit {
     this.sessionEService.RemoveEligibilityFromSession();
     this.ngOnInit();
     this.showNextButton = true;
-    this.modalRef.hide();
+    this.modalRef.hide();    
     this.reCaptcha.reset(); //to reset captcha on cancel 
   }
 
@@ -405,7 +403,7 @@ export class EligibilityreactiveComponent implements OnInit {
   editData:IEligibility;
   EditMode(){
     this.IsReviewMode=!this.IsReviewMode;
-    // this.isRecaptaValid = false;
+    // this.isRecaptaValid = false;    
     const contactData = this.mapDateData(this.eligibilityFrm.value);
     contactData.NewRegistration = this.eligibilityFrm.get('NewRegistration').value;
     contactData.RecordUpdate = this.eligibilityFrm.get('RecordUpdate').value;

@@ -48,27 +48,26 @@ namespace OvrApp.API.Controllers
             {
                 return BadRequest();
             }
-            
-            _context.Eligibilitys.Add(new Eligibility
-            {
-                IsCitizen = item.IsCitizen,
-                IsFelon = item.IsFelon,
-                IsMentalIncomp = item.IsMentalIncomp,
-                NewRegistration = item.NewRegistration,
-                RecordUpdate = item.RecordUpdate,
-                RequesttoReplace = item.RequesttoReplace,
-                DLNumber = item.DLNumber,
-                LastSSN = item.LastSSN,
-                IssueDate = item.IssueDate,
-                LastName = item.LastName,
-                Firstname = item.Firstname,
-                MiddleName = item.MiddleName,
-                Suffix = item.Suffix,
-                Dob = item.Dob
-            });
-            _context.SaveChanges();
+            //_context.Eligibilitys.Add(new Eligibility
+            //{
+            //    IsCitizen = item.IsCitizen,
+            //    IsFelon = item.IsFelon,
+            //    IsMentalIncomp = item.IsMentalIncomp,
+            //    NewRegistration = item.NewRegistration,
+            //    RecordUpdate = item.RecordUpdate,
+            //    RequesttoReplace = item.RequesttoReplace,
+            //    DLNumber = item.DLNumber,
+            //    LastSSN = item.LastSSN,
+            //    IssueDate = item.IssueDate,
+            //    LastName = item.LastName,
+            //    Firstname = item.Firstname,
+            //    MiddleName = item.MiddleName,
+            //    Suffix = item.Suffix,
+            //    Dob = item.Dob
+            //});
+            //_context.SaveChanges();
 
-            return Ok( new { message= "Eligibility is added successfully."});
+            return Ok(new { message = "Eligibility is added successfully." });
         }
     }
 }

@@ -9,6 +9,8 @@
         <h3 class="panel-title">Register Voter</h3>
       </div>
       <div class="panel-body">
+
+          <!-- <app-step2></app-step2> -->
         <!-- <div class="form-group">
           <mat-radio-group class="contact-radio-group" formControlName="IsCitizen" >
               <label class="col-md-3 control-label" for="IsCitizen">Are you a USA citizen?</label>
@@ -135,7 +137,7 @@
                       <div class="col-md-11">
                         <label>
                           <input name="IsSSNAvailable" id="IsSSNAvailable"
-                            (change)="setSSNDetail()()" type="checkbox" formControlName="IsSSNAvailable">
+                            (change)="setSSNDetail()" type="checkbox" formControlName="IsSSNAvailable">
                           I do not have Florida SSN 
                         </label>
                       </div>
@@ -344,14 +346,12 @@
 
             </tab>
             <tab heading="Step2" [disabled]="true">
-
-              Step 2
+              <app-step2></app-step2>
+              
 
             </tab>
-            <tab heading="Step3" [disabled]="true">
-
-              step3
-
+            <tab heading="Step3" [disabled]="true">              
+              <app-step3></app-step3>              
             </tab>
           </tabset>
         </div>

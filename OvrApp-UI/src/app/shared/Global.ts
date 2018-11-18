@@ -29,4 +29,5 @@ public static mentalIncomps = [{
       id: 1
   }];
   public static technologies = ['JavaScript', 'SharePoint', 'C#'];
+  public static partys = ['Select a party Affliliation or No Affliliation', 'Florida Democratic Party', 'Republican Party of Florida'];
 }
