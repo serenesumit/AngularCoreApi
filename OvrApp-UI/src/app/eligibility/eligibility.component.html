@@ -8,15 +8,15 @@
 <form [formGroup]="eligibilityForm" (ngSubmit)="onFormSubmit()">
   <table>
 	 <tr>
-	   <td>DLNumber: </td>
+	   <td>FlDlNum: </td>
 	   <td>
-		<input formControlName="DLNumber">
+		<input formControlName="FlDlNum">
 	   </td>
 	 </tr>
 	 <tr>
-	   <td>LastSSN: </td>
+	   <td>SsnLast4: </td>
 	   <td>
-	      <input formControlName="LastSSN">
+	      <input formControlName="SsnLast4">
 	   </td>
 	 </tr>
 	 <tr>
@@ -35,6 +35,6 @@
 </form>
 <h3>Eligibility Details</h3>
 <p *ngFor="let eligibility of allEligibility$ | async">
-	{{eligibility.DLNumber}} | {{eligibility.LastName}} |
-  {{eligibility.LastSSN}}
+	{{eligibility.FlDlNum}} | {{eligibility.LastName}} |
+  {{eligibility.SsnLast4}}
 </p>

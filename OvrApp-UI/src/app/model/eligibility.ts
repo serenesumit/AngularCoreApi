@@ -1,21 +1,20 @@
 export interface IEligibility {
-  id: number;
-  IsCitizen: string;
-  IsFelon: string;
-  IsMentalIncomp: string;
+  OvrApplicationId: number;
+  UsCitizen: boolean;
+  NotAFelon: boolean;
+  MentalIncompStatus: boolean;
   NewRegistration: boolean;
   RecordUpdate: boolean;
   RequesttoReplace: boolean;
-  DLNumber: string;
-  LastSSN: string;
+  FlDlNum: string;
+  SsnLast4: string;
   FirstName :string;
-  IssueDate: string;
-  LastName: string;
-  Firstname: string;
+  DlIssueDate: string;
+  LastName: string;  
   MiddleName: string;
-  Suffix: string;
-   Dob: string;
- // Dob: Date;
+  NameSuffix: string;
+   DateOfBirth: string;   
+ // DateOfBirth: Date;
 
   currentTabId:number;
 }

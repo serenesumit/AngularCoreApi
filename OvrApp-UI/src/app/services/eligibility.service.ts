@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { IEligibility } from '../model/eligibility';
 import { catchError } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
+import { Global } from '../shared/Global';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,6 +15,7 @@ const httpOptions = {
 @Injectable()
 export class EligibilityService {
 
+
   public sharedEligibility = {};
 
 
@@ -21,7 +23,7 @@ constructor(private http: HttpClient) { }
 
 // getAllEligibility(url: string): Observable<IEligibility[]> {
   getAllEligibility(url: string): Observable<IEligibility[]> {
-  return this.http.get<IEligibility[]>('http://localhost:44319/api/ovrapp/getAllEligibility')
+  return this.http.get<IEligibility[]>(Global.BASE_USER_ENDPOINT+'ovrapp/getAllEligibility')
     .pipe(
       catchError(this.handleError)
     );
@@ -39,8 +41,8 @@ getOneEligibility(id: number): Observable<IEligibility[]> {
 }
 
 // insert new contact details
-addEligibility(ieligibility: IEligibility): Observable<any> {
-  return this.http.post<IEligibility>('http://localhost:44319/api/ovrapp/addEligibility', ieligibility, httpOptions)
+addEligibility(ieligibility: IEligibility): Observable<any> {  
+  return this.http.post<IEligibility>(Global.BASE_USER_ENDPOINT+'ovrapp/firstStep/addEligibility', ieligibility, httpOptions)
     .pipe(
       catchError(this.handleError)
     );
@@ -51,7 +53,7 @@ postEligibility(ieligibility: IEligibility): Observable<HttpResponse<IEligibilit
   const httpHeaders = new HttpHeaders({
        'Content-Type' : 'application/json'
   });
-  return this.http.post<IEligibility>('http://localhost:44319/api/ovrapp/addEligibility', ieligibility,
+  return this.http.post<IEligibility>(Global.BASE_USER_ENDPOINT+'ovrapp/firstStep/addEligibility', ieligibility,
       {
         headers: httpHeaders,
         observe: 'response'

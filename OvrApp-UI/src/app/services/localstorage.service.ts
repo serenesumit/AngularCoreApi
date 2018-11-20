@@ -14,9 +14,7 @@ constructor(){};
     localStorage.removeItem('eligibility');
   }
 
-  getEligibilityFromSession(){
-
-    debugger;
+  getEligibilityFromSession(){    
     var item = localStorage.getItem('eligibility');
     var jsonObject: IEligibility = JSON.parse(item);
     return jsonObject;

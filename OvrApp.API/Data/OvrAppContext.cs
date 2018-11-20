@@ -9,5 +9,7 @@ namespace OvrApp.API.Data
         {}
 
         public DbSet<Eligibility> Eligibilitys {get; set;}
+
+        public DbSet<OvrApplication> OvrApplications { get; set; }
     }
 }

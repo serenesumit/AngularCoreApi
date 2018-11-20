@@ -1,5 +1,5 @@
 export class Global {
- // public static BASE_USER_ENDPOINT = 'api/contact/';
+ public static BASE_USER_ENDPOINT = 'http://localhost:44319/api/';
  public static citizens = [{
   name: 'Yes',
   id: 1,

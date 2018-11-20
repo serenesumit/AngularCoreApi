@@ -29,8 +29,11 @@ export class EligibilityreactiveComponent implements OnInit {
   RecaptaSiteKey: string = CommonSetting.RecaptaSiteKey;
   isRecaptaValid: boolean = false;
   IsReviewMode:boolean = false;
-  
-  SuffixList: string[] = ['I', 'II', 'III','IV','IX','JR','SR','V','VI','VII','VIII'];  
+  IsEligibilityOn:boolean = false;
+  //startDate = new Date(1990, 0, 1);
+  todayDate = new Date();
+  startDate =new Date(this.todayDate.getFullYear()-18, this.todayDate.getMonth()-1, this.todayDate.getDate());
+  NameSuffixList: string[] = ['I', 'II', 'III','IV','IX','JR','SR','V','VI','VII','VIII'];  
 
   @ViewChild('staticTabs') staticTabs: TabsetComponent;
   @ViewChild('reCaptcha') reCaptcha: RecaptchaComponent;
@@ -56,9 +59,9 @@ export class EligibilityreactiveComponent implements OnInit {
   selectTab(tabId: number) {
     if (tabId == 1) {
       //Eligiblity validation
-      var isEValid = (this.eligibilityFrm.get('IsCitizen').value == 1) && (this.eligibilityFrm.get('IsFelon').value == 1)
-        && (this.eligibilityFrm.get('IsMentalIncomp').value == 1)
-        && this.eligibilityFrm.valid && this.isRecaptaValid;
+      var isEValid = (this.eligibilityFrm.get('UsCitizen').value == 1) && (this.eligibilityFrm.get('NotAFelon').value == 1)
+        && (this.eligibilityFrm.get('MentalIncompStatus').value == 1);
+        //&& this.eligibilityFrm.valid && this.isRecaptaValid;
       if (isEValid) {
         this.staticTabs.tabs[1].disabled = false;
         this.isStep1Valid = false;
@@ -103,8 +106,8 @@ export class EligibilityreactiveComponent implements OnInit {
   }
 
   validateEligibility() {
-    var isEValid = (this.eligibilityFrm.get('IsCitizen').value == 1) && (this.eligibilityFrm.get('IsFelon').value == 1)
-      && (this.eligibilityFrm.get('IsMentalIncomp').value == 1);
+    var isEValid = (this.eligibilityFrm.get('UsCitizen').value == 1) && (this.eligibilityFrm.get('NotAFelon').value == 1)
+      && (this.eligibilityFrm.get('MentalIncompStatus').value == 1);
     if (isEValid) {
       this.staticTabs.tabs[1].disabled = false;
     } else {
@@ -118,44 +121,44 @@ export class EligibilityreactiveComponent implements OnInit {
     contactData.NewRegistration = this.eligibilityFrm.get('NewRegistration').value;
     contactData.RecordUpdate = this.eligibilityFrm.get('RecordUpdate').value;
     contactData.RequesttoReplace = this.eligibilityFrm.get('RequesttoReplace').value;
-    //const contactData = new Eligibility(this.eligibilityFrm.get('IsCitizen').value, this.eligibilityFrm.get('IsFelon').value, this.eligibilityFrm.get('IsMentalIncomp').value);
+    //const contactData = new Eligibility(this.eligibilityFrm.get('UsCitizen').value, this.eligibilityFrm.get('NotAFelon').value, this.eligibilityFrm.get('MentalIncompStatus').value);
     contactData.currentTabId = tabId;
     this.sessionEService.SaveEligibilityToSession(contactData);
   }
 
 
   formErrors = {
-    'IsCitizen': '',
-    'IsFelon': '',
-    'IsMentalIncomp': '',
-    'DLNumber': '',
-    'LastSSN': '',
+    'UsCitizen': '',
+    'NotAFelon': '',
+    'MentalIncompStatus': '',
+    'FlDlNum': '',
+    'SsnLast4': '',
     'LastName': '',
     'FirstName': '',
     'MiddleName': '',
-    'Dob': '',
-    'IssueDate':'',
-    'Suffix':''
+    'DateOfBirth': '',
+    'DlIssueDate':'',
+    'NameSuffix':''
     // 'proficiency': ''
   };
   // This object contains all the validation messages for this form
   validationMessages = {
-    'IsCitizen': {
-      'required': 'IsCitizen is required.',
+    'UsCitizen': {
+      'required': 'UsCitizen is required.',
     },
-    'IsFelon': {
-      'required': 'IsFelon is required.',
+    'NotAFelon': {
+      'required': 'NotAFelon is required.',
     },
-    'IsMentalIncomp': {
-      'required': 'IsMentalIncomp is required.',
+    'MentalIncompStatus': {
+      'required': 'MentalIncompStatus is required.',
     },
-    'DLNumber': {
-      'required': 'DLNumber is required.',
-      'minlength': 'DLNumber must be greater than 2 characters.',
-      'maxlength': 'DLNumber must be less than 13 characters.'
+    'FlDlNum': {
+      'required': 'FlDlNum is required.',
+      'minlength': 'FlDlNum must be greater than 2 characters.',
+      'maxlength': 'FlDlNum must be less than 13 characters.'
     },
-    'LastSSN': {
-      'required': 'LastSSN is required.',
+    'SsnLast4': {
+      'required': 'SsnLast4 is required.',
       'maxlength': 'Last4SSN must be less than 4 characters.'
     },
     'LastName': {
@@ -167,15 +170,15 @@ export class EligibilityreactiveComponent implements OnInit {
     'MiddleName': {
       'required': 'MiddleName is required.'
     },
-    'Dob': {
-      'required': 'Dob is required.'
+    'DateOfBirth': {
+      'required': 'DateOfBirth is required.'
     },
 
-    'IssueDate': {
+    'DlIssueDate': {
       'required': 'DL issue date is required.'
     },
-    'Suffix': {
-      'required': 'Suffix is required.'
+    'NameSuffix': {
+      'required': 'NameSuffix is required.'
     }
     
     
@@ -188,25 +191,25 @@ export class EligibilityreactiveComponent implements OnInit {
 
     this.eligibilityFrm = this.fb.group({
       id: [''],
-      IsCitizen: ['', Validators.required],
-      IsFelon: ['', Validators.required],
-      IsMentalIncomp: ['', Validators.required],
+      UsCitizen: ['', Validators.required],
+      NotAFelon: ['', Validators.required],
+      MentalIncompStatus: ['', Validators.required],
 
       NewRegistration: [''],
       RecordUpdate: [''],
       RequesttoReplace: [''],
       IsDLAvailable:[''],
       IsSSNAvailable:[''],
-      //  DLNumber: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10), Validators.pattern(this.unamePattern)]],
-      DLNumber: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(13)]],
-      LastSSN: ['', [Validators.required, Validators.maxLength(4)]],
+      //  FlDlNum: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10), Validators.pattern(this.unamePattern)]],
+      FlDlNum: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(13)]],
+      SsnLast4: ['', [Validators.required, Validators.maxLength(4)]],
       LastName: ['', Validators.required],
       FirstName: ['', Validators.required],
       MiddleName: ['', Validators.required],
-      // Dob: ['']
-      Dob: ['', Validators.required],
-      IssueDate:['', Validators.required],
-      Suffix:['', Validators.required]      
+      // DateOfBirth: ['']
+      DateOfBirth: ['', Validators.required],
+      DlIssueDate:['', Validators.required],
+      NameSuffix:['', Validators.required]      
     });
     this.citizens = Global.citizens;
 
@@ -216,27 +219,28 @@ export class EligibilityreactiveComponent implements OnInit {
 
     var modelFromSession = this.sessionEService.getEligibilityFromSession();    
     if (modelFromSession != null) {
-      this.eligibilityFrm.get('IsCitizen').setValue(modelFromSession.IsCitizen);
-      this.eligibilityFrm.get('IsFelon').setValue(modelFromSession.IsFelon);
-      this.eligibilityFrm.get('IsMentalIncomp').setValue(modelFromSession.IsMentalIncomp);
-
+      this.eligibilityFrm.get('UsCitizen').setValue(modelFromSession.UsCitizen);
+      this.eligibilityFrm.get('NotAFelon').setValue(modelFromSession.NotAFelon);
+      this.eligibilityFrm.get('MentalIncompStatus').setValue(modelFromSession.MentalIncompStatus);
       this.eligibilityFrm.get('NewRegistration').setValue(modelFromSession.NewRegistration);
       this.eligibilityFrm.get('RecordUpdate').setValue(modelFromSession.RecordUpdate);
       this.eligibilityFrm.get('RequesttoReplace').setValue(modelFromSession.RequesttoReplace);
-      this.eligibilityFrm.get('DLNumber').setValue(modelFromSession.DLNumber);
-      this.eligibilityFrm.get('LastSSN').setValue(modelFromSession.LastSSN);
+      this.eligibilityFrm.get('FlDlNum').setValue(modelFromSession.FlDlNum);
+      this.eligibilityFrm.get('SsnLast4').setValue(modelFromSession.SsnLast4);
       this.eligibilityFrm.get('LastName').setValue(modelFromSession.LastName);
       this.eligibilityFrm.get('FirstName').setValue(modelFromSession.FirstName);
       this.eligibilityFrm.get('MiddleName').setValue(modelFromSession.MiddleName);
-      this.eligibilityFrm.get('Dob').setValue(modelFromSession.Dob);
-      this.eligibilityFrm.get('IssueDate').setValue(modelFromSession.IssueDate);      
-      this.selectTab(modelFromSession.currentTabId);
+      this.eligibilityFrm.get('DateOfBirth').setValue(modelFromSession.DateOfBirth);
+      this.eligibilityFrm.get('DlIssueDate').setValue(modelFromSession.DlIssueDate);        
+      this.enableEligibilityForm();
+      this.selectTab(modelFromSession.currentTabId);      
     } else {
-
       this.selectTab(0);
+      this.eligibilityFrm.get('UsCitizen').setValue('0');
+      this.eligibilityFrm.get('NotAFelon').setValue('0');
+      this.eligibilityFrm.get('MentalIncompStatus').setValue('0');
     }
-
-    this.isStep1Valid = false;
+    this.isStep1Valid = false;        
   }
 
   logValidationErrors(group: FormGroup = this.eligibilityFrm): void {
@@ -262,8 +266,8 @@ export class EligibilityreactiveComponent implements OnInit {
 
 
 
-    var isEValid = (this.eligibilityFrm.get('IsCitizen').value == 1) && (this.eligibilityFrm.get('IsFelon').value == 1)
-      && (this.eligibilityFrm.get('IsMentalIncomp').value == 1)
+    var isEValid = (this.eligibilityFrm.get('UsCitizen').value == 1) && (this.eligibilityFrm.get('NotAFelon').value == 1)
+      && (this.eligibilityFrm.get('MentalIncompStatus').value == 1)
       && this.eligibilityFrm.valid && this.isRecaptaValid;
     if (isEValid) {
       this.staticTabs.tabs[1].disabled = false;
@@ -272,9 +276,13 @@ export class EligibilityreactiveComponent implements OnInit {
 
       const contactData = this.mapDateData(formData.value);
 
-      contactData.NewRegistration = this.eligibilityFrm.get('NewRegistration').value;
+      contactData.NewRegistration = this.eligibilityFrm.get('NewRegistration').value;      
       contactData.RecordUpdate = this.eligibilityFrm.get('RecordUpdate').value;
       contactData.RequesttoReplace = this.eligibilityFrm.get('RequesttoReplace').value;
+
+      contactData.MentalIncompStatus = this.eligibilityFrm.get('MentalIncompStatus').value=='1'?true:false;
+      contactData.NotAFelon = this.eligibilityFrm.get('NotAFelon').value=='1'?true:false;
+      contactData.UsCitizen = this.eligibilityFrm.get('UsCitizen').value=='1'?true:false;
 
       this.service.addEligibility(contactData).subscribe(
         (data: IEligibility) => {
@@ -295,12 +303,12 @@ export class EligibilityreactiveComponent implements OnInit {
   }
 
   mapDateData(customer: IEligibility): IEligibility {
-    if (customer.Dob != null && customer.Dob != "") {
-      customer.Dob = new Date(customer.Dob).toISOString();
+    if (customer.DateOfBirth != null && customer.DateOfBirth != "") {
+      customer.DateOfBirth = new Date(customer.DateOfBirth).toISOString();
     }
 
-    if (customer.IssueDate != null && customer.IssueDate != "") {
-      customer.IssueDate = new Date(customer.IssueDate).toISOString();
+    if (customer.DlIssueDate != null && customer.DlIssueDate != "") {
+      customer.DlIssueDate = new Date(customer.DlIssueDate).toISOString();
     }
 
     
@@ -339,33 +347,31 @@ export class EligibilityreactiveComponent implements OnInit {
 
   hideDLDetail:boolean= true;
 
-  setDLDetail(){
-
-    debugger;
+  setDLDetail(){    
     this.hideDLDetail = !this.hideDLDetail;
 
     if(!this.hideDLDetail){      
-      this.eligibilityFrm.controls['DLNumber'].setValidators(null);
-      this.eligibilityFrm.controls['IssueDate'].setValidators(null);
+      this.eligibilityFrm.controls['FlDlNum'].setValidators(null);
+      this.eligibilityFrm.controls['DlIssueDate'].setValidators(null);
       
       
     }else{
-      this.eligibilityFrm.controls['DLNumber'].setValidators([Validators.required, Validators.minLength(2), Validators.maxLength(13)]);      
-      this.eligibilityFrm.controls['IssueDate'].setValidators([Validators.required]); 
+      this.eligibilityFrm.controls['FlDlNum'].setValidators([Validators.required, Validators.minLength(2), Validators.maxLength(13)]);      
+      this.eligibilityFrm.controls['DlIssueDate'].setValidators([Validators.required]); 
     }   
-    this.eligibilityFrm.controls['DLNumber'].updateValueAndValidity(); 
-    this.eligibilityFrm.controls['IssueDate'].updateValueAndValidity(); 
+    this.eligibilityFrm.controls['FlDlNum'].updateValueAndValidity(); 
+    this.eligibilityFrm.controls['DlIssueDate'].updateValueAndValidity(); 
   }
   hideSSNDetail:boolean= true;
   setSSNDetail(){
     this.hideSSNDetail = !this.hideSSNDetail;
     if(!this.hideSSNDetail){      
-      this.eligibilityFrm.controls['LastSSN'].setValidators(null);                  
+      this.eligibilityFrm.controls['SsnLast4'].setValidators(null);                  
     }else{      
-      this.eligibilityFrm.controls['LastSSN'].setValidators([Validators.required,Validators.maxLength(4)]); 
+      this.eligibilityFrm.controls['SsnLast4'].setValidators([Validators.required,Validators.maxLength(4)]); 
     }  
 
-    this.eligibilityFrm.controls['LastSSN'].updateValueAndValidity(); 
+    this.eligibilityFrm.controls['SsnLast4'].updateValueAndValidity(); 
   }
 
 
@@ -380,8 +386,11 @@ export class EligibilityreactiveComponent implements OnInit {
     this.sessionEService.RemoveEligibilityFromSession();
     this.ngOnInit();
     this.showNextButton = true;
+    this.IsReviewMode = false; 
+       
     this.modalRef.hide();    
     this.reCaptcha.reset(); //to reset captcha on cancel 
+    this.resolvedCaptcha(null);    
   }
 
   decline(): void {
@@ -391,11 +400,11 @@ export class EligibilityreactiveComponent implements OnInit {
 
   }
 
-  resolvedCaptcha(captchaResponse: string) {
-    console.log(`Resolved captcha with response ${captchaResponse}:`);
-
+  resolvedCaptcha(captchaResponse: string) {    
     if (captchaResponse != null) {
       this.isRecaptaValid = true;
+    }else{
+      this.isRecaptaValid = false;
     }
   }
 
@@ -410,5 +419,11 @@ export class EligibilityreactiveComponent implements OnInit {
     contactData.RequesttoReplace = this.eligibilityFrm.get('RequesttoReplace').value;
     console.log(contactData);    
     this.editData = contactData;
+  }
+
+  enableEligibilityForm(){    
+    var isEValidp = (this.eligibilityFrm.get('UsCitizen').value == 1) && (this.eligibilityFrm.get('NotAFelon').value == 1)
+        && (this.eligibilityFrm.get('MentalIncompStatus').value == 1);            
+      this.IsEligibilityOn = isEValidp;      
   }
 }

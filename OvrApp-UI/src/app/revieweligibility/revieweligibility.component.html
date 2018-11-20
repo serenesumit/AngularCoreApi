@@ -14,14 +14,14 @@
     </thead>
     <tbody *ngIf="getcustomer != null">
       <tr>
-        <td>{{ getcustomer.DLNumber }}</td>
+        <td>{{ getcustomer.FlDlNum }}</td>
         <td>
-          {{ getcustomer.Dob | date }}
+          {{ getcustomer.DateOfBirth | date }}
         </td>
         <td>{{ getcustomer.FirstName }}</td>
-        <td>{{ getcustomer.IssueDate }}</td>
+        <td>{{ getcustomer.DlIssueDate }}</td>
         <td>{{ getcustomer.LastName }}</td>
-        <td>{{ getcustomer.LastSSN }}</td>
+        <td>{{ getcustomer.SsnLast4 }}</td>
         <td>{{ getcustomer.MiddleName }}</td>
       </tr>
     </tbody>
@@ -76,25 +76,25 @@
               <tr>
                 <td>
                   <div class=".col-xs-6 .col-sm-4">
-                    <b>Florida DL or Florida ID card number: </b> {{ getcustomer.DLNumber }}
+                    <b>Florida DL or Florida ID card number: </b> {{ getcustomer.FlDlNum }}
                   </div>
                 </td>
 
                 <td>
                   <div class=".col-xs-6 .col-sm-4">
-                    <b>Florida DL Issued Date: </b> {{ getcustomer.IssueDate }}
+                    <b>Florida DL Issued Date: </b> {{ getcustomer.DlIssueDate }}
                   </div>
                 </td>
               </tr>
               <tr>
                 <td>
                   <div class=".col-xs-6 .col-sm-4">
-                    <b>Last 4 digits of your Social Security Number: </b> {{ getcustomer.LastSSN }}
+                    <b>Last 4 digits of your Social Security Number: </b> {{ getcustomer.SsnLast4 }}
                   </div>
                 </td>
 
                 <td>
-                  <div class=".col-xs-6 .col-sm-4"><b>Date of Birth:</b> {{ getcustomer.Dob | date }}</div>
+                  <div class=".col-xs-6 .col-sm-4"><b>Date of Birth:</b> {{ getcustomer.DateOfBirth | date }}</div>
                 </td>
               </tr>
               <tr>
@@ -110,7 +110,7 @@
                   <div class=".col-xs-6 .col-sm-4"><b>MiddleName:</b> {{ getcustomer.MiddleName }}</div>
                 </td>
                 <td>
-                  <div class=".col-xs-6 .col-sm-4"><b>Suffix: </b></div>
+                  <div class=".col-xs-6 .col-sm-4"><b>NameSuffix: </b></div>
                 </td>
               </tr>
             </tbody>

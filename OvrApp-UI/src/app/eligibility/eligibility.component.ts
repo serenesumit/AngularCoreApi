@@ -20,17 +20,17 @@ export class EligibilityComponent implements OnInit {
 
   ngOnInit() {
     this.eligibilityForm = this.formBuilder.group({
-      IsCitizen: ['', [ Validators.required ] ],
-      IsFelon: ['', [ Validators.required ] ],
-      IsMentalIncomp: ['', [ Validators.required ] ],
+      UsCitizen: ['', [ Validators.required ] ],
+      NotAFelon: ['', [ Validators.required ] ],
+      MentalIncompStatus: ['', [ Validators.required ] ],
       NewRegistration: ['', [ Validators.required ] ],
       RecordUpdate: ['', [ Validators.required ] ],
       RequesttoReplace: ['', [ Validators.required ] ],
-      DLNumber: ['', [ Validators.required ] ],
-      LastSSN: ['', [ Validators.required ] ],
-      IssueDate: ['', [ Validators.required ] ],
+      FlDlNum: ['', [ Validators.required ] ],
+      SsnLast4: ['', [ Validators.required ] ],
+      DlIssueDate: ['', [ Validators.required ] ],
       LastName: ['', [ Validators.required ] ],
-      Firstname: ['', [ Validators.required ] ],
+      FirstName: ['', [ Validators.required ] ],
       MiddleName: ['', [ Validators.required ] ],
     });
     this.saveEligibility();
@@ -63,14 +63,14 @@ export class EligibilityComponent implements OnInit {
     this.allEligibility$ = this.eligibilityService.getAllEligibility('');
  }
 
-//  get IsCitizen() {
-//   return this.eligibilityForm.get('IsCitizen');
+//  get UsCitizen() {
+//   return this.eligibilityForm.get('UsCitizen');
 // }
-// get IsFelon() {
-//   return this.eligibilityForm.get('IsFelon');
+// get NotAFelon() {
+//   return this.eligibilityForm.get('NotAFelon');
 // }
-// get IsMentalIncomp() {
-//   return this.eligibilityForm.get('IsMentalIncomp');
+// get MentalIncompStatus() {
+//   return this.eligibilityForm.get('MentalIncompStatus');
 // }
 // get NewRegistration() {
 //   return this.eligibilityForm.get('NewRegistration');
@@ -81,14 +81,14 @@ export class EligibilityComponent implements OnInit {
 // get RequesttoReplace() {
 //   return this.eligibilityForm.get('RequesttoReplace');
 // }
-// get DLNumber() {
-//   return this.eligibilityForm.get('DLNumber');
+// get FlDlNum() {
+//   return this.eligibilityForm.get('FlDlNum');
 // }
-// get LastSSN() {
-//   return this.eligibilityForm.get('LastSSN');
+// get SsnLast4() {
+//   return this.eligibilityForm.get('SsnLast4');
 // }
-// get IssueDate() {
-//   return this.eligibilityForm.get('IssueDate');
+// get DlIssueDate() {
+//   return this.eligibilityForm.get('DlIssueDate');
 // }
 // get LastName() {
 //   return this.eligibilityForm.get('LastName');
@@ -99,35 +99,35 @@ export class EligibilityComponent implements OnInit {
 // get MiddleName() {
 //   return this.eligibilityForm.get('MiddleName');
 // }
-// get Suffix() {
-//   return this.eligibilityForm.get('Suffix');
+// get NameSuffix() {
+//   return this.eligibilityForm.get('NameSuffix');
 // }
 saveEligibility() {
-//  const eligibility = {id: '3', IsCitizen: 'true',
-//  IsFelon: 'false', IsMentalIncomp: 'false', NewRegistration: 'true', RecordUpdate: 'true',
-//  RequesttoReplace: 'false', DLNumber: 'A1234569879', LastSSN: '7894', IssueDate: '12/12/2007',
-//  LastName: 'LastName', Firstname: 'FirstName', MiddleName: 'MiddleName', Suffix: 'Mr', Dob: '12/12/1981'};
-// const eligibility = {id: '3', IsCitizen: 'true',
-//  IsFelon: 'false', IsMentalIncomp: 'false', NewRegistration: 'true', RecordUpdate: 'true',
-//  RequesttoReplace: 'false', DLNumber: 'A1234569879', LastSSN: '7894',
-//  LastName: 'LastName', Firstname: 'FirstName', MiddleName: 'MiddleName', Suffix: 'Mr'};
+//  const eligibility = {id: '3', UsCitizen: 'true',
+//  NotAFelon: 'false', MentalIncompStatus: 'false', NewRegistration: 'true', RecordUpdate: 'true',
+//  RequesttoReplace: 'false', FlDlNum: 'A1234569879', SsnLast4: '7894', DlIssueDate: '12/12/2007',
+//  LastName: 'LastName', Firstname: 'FirstName', MiddleName: 'MiddleName', NameSuffix: 'Mr', DateOfBirth: '12/12/1981'};
+// const eligibility = {id: '3', UsCitizen: 'true',
+//  NotAFelon: 'false', MentalIncompStatus: 'false', NewRegistration: 'true', RecordUpdate: 'true',
+//  RequesttoReplace: 'false', FlDlNum: 'A1234569879', SsnLast4: '7894',
+//  LastName: 'LastName', Firstname: 'FirstName', MiddleName: 'MiddleName', NameSuffix: 'Mr'};
  const eligibility = this.eligibilityForm.value;
      this.eligibilityService.postEligibility(eligibility).subscribe(res => {
           const eligi: IEligibility = res.body;
-          console.log(eligi.IsCitizen);
-          console.log(eligi.IsFelon);
-          console.log(eligi.IsMentalIncomp);
+          console.log(eligi.UsCitizen);
+          console.log(eligi.NotAFelon);
+          console.log(eligi.MentalIncompStatus);
           // console.log(eligi.NewRegistration);
           // console.log(eligi.RecordUpdate);
           // console.log(eligi.RequesttoReplace);
-          console.log(eligi.DLNumber);
-          console.log(eligi.LastSSN);
-          // console.log(eligi.IssueDate);
+          console.log(eligi.FlDlNum);
+          console.log(eligi.SsnLast4);
+          // console.log(eligi.DlIssueDate);
           console.log(eligi.LastName);
-          console.log(eligi.Firstname);
+          console.log(eligi.FirstName);
           console.log(eligi.MiddleName);
-          console.log(eligi.Suffix);
-          // console.log(eligi.Dob);
+          console.log(eligi.NameSuffix);
+          // console.log(eligi.DateOfBirth);
           console.log(res.headers.get('Content-Type'));
           this.loadAllEligibilitys();
         },
