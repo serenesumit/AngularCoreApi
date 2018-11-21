@@ -425,5 +425,6 @@ export class EligibilityreactiveComponent implements OnInit {
     var isEValidp = (this.eligibilityFrm.get('UsCitizen').value == 1) && (this.eligibilityFrm.get('NotAFelon').value == 1)
         && (this.eligibilityFrm.get('MentalIncompStatus').value == 1);            
       this.IsEligibilityOn = isEValidp;      
+      this.isStep1Valid = !isEValidp;
   }
 }
