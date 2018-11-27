@@ -26,7 +26,7 @@
 
         </div>
         <mat-form-field appearance="outline"  (blur)="logValidationErrors()" >
-          <mat-select placeholder="Select a Party"  formControlName="PartyAffiliation">
+          <mat-select placeholder="Select a Party"  formControlName="partyAffiliation">
             <mat-option>-- None --</mat-option>
             <mat-option *ngFor="let party  of partys" [value]="party">
               {{ party }}
@@ -54,14 +54,14 @@
       <br />
 
       <div class='row' id="manualAddressEntry">
-          <div class='col-sm-3' [ngClass]="{'has-error' : formErrors.StreetNumber}">
+          <div class='col-sm-3' [ngClass]="{'has-error' : formErrors.resStreetNumber}">
               <div class='form-group'>
 
-                  <label for="StreetNumber">Street Number <span style="color:#e80000;">*</span></label>
+                  <label for="resStreetNumber">Street Number <span style="color:#e80000;">*</span></label>
                   &nbsp;&nbsp;&nbsp;
-                  <input type="text" id="StreetNumber"  (blur)="logValidationErrors()" formControlName="StreetNumber"  class="form-control">
-                  <span class="help-block" *ngIf="formErrors.StreetNumber">
-                      {{formErrors.StreetNumber}}
+                  <input type="text" id="resStreetNumber"  (blur)="logValidationErrors()" formControlName="resStreetNumber"  class="form-control">
+                  <span class="help-block" *ngIf="formErrors.resStreetNumber">
+                      {{formErrors.resStreetNumber}}
                     </span>
               </div>
 
@@ -71,7 +71,7 @@
               <div class='form-group'>
 
                   <label for="LegalAddressNameSuffix">Street Number NameSuffix</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="resStreetNumberSuffix">
               </div>
 
           </div>
@@ -79,20 +79,20 @@
               <div class='form-group'>
 
                   <label for="LegalAddressDirection">Pre Direction</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="resStreetPreDirection">
               </div>
 
           </div>         
 
 
-          <div class='col-sm-3'  [ngClass]="{'has-error' : formErrors.StreetName}">
+          <div class='col-sm-3'  [ngClass]="{'has-error' : formErrors.resStreetName}">
               <div class='form-group'>
 
-                  <label for="StreetName">Street Name <span style="color:#e80000;">*</span></label>
+                  <label for="resStreetName">Street Name <span style="color:#e80000;">*</span></label>
                   &nbsp;&nbsp;&nbsp;
-                  <input type="text" id="StreetName"  (blur)="logValidationErrors()" formControlName="StreetName"  class="form-control">
-                  <span class="help-block" *ngIf="formErrors.StreetName">
-                      {{formErrors.StreetName}}
+                  <input type="text" id="resStreetName"  (blur)="logValidationErrors()" formControlName="resStreetName"  class="form-control">
+                  <span class="help-block" *ngIf="formErrors.resStreetName">
+                      {{formErrors.resStreetName}}
                     </span>
               </div>
 
@@ -101,7 +101,7 @@
               <div class='form-group'>
 
                   <label for="LegalAddressType">Type</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="resStreetType">
               </div>
 
           </div>
@@ -109,7 +109,7 @@
               <div class='form-group'>
 
                   <label for="LegalAddressDirNameSuffix">Post Direction</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="resStreetPostDirection">
               </div>
 
           </div>
@@ -117,14 +117,14 @@
               <div class='form-group'>
 
                   <label for="LegalAddressUnitType">Unit Type</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="resUnitType">
               </div>
           </div>
           <div class='col-sm-3'>
               <div class='form-group'>
 
                   <label for="LegalAddressUnitNumber">Unit Number</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="resUnitNumber">
 
               </div>
 
@@ -138,29 +138,29 @@
 
 
 
-          <div class='col-sm-3' [ngClass]="{'has-error' : formErrors.CityName}">
+          <div class='col-sm-3' [ngClass]="{'has-error' : formErrors.resUspsCityName}">
               <div class='form-group'>
 
-                  <label for="CityName">City Name <span style="color:#e80000;">*</span></label>
+                  <label for="resUspsCityName">City Name <span style="color:#e80000;">*</span></label>
                   &nbsp;&nbsp;&nbsp;
-                  <input id="CityName"  (blur)="logValidationErrors()" formControlName="CityName"  class="form-control">
-                  <span class="help-block" *ngIf="formErrors.CityName">
-                      {{formErrors.CityName}}
+                  <input id="CityName"  (blur)="logValidationErrors()" formControlName="resUspsCityName"  class="form-control">
+                  <span class="help-block" *ngIf="formErrors.resUspsCityName">
+                      {{formErrors.resUspsCityName}}
                     </span>
               </div>
 
           </div>
 
 
-          <div class='col-sm-3' [ngClass]="{'has-error' : formErrors.ZipCode}">
+          <div class='col-sm-3' [ngClass]="{'has-error' : formErrors.resZipCode}">
               <div class='form-group'>
-                  <label for="ZipCode">Zip Code <span style="color:#e80000;">*</span></label>
+                  <label for="resZipCode">Zip Code <span style="color:#e80000;">*</span></label>
                   &nbsp;&nbsp;&nbsp;
-                  <input id="ZipCode"   (blur)="logValidationErrors()" formControlName="ZipCode"  class="form-control"
+                  <input id="resZipCode"   (blur)="logValidationErrors()" formControlName="resZipCode"  class="form-control"
                                   
                   [patterns]="ZipCodePattern" mask="0000000000">
                   <span class="help-block" *ngIf="formErrors.ZipCode">
-                      {{formErrors.ZipCode}}
+                      {{formErrors.resZipCode}}
                     </span>
               </div>
           </div>
@@ -169,14 +169,14 @@
           <div class='col-sm-3'>
               <div class='form-group'>
                   <label for="LegalAddressZipCode4">Zip CodePlus4</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="resZipCodePlus4">
               </div>
           </div>
           <div class='col-sm-3'>
               <div class='form-group'>
 
                   <label for="LegalAddressCounty">County</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" formControlName="countyOfResidence">
               </div>
           </div>
 </div>
@@ -184,30 +184,26 @@
 <hr style="border-color:black;" />
 <div class='row'>
   <div class='col-sm-8'>
-      <div class='form-group'  [ngClass]="{'has-error' : formErrors.IsMailingAddress}">
+      <div class='form-group'>
           <div style="font-weight:bold">
               <fieldset>
                   <legend style="font-size:16px; border-bottom:0px; padding-left:0px; float: left; width:60%; font-weight:bold">Mailing address is same as your residential address.</legend>
                   
-                  <label for="IsMailingAddress">
-                      <input name="IsMailingAddress" type="radio" value="1" formControlName="IsMailingAddress" (blur)="logValidationErrors()">Yes
+                  <label for="mailingAddSameAsResi">
+                      <input name="mailingAddSameAsResi" type="radio" value="1" formControlName="mailingAddSameAsResi">Yes
                   </label>
                   &nbsp; &nbsp;
                   
-                  <label for="MailingSameAsResidenceNo">
-                      <input name="IsMailingAddress" type="radio" value="0" formControlName="IsMailingAddress" (blur)="logValidationErrors()">No
+                  <label for="mailingAddSameAsResi">
+                      <input name="mailingAddSameAsResi" type="radio" value="0" formControlName="mailingAddSameAsResi">No
                   </label>
-
-                  <span class="help-block" *ngIf="formErrors.IsMailingAddress">
-                      {{formErrors.IsMailingAddress}}
-                    </span>
               </fieldset>
           </div>
       </div>     
   </div>
 </div>
 <br />
-<div [hidden]="RdFrm.controls.IsMailingAddress.value == '1'" class="form-group" id="MailAddress">
+<div [hidden]="RdFrm.controls.mailingAddSameAsResi.value == '1'" class="form-group" id="MailAddress">
   <h3> Mailing Address</h3>
   <h5>(This information is not required.)</h5>
   <hr style="border-color:black;" />
@@ -216,35 +212,35 @@
           <div class='form-group'>
 
               <label for="MAddressLine1">Address Line 1</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" formControlName="mailAddrLine1">
           </div>
       </div>
       <div class='col-sm-4'>
           <div class='form-group'>
 
               <label for="MAddressLine2">Address Line 2</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" formControlName="mailAddrLine2">
           </div>
       </div>
       <div class='col-sm-4'>
           <div class='form-group'>
 
               <label for="MAddressLine3">Address Line 3</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" formControlName="mailAddrLine3">
           </div>
       </div>
       <div class='col-sm-4'>
           <div class='form-group'>
 
               <label for="MailingCity">City</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" formControlName="mailAddrCity">
           </div>
       </div>
       <div class='col-sm-4'>
           <div class='form-group'>
 
               <label for="MailingState">State</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" formControlName="mailAddrState">
 
           </div>
       </div>
@@ -252,14 +248,14 @@
           <div class='form-group'>
 
               <label for="MailingZipCode">Zip Code</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" formControlName="mailAddrZip">
           </div>
       </div>
       <div class='col-sm-4'>
           <div class='form-group'>
 
               <label for="MCountryOutsideUS">Country if outside US</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" formControlName="mailAddrCountry">
           </div>
       </div>
   </div>
@@ -272,28 +268,28 @@
                       <div class='form-group'>
 
                           <label for="FAddressLine1">Address Line 1</label>
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" formControlName="formerAddrLine1">
                       </div>
                   </div>
                   <div class='col-sm-4'>
                       <div class='form-group'>
 
                           <label for="FAddressLine2">Address Line 2</label>
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" formControlName="formerAddrLine2">
                       </div>
                   </div>
                   <div class='col-sm-4'>
                       <div class='form-group'>
 
                           <label for="FAddressLine3">Address Line 3</label>
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" formControlName="fromerAddrLine3">
                       </div>
                   </div>
                   <div class='col-sm-4'>
                       <div class='form-group'>
 
                           <label for="FormerCity">City</label>
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" formControlName="formerAddrCity">
                       </div>
                   </div>
                   <div class='col-sm-4'>
@@ -301,7 +297,7 @@
 
                           <label for="FormerState">State</label>
 
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" formControlName="formerAddrState">
 
                       </div>
                   </div>
@@ -311,28 +307,28 @@
                       <div class='form-group'>
 
                           <label for="FormerZipCode">Zip Code</label>
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" formControlName="formerAddrZip">
                       </div>
                   </div>
                   <div class='col-sm-4'>
                       <div class='form-group'>
 
                           <label for="FormerFirstName">Former First Name</label>
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" formControlName="formerFirstName">
                       </div>
                   </div>
                   <div class='col-sm-4'>
                       <div class='form-group'>
 
                           <label for="FormerMiddleName">Former Middle Name</label>
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" formControlName="formerMiddleName">
                       </div>
                   </div>
                   <div class='col-sm-4'>
                       <div class='form-group'>
 
                           <label for="FormerLastName">Former Last Name</label>
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" formControlName="formerLastName">
                       </div>
                   </div>
               </div>
@@ -350,14 +346,14 @@
               <br /><br />
               <div class='row'>
                   <div class='col-sm-4'>
-                      <div class='form-group' [ngClass]="{'has-error' : formErrors.Gender}">
+                      <div class='form-group' [ngClass]="{'has-error' : formErrors.gender}">
 
                           <label> Gender <br/>
-                          <input name="Gender" type="radio" value="1" formControlName="Gender" (blur)="logValidationErrors()">
+                          <input name="gender" type="radio" value="1" formControlName="gender" (blur)="logValidationErrors()">
                            Male</label> &nbsp;
-                           <input name="Gender" type="radio" value="2" formControlName="Gender" (blur)="logValidationErrors()"> <label for="Gender"> Female</label>
-                           <span class="help-block" *ngIf="formErrors.Gender">
-                              {{formErrors.Gender}}
+                           <input name="gender" type="radio" value="2" formControlName="gender" (blur)="logValidationErrors()"> <label for="gender"> Female</label>
+                           <span class="help-block" *ngIf="formErrors.gender">
+                              {{formErrors.gender}}
                             </span>
                       </div>                     
                   </div>
@@ -365,18 +361,18 @@
                       <div class='form-group'>
                           <label for="Race">Race/Ethnicity</label>
 
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" formControlName="raceId">
                       </div>
                   </div>
                   <div class='row'>
                       <div class='col-sm-4'>
-                          <div class='form-group' [ngClass]="{'has-error' : formErrors.PhoneNumber}">
+                          <div class='form-group' [ngClass]="{'has-error' : formErrors.daytimePhone}">
 
-                              <label for="PhoneNumber">Telephone Number</label>
-                              <input id="PhoneNumber"   (blur)="logValidationErrors()" formControlName="PhoneNumber"  class="form-control"                                                  
+                              <label for="daytimePhone">Telephone Number</label>
+                              <input id="daytimePhone"   (blur)="logValidationErrors()" formControlName="daytimePhone"  class="form-control"                                                  
                               [patterns]="PhonePattern" mask="(000)-0000-000-00">
-                              <span class="help-block" *ngIf="formErrors.PhoneNumber">
-                                  {{formErrors.PhoneNumber}}
+                              <span class="help-block" *ngIf="formErrors.daytimePhone">
+                                  {{formErrors.daytimePhone}}
                               </span>
                           </div>
 
@@ -394,21 +390,21 @@
                           </div>
                           <div class="form-group"  id="dvEmail">
                               <div class='col-sm-4'>
-                                  <div class='form-group' [ngClass]="{'has-error' : formErrors.Email}">
+                                  <div class='form-group' [ngClass]="{'has-error' : formErrors.publicEmailAddress}">
 
-                                      <label for="Email">Email</label>
-                                      <input type="email" id="Email"   (blur)="logValidationErrors()" formControlName="Email"  class="form-control">
-                                      <span class="help-block" *ngIf="formErrors.Email">
-                                          {{formErrors.Email}}
+                                      <label for="publicEmailAddress">Email</label>
+                                      <input type="email" id="publicEmailAddress"   (blur)="logValidationErrors()" formControlName="publicEmailAddress"  class="form-control">
+                                      <span class="help-block" *ngIf="formErrors.publicEmailAddress">
+                                          {{formErrors.publicEmailAddress}}
                                       </span>
                                   </div>                                  
                               </div>
                               <div class='col-sm-4'>
-                                  <div class='form-group' [ngClass]="{'has-error' : formErrors.ConfirmEmail}">
-                                      <label for="ConfirmEmail">Confirm Email Address</label>
-                                      <input type="email" id="ConfirmEmail"   (blur)="logValidationErrors()" formControlName="ConfirmEmail"  class="form-control">
-                                      <span class="help-block" *ngIf="formErrors.ConfirmEmail">
-                                          {{formErrors.ConfirmEmail}}
+                                  <div class='form-group' [ngClass]="{'has-error' : formErrors.emailConfirmation}">
+                                      <label for="emailConfirmation">Confirm Email Address</label>
+                                      <input type="email" id="emailConfirmation"   (blur)="logValidationErrors()" formControlName="emailConfirmation"  class="form-control">
+                                      <span class="help-block" *ngIf="formErrors.emailConfirmation">
+                                          {{formErrors.emailConfirmation}}
                                       </span>
                                   </div>
                               </div>
@@ -420,7 +416,7 @@
                       <div class='form-group'>
 
                           <label for="PlaceOfBirth"> State or Country of Birth</label>
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" formControlName="placeOfBirth">
                       </div>
                   </div>
 
@@ -435,38 +431,38 @@
                   <div class="col-lg-12">
 
                       <br />
-                      <div style="font-weight:bold"  [ngClass]="{'has-error' : formErrors.VotingAssistRequired}">
+                      <div style="font-weight:bold"  [ngClass]="{'has-error' : formErrors.votingAssistRequired}">
                           <fieldset>
                               <legend style="font-size:14px; border-bottom:0px; padding-left:0px; float: left; width:30%">I will need assistance with voting.</legend>
-                              <input name="VotingAssistRequired" type="radio" value="1" formControlName="VotingAssistRequired" (blur)="logValidationErrors()">
-                              <label for="VotingAssistRequired">
+                              <input name="votingAssistRequired" type="radio" value="1" formControlName="votingAssistRequired" (blur)="logValidationErrors()">
+                              <label for="votingAssistRequired">
                                   Yes
                               </label>
 
-                              <input name="VotingAssistRequired" type="radio" value="2" formControlName="VotingAssistRequired" (blur)="logValidationErrors()"> 
+                              <input name="votingAssistRequired" type="radio" value="2" formControlName="votingAssistRequired" (blur)="logValidationErrors()"> 
                                                             <label for="VotingAssistRequiredNo">
                                   No
                               </label>
-                              <span class="help-block" *ngIf="formErrors.VotingAssistRequired">
-                                  {{formErrors.VotingAssistRequired}}
+                              <span class="help-block" *ngIf="formErrors.votingAssistRequired">
+                                  {{formErrors.votingAssistRequired}}
                                 </span>
                           </fieldset>
                       </div>
 
-                      <div style="font-weight:bold" [ngClass]="{'has-error' : formErrors.PoolWorkerVolunteer}">
+                      <div style="font-weight:bold" [ngClass]="{'has-error' : formErrors.pollWorkerVolunteer}">
                           <fieldset>
                               <legend style="font-size:14px; border-bottom:0px; padding-left:0px; float: left; width:30%">I am interested in becoming a poll worker.</legend>
-                              <input name="PoolWorkerVolunteer" type="radio" value="1" formControlName="PoolWorkerVolunteer" (blur)="logValidationErrors()">
-                              <label for="PoolWorkerVolunteer">
+                              <input name="pollWorkerVolunteer" type="radio" value="1" formControlName="pollWorkerVolunteer" (blur)="logValidationErrors()">
+                              <label for="pollWorkerVolunteer">
                                   Yes
                               </label>
 
-                              <input name="PoolWorkerVolunteer" type="radio" value="2" formControlName="PoolWorkerVolunteer" (blur)="logValidationErrors()"> 
-                              <label for="PoolWorkerVolunteer">
+                              <input name="pollWorkerVolunteer" type="radio" value="2" formControlName="pollWorkerVolunteer" (blur)="logValidationErrors()"> 
+                              <label for="pollWorkerVolunteer">
                                   No
                               </label>
-                              <span class="help-block" *ngIf="formErrors.PoolWorkerVolunteer">
-                                  {{formErrors.PoolWorkerVolunteer}}
+                              <span class="help-block" *ngIf="formErrors.pollWorkerVolunteer">
+                                  {{formErrors.pollWorkerVolunteer}}
                                 </span>
                           </fieldset>
                       </div>

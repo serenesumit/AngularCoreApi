@@ -30,11 +30,10 @@ constructor(private http: HttpClient) { }
 }
 
 // Get Customer By Id
-getOneEligibility(id: number): Observable<IEligibility[]> {
-  const newurl = `${'http://localhost:44319/api/ovrapp/getEligibility'}?id=${id}`;
-// const newurl = `${'http://localhost:44319/api/customer/getCustomer'}?id=${44}`;
- console.log(newurl);
- return this.http.get<IEligibility[]>(newurl)
+getOneEligibility(id: number): Observable<IEligibility> {
+  
+  const newurl = Global.BASE_USER_ENDPOINT+'ovrapp/' + id;
+ return this.http.get<IEligibility>(newurl)
  .pipe(
    catchError(this.handleError)
  );
@@ -42,7 +41,8 @@ getOneEligibility(id: number): Observable<IEligibility[]> {
 
 // insert new contact details
 addEligibility(ieligibility: IEligibility): Observable<any> {  
-  return this.http.post<IEligibility>(Global.BASE_USER_ENDPOINT+'ovrapp/firstStep/addEligibility', ieligibility, httpOptions)
+  alert("called");
+  return this.http.post<IEligibility>(Global.BASE_USER_ENDPOINT+'ovrapp', ieligibility, httpOptions)
     .pipe(
       catchError(this.handleError)
     );
@@ -53,12 +53,22 @@ postEligibility(ieligibility: IEligibility): Observable<HttpResponse<IEligibilit
   const httpHeaders = new HttpHeaders({
        'Content-Type' : 'application/json'
   });
-  return this.http.post<IEligibility>(Global.BASE_USER_ENDPOINT+'ovrapp/firstStep/addEligibility', ieligibility,
+  return this.http.post<IEligibility>(Global.BASE_USER_ENDPOINT+'ovrapp', ieligibility,
       {
         headers: httpHeaders,
         observe: 'response'
       }
   );
+}
+
+
+
+updateEligibility(id:number,ieligibility: IEligibility): Observable<IEligibility> {  
+  alert("called");
+  return this.http.put<IEligibility>(Global.BASE_USER_ENDPOINT+'ovrapp/'+id, ieligibility, httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    );
 }
 
 // custom handler

@@ -1,9 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using OvrApp.API.Data;
 using OvrApp.API.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OvrApp.API.Controllers
 {
@@ -12,11 +13,14 @@ namespace OvrApp.API.Controllers
     public class OvrAppController : Controller
     {
         private readonly OvrAppContext _context;
+        private IMapper _mapper;
 
         // initiate database context
-        public OvrAppController(OvrAppContext context)
+        public OvrAppController(OvrAppContext context,
+               IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -28,7 +32,7 @@ namespace OvrApp.API.Controllers
         }
 
         [HttpGet]
-        [Route("getEligibility")]
+        [Route("{id:int}")]
         public IActionResult GetById(long id)
         {
             // filter contact records by contact id
@@ -41,7 +45,7 @@ namespace OvrApp.API.Controllers
         }
 
         [HttpPost]
-        [Route("firstStep/addEligibility")]
+        // [Route("addEligibility")]
         public IActionResult CreateEligibility([FromBody] OvrApplication item)
         {
             // set bad request if contact data is not provided in body
@@ -49,102 +53,37 @@ namespace OvrApp.API.Controllers
             {
                 return BadRequest();
             }
-            _context.OvrApplications.Add(new OvrApplication
-            {
-                UsCitizen = item.UsCitizen,
-                NotAFelon = item.NotAFelon,
-                MentalIncompStatus = item.MentalIncompStatus,
-                NewRegistration = item.NewRegistration,
-                RecordUpdate = item.RecordUpdate,
-                RequesttoReplace = item.RequesttoReplace,
-                FlDlNum = item.FlDlNum,
-                SsnLast4 = item.SsnLast4,
-                DlIssueDate = item.DlIssueDate,
-                LastName = item.LastName,
-                FirstName = item.FirstName,
-                MiddleName = item.MiddleName,
-                NameSuffix = item.NameSuffix,
-                DateOfBirth = item.DateOfBirth
-            });
-            _context.SaveChanges();
 
-            return Ok(new { message = "Eligibility is added successfully." });
+            var dbOvrApplication = _mapper.Map<OvrApplication>(item);
+            dbOvrApplication.SessionId = Guid.NewGuid().ToString();
+            _context.OvrApplications.Add(dbOvrApplication);
+            _context.SaveChanges();
+            var data = GetOvrApplicationById(dbOvrApplication.OvrApplicationId);
+            return new ObjectResult(data);
         }
 
 
-
         [HttpPut]
-        [Route("{id:int}/first/updateEligibility")]
+        [Route("{id:int}")]
         public IActionResult UpdateEligibility(long id, [FromBody] OvrApplication model)
         {
             // set bad request if contact data is not provided in body
-            if (id == 0)
+            if (id == 0 || id != model.OvrApplicationId)
             {
                 return BadRequest();
             }
 
             var dbOvrApplication = this.GetOvrApplicationById(id);
-            if (dbOvrApplication == null)
+            if (dbOvrApplication == null || model == null)
             {
                 return NotFound();
             }
+            dbOvrApplication = _mapper.Map<OvrApplication>(model);
 
-            dbOvrApplication.UsCitizen = model.UsCitizen;
-            dbOvrApplication.NotAFelon = model.NotAFelon;
-            dbOvrApplication.MentalIncompStatus = model.MentalIncompStatus;
-            dbOvrApplication.NewRegistration = model.NewRegistration;
-            dbOvrApplication.RecordUpdate = model.RecordUpdate;
-            dbOvrApplication.RequesttoReplace = model.RequesttoReplace;
-            dbOvrApplication.FlDlNum = model.FlDlNum;
-            dbOvrApplication.SsnLast4 = model.SsnLast4;
-            dbOvrApplication.DlIssueDate = model.DlIssueDate;
-            dbOvrApplication.LastName = model.LastName;
-            dbOvrApplication.FirstName = model.FirstName;
-            dbOvrApplication.MiddleName = model.MiddleName;
-            dbOvrApplication.NameSuffix = model.NameSuffix;
-            dbOvrApplication.DateOfBirth = model.DateOfBirth;
             _context.Update(dbOvrApplication);
             _context.SaveChanges();
 
-            return Ok(new { message = "Eligibility is updated successfully." });
-        }
-        
-
-
-        [HttpPut]
-        [Route("{id:int}/second/updateEligibility")]
-        public IActionResult UpdateSecondEligibility(long id, [FromBody] OvrApplication model)
-        {
-            // set bad request if contact data is not provided in body
-            if (id == 0)
-            {
-                return BadRequest();
-            }
-
-            var dbOvrApplication = this.GetOvrApplicationById(id);
-            if (dbOvrApplication == null)
-            {
-                return NotFound();
-            }
-
-            dbOvrApplication.UsCitizen = model.UsCitizen;
-            dbOvrApplication.NotAFelon = model.NotAFelon;
-            dbOvrApplication.MentalIncompStatus = model.MentalIncompStatus;
-            dbOvrApplication.NewRegistration = model.NewRegistration;
-            dbOvrApplication.RecordUpdate = model.RecordUpdate;
-            dbOvrApplication.RequesttoReplace = model.RequesttoReplace;
-            dbOvrApplication.FlDlNum = model.FlDlNum;
-            dbOvrApplication.SsnLast4 = model.SsnLast4;
-            dbOvrApplication.DlIssueDate = model.DlIssueDate;
-            dbOvrApplication.LastName = model.LastName;
-            dbOvrApplication.FirstName = model.FirstName;
-            dbOvrApplication.MiddleName = model.MiddleName;
-            dbOvrApplication.NameSuffix = model.NameSuffix;
-            dbOvrApplication.DateOfBirth = model.DateOfBirth;
-            _context.Update(dbOvrApplication);
-            _context.SaveChanges();
-
-            return Ok(new { message = "Eligibility is updated successfully." });
+            return new ObjectResult(GetOvrApplicationById(dbOvrApplication.OvrApplicationId));
         }
 
 

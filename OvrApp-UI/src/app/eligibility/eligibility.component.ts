@@ -20,18 +20,18 @@ export class EligibilityComponent implements OnInit {
 
   ngOnInit() {
     this.eligibilityForm = this.formBuilder.group({
-      UsCitizen: ['', [ Validators.required ] ],
-      NotAFelon: ['', [ Validators.required ] ],
-      MentalIncompStatus: ['', [ Validators.required ] ],
-      NewRegistration: ['', [ Validators.required ] ],
-      RecordUpdate: ['', [ Validators.required ] ],
-      RequesttoReplace: ['', [ Validators.required ] ],
-      FlDlNum: ['', [ Validators.required ] ],
-      SsnLast4: ['', [ Validators.required ] ],
-      DlIssueDate: ['', [ Validators.required ] ],
-      LastName: ['', [ Validators.required ] ],
-      FirstName: ['', [ Validators.required ] ],
-      MiddleName: ['', [ Validators.required ] ],
+      usCitizen: ['', [ Validators.required ] ],
+      notAFelon: ['', [ Validators.required ] ],
+      mentalIncompStatus: ['', [ Validators.required ] ],
+      newRegistration: ['', [ Validators.required ] ],
+      recordUpdate: ['', [ Validators.required ] ],
+      requesttoReplace: ['', [ Validators.required ] ],
+      flDlNum: ['', [ Validators.required ] ],
+      ssnLast4: ['', [ Validators.required ] ],
+      dlIssueDate: ['', [ Validators.required ] ],
+      lastName: ['', [ Validators.required ] ],
+      firstName: ['', [ Validators.required ] ],
+      middleName: ['', [ Validators.required ] ],
     });
     this.saveEligibility();
 
@@ -114,21 +114,6 @@ saveEligibility() {
  const eligibility = this.eligibilityForm.value;
      this.eligibilityService.postEligibility(eligibility).subscribe(res => {
           const eligi: IEligibility = res.body;
-          console.log(eligi.UsCitizen);
-          console.log(eligi.NotAFelon);
-          console.log(eligi.MentalIncompStatus);
-          // console.log(eligi.NewRegistration);
-          // console.log(eligi.RecordUpdate);
-          // console.log(eligi.RequesttoReplace);
-          console.log(eligi.FlDlNum);
-          console.log(eligi.SsnLast4);
-          // console.log(eligi.DlIssueDate);
-          console.log(eligi.LastName);
-          console.log(eligi.FirstName);
-          console.log(eligi.MiddleName);
-          console.log(eligi.NameSuffix);
-          // console.log(eligi.DateOfBirth);
-          console.log(res.headers.get('Content-Type'));
           this.loadAllEligibilitys();
         },
 (err: HttpErrorResponse) => {

@@ -41,48 +41,48 @@
                   You have checked one or more field that make you ineligible to register. Please contact your county
                   Supervisor of Elections.
                 </alert>
-                <div class="form-group" [ngClass]="{'has-error' : formErrors.UsCitizen}">
-                  <label class="col-md-3 control-label" for="UsCitizen">Are you a USA citizen?</label>
+                <div class="form-group" [ngClass]="{'has-error' : formErrors.usCitizen}">
+                  <label class="col-md-3 control-label" for="usCitizen">Are you a USA citizen?</label>
                   <div class="col-md-4">
                     <label class="radio-inline">
-                      <input id="UsCitizen" type="radio" value="1" (change)="enableEligibilityForm()" formControlName="UsCitizen" (blur)="logValidationErrors()">Yes
+                      <input id="usCitizen" type="radio" value="1" (change)="enableEligibilityForm()" formControlName="usCitizen" (blur)="logValidationErrors()">Yes
                     </label>
                     <label class="radio-inline">
-                      <input id="UsCitizen" type="radio" value="0" (change)="enableEligibilityForm()" formControlName="UsCitizen" (blur)="logValidationErrors()">No
+                      <input id="usCitizen" type="radio" value="0" (change)="enableEligibilityForm()" formControlName="usCitizen" (blur)="logValidationErrors()">No
                     </label>
-                    <span class="help-block" *ngIf="formErrors.UsCitizen">
-                      {{formErrors.UsCitizen}}
+                    <span class="help-block" *ngIf="formErrors.usCitizen">
+                      {{formErrors.usCitizen}}
                     </span>
                   </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error' : formErrors.NotAFelon}">
-                  <label class="col-md-3 control-label" for="NotAFelon">I am not a convicted felon</label>
+                <div class="form-group" [ngClass]="{'has-error' : formErrors.notAFelon}">
+                  <label class="col-md-3 control-label" for="notAFelon">I am not a convicted felon</label>
                   <div class="col-md-8">
                     <label class="radio-inline">
-                      <input name="NotAFelon" type="radio" value="1" (change)="enableEligibilityForm()" formControlName="NotAFelon" (blur)="logValidationErrors()">Yes
+                      <input name="notAFelon" type="radio" value="1" (change)="enableEligibilityForm()" formControlName="notAFelon" (blur)="logValidationErrors()">Yes
                     </label>
                     <label class="radio-inline">
-                      <input name="NotAFelon" type="radio" value="0" (change)="enableEligibilityForm()" formControlName="NotAFelon" (blur)="logValidationErrors()">No
+                      <input name="notAFelon" type="radio" value="0" (change)="enableEligibilityForm()" formControlName="notAFelon" (blur)="logValidationErrors()">No
                     </label>
-                    <span class="help-block" *ngIf="formErrors.NotAFelon">
-                      {{formErrors.NotAFelon}}
+                    <span class="help-block" *ngIf="formErrors.notAFelon">
+                      {{formErrors.notAFelon}}
                     </span>
                   </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error' : formErrors.MentalIncompStatus}">
-                  <label class="col-md-3 control-label" for="MentalIncompStatus">I have not been adjudicated mentally
+                <div class="form-group" [ngClass]="{'has-error' : formErrors.mentalIncompStatus}">
+                  <label class="col-md-3 control-label" for="mentalIncompStatus">I have not been adjudicated mentally
                     incapacitated</label>
                   <div class="col-md-8">
                     <label class="radio-inline">
-                      <input name="MentalIncompStatus" id="MentalIncompStatus" (change)="enableEligibilityForm()" type="radio" value="1" formControlName="MentalIncompStatus"
+                      <input name="mentalIncompStatus" id="mentalIncompStatus" (change)="enableEligibilityForm()" type="radio" value="1" formControlName="mentalIncompStatus"
                         (blur)="logValidationErrors()">Yes
                     </label>
                     <label class="radio-inline">
-                      <input name="MentalIncompStatus" id="MentalIncompStatus" (change)="enableEligibilityForm()" type="radio" value="0" formControlName="MentalIncompStatus"
+                      <input name="mentalIncompStatus" id="mentalIncompStatus" (change)="enableEligibilityForm()" type="radio" value="0" formControlName="mentalIncompStatus"
                         (blur)="logValidationErrors()">No
                     </label>
-                    <span class="help-block" *ngIf="formErrors.MentalIncompStatus">
-                      {{formErrors.MentalIncompStatus}}
+                    <span class="help-block" *ngIf="formErrors.mentalIncompStatus">
+                      {{formErrors.mentalIncompStatus}}
                     </span>
                   </div>
                 </div>
@@ -94,8 +94,8 @@
                   <div class="col-md-1"></div>
                   <div class="col-md-11">
                     <label>
-                      <input name="NewRegistration" id="NewRegistration" [attr.disabled]="isNewRegistration == true ? true : null"
-                        type="checkbox" (change)="setNewRegistrationStatus()" formControlName="NewRegistration"> New
+                      <input name="newRegistration" id="newRegistration" [attr.disabled]="isNewRegistration == true ? true : null"
+                        type="checkbox" (change)="setNewRegistrationStatus()" formControlName="newRegistration"> New
                       Registration
                     </label>
                   </div>
@@ -106,7 +106,7 @@
                     <div class="col-md-11">
                       <label>
                         <input name="RecordUpdate" id="RecordUpdate" [attr.disabled]="isNewrecordUpdate == true ? true : null"
-                          type="checkbox" (change)="setNewRegistrationStatusFalse()" formControlName="RecordUpdate">
+                          type="checkbox" (change)="setNewRegistrationStatusFalse()" formControlName="recordUpdate">
                         Record Update/Change (e.g., Address, Party Affiliation, Name, Signature)
                       </label>
                     </div>
@@ -115,8 +115,8 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
                       <label>
-                        <input name="RequesttoReplace" [attr.disabled]="isNewrecordUpdate == true ? true : null" id="RequesttoReplace"
-                          (change)="setNewRegistrationStatusFalse()" type="checkbox" formControlName="RequesttoReplace">
+                        <input name="RequesttoReplace" [attr.disabled]="isNewrecordUpdate == true ? true : null" id="requesttoReplace"
+                          (change)="setNewRegistrationStatusFalse()" type="checkbox" formControlName="requesttoReplace">
                         Request to Replace Voter Information Card
                       </label>
                     </div>
@@ -129,8 +129,8 @@
                       <div class="col-md-1"></div>
                       <div class="col-md-11">
                         <label>
-                          <input name="IsDLAvailable" id="IsDLAvailable" 
-                            type="checkbox" (change)="setDLDetail()" formControlName="IsDLAvailable">
+                          <input name="isDLAvailable" id="isDLAvailable" 
+                            type="checkbox" (change)="setDLDetail()" formControlName="isDLAvailable">
                           I do not have Florida DL
                         </label>
                       </div>
@@ -139,8 +139,8 @@
                       <div class="col-md-1"></div>
                       <div class="col-md-11">
                         <label>
-                          <input name="IsSSNAvailable" id="IsSSNAvailable"
-                            (change)="setSSNDetail()" type="checkbox" formControlName="IsSSNAvailable">
+                          <input name="isSSNAvailable" id="isSSNAvailable"
+                            (change)="setSSNDetail()" type="checkbox" formControlName="isSSNAvailable">
                           I do not have Florida SSN 
                         </label>
                       </div>
@@ -148,21 +148,21 @@
                   </div>
 
                   <div *ngIf="hideDLDetail">
-                <div class="form-group" [ngClass]="{'has-error' : formErrors.FlDlNum}">
-                  <label class="col-sm-2 control-label" for="FlDlNum">DL Number</label>
+                <div class="form-group" [ngClass]="{'has-error' : formErrors.flDlNum}">
+                  <label class="col-sm-2 control-label" for="flDlNum">DL Number</label>
                   <div class="col-sm-8">
-                    <input id="FlDlNum" type="text" class="form-control" formControlName="FlDlNum" (blur)="logValidationErrors()"
+                    <input id="flDlNum" type="text" class="form-control" formControlName="flDlNum" (blur)="logValidationErrors()"
                       [patterns]="DLPattern" mask="A000-000-00-000-0">
-                    <span class="help-block" *ngIf="formErrors.FlDlNum">
+                    <span class="help-block" *ngIf="formErrors.flDlNum">
                       {{formErrors.FlDlNum}}
                     </span>
                   </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="DlIssueDate">DL Issue Date </label>
+                    <label class="col-sm-2 control-label" for="dlIssueDate">DL Issue Date </label>
                     <mat-form-field appearance="outline" class="col-sm-8">
-                      <input matInput [matDatepicker]="pickerDlIssueDate" placeholder="DL Issue Date" formControlName="DlIssueDate">
+                      <input matInput [matDatepicker]="pickerDlIssueDate" placeholder="DL Issue Date" formControlName="dlIssueDate">
                       <mat-datepicker-toggle matNameSuffix [for]="pickerDlIssueDate"></mat-datepicker-toggle>
                       <mat-datepicker #pickerDlIssueDate></mat-datepicker>
                       <!-- <mat-error *ngIf="formErrors.DateOfBirth ">
@@ -187,66 +187,64 @@
                                     Hello from div, Last SSN is Valid
                                   </div> -->
 
-                <div *ngIf="hideSSNDetail" class="form-group" [ngClass]="{'has-error' : formErrors.SsnLast4}">
+                <div *ngIf="hideSSNDetail" class="form-group" [ngClass]="{'has-error' : formErrors.ssnLast4}">
                   <label class="col-sm-2 control-label" for="SsnLast4">Last SSN</label>
                   <div class="col-sm-8">
-                    <input name="SsnLast4" id="SsnLast4" type="text" class="form-control" formControlName="SsnLast4"
+                    <input name="ssnLast4" id="ssnLast4" type="text" class="form-control" formControlName="ssnLast4"
                       (blur)="logValidationErrors()" [patterns]="SSNPattern" mask="0000">
-                    <span class="help-block" *ngIf="formErrors.SsnLast4">
+                    <span class="help-block" *ngIf="formErrors.ssnLast4">
                       {{formErrors.SsnLast4}}
                     </span>
                   </div>
                 </div>
 
-                <div class="form-group" [ngClass]="{'has-error' : formErrors.LastName}">
-                  <label class="col-sm-2 control-label" for="LastName">Last Name</label>
+                <div class="form-group" [ngClass]="{'has-error' : formErrors.lastName}">
+                  <label class="col-sm-2 control-label" for="lastName">Last Name</label>
                   <div class="col-sm-8">
-                    <input id="LastName" type="text" class="form-control" formControlName="LastName" (blur)="logValidationErrors()">
-                    <span class="help-block" *ngIf="formErrors.LastName">
-                      {{formErrors.LastName}}
+                    <input id="lastName" type="text" class="form-control" formControlName="lastName" (blur)="logValidationErrors()">
+                    <span class="help-block" *ngIf="formErrors.lastName">
+                      {{formErrors.lastName}}
                     </span>
                   </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error' : formErrors.FirstName}">
+                <div class="form-group" [ngClass]="{'has-error' : formErrors.firstName}">
                   <label class="col-sm-2 control-label" for="FirstName">First Name </label>
                   <div class="col-sm-8">
-                    <input id="FirstName" type="text" class="form-control" formControlName="FirstName" (blur)="logValidationErrors()">
-                    <span class="help-block" *ngIf="formErrors.FirstName">
-                      {{formErrors.FirstName}}
+                    <input id="firstName" type="text" class="form-control" formControlName="firstName" (blur)="logValidationErrors()">
+                    <span class="help-block" *ngIf="formErrors.firstName">
+                      {{formErrors.firstName}}
                     </span>
                   </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error' : formErrors.MiddleName}">
-                  <label class="col-sm-2 control-label" for="MiddleName">Middle Name </label>
+                <div class="form-group" [ngClass]="{'has-error' : formErrors.middleName}">
+                  <label class="col-sm-2 control-label" for="middleName">Middle Name </label>
                   <div class="col-sm-8">
-                    <input id="MiddleName" type="text" class="form-control" formControlName="MiddleName" (blur)="logValidationErrors()">
-                    <span class="help-block" *ngIf="formErrors.MiddleName">
-                      {{formErrors.MiddleName}}
+                    <input id="middleName" type="text" class="form-control" formControlName="middleName" (blur)="logValidationErrors()">
+                    <span class="help-block" *ngIf="formErrors.middleName">
+                      {{formErrors.middleName}}
                     </span>
                   </div>
                 </div>
 
-                <div class="form-group" [ngClass]="{'has-error' : formErrors.NameSuffix}">
-                  <label class="col-sm-2 control-label" for="NameSuffix">NameSuffix </label>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="nameSuffix">NameSuffix </label>
                   <div class="col-sm-8">
-                    <select id="NameSuffix" class="form-control" formControlName="NameSuffix" (blur)="logValidationErrors()">                      
+                    <select id="nameSuffix" class="form-control" formControlName="nameSuffix">                      
                       <option *ngFor="let c of NameSuffixList" [ngValue]="c">{{ c }}</option>
                   </select>
-                    <span class="help-block" *ngIf="formErrors.NameSuffix">
-                      {{formErrors.NameSuffix}}
-                    </span>
+                  
                   </div>
                 </div>
 
               
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="DateOfBirth">Date of Birth (Min. 18 years) </label>
+                  <label class="col-sm-2 control-label" for="dateOfBirth">Date of Birth (Min. 18 years) </label>
                   <mat-form-field appearance="outline" class="col-sm-8">
-                    <input matInput [matDatepicker]="picker" [max]="startDate" placeholder="Date of Birth" formControlName="DateOfBirth">
+                    <input matInput [matDatepicker]="picker" [max]="startDate" placeholder="Date of Birth" formControlName="dateOfBirth">
                     <mat-datepicker-toggle matNameSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker [startAt]="startDate" #picker></mat-datepicker>
-                    <!-- <mat-error *ngIf="formErrors.DateOfBirth ">
-                                          {{ formErrors.DateOfBirth }}
+                    <!-- <mat-error *ngIf="formErrors.dateOfBirth ">
+                                          {{ formErrors.dateOfBirth }}
                                         </mat-error> -->
                     <mat-error style="color:#a94442; font-size: 14px;">
                       Date of birth is required
@@ -279,63 +277,63 @@
                           <tbody>
                             <tr>
                               <td colspan="2" style="border: 0px solid #ffffff; font-weight:bold">
-                                <span *ngIf="editData.NewRegistration" class="glyphicon glyphicon-check"></span>
-                                <span *ngIf="!editData.NewRegistration" class="glyphicon glyphicon-unchecked"></span>
+                                <span *ngIf="editData.newRegistration" class="glyphicon glyphicon-check"></span>
+                                <span *ngIf="!editData.newRegistration" class="glyphicon glyphicon-unchecked"></span>
                                  NewRegistration
                               </td>
                             </tr>
                             <tr>
                               <td colspan="2" style="border: 0px solid #ffffff; font-weight:bold">
-                                  <span *ngIf="editData.RecordUpdate" class="glyphicon glyphicon-check"></span>
-                                  <span *ngIf="!editData.RecordUpdate" class="glyphicon glyphicon-unchecked"></span>
+                                  <span *ngIf="editData.recordUpdate" class="glyphicon glyphicon-check"></span>
+                                  <span *ngIf="!editData.recordUpdate" class="glyphicon glyphicon-unchecked"></span>
                                 RecordUpdateOrChange
                               </td>
                             </tr>
                             <tr>
                               <td colspan="2" style="border: 0px solid #ffffff; font-weight:bold">
-                                  <span *ngIf="editData.RequesttoReplace" class="glyphicon glyphicon-check"></span>
-                                  <span *ngIf="!editData.RequesttoReplace" class="glyphicon glyphicon-unchecked"></span>
+                                  <span *ngIf="editData.requesttoReplace" class="glyphicon glyphicon-check"></span>
+                                  <span *ngIf="!editData.requesttoReplace" class="glyphicon glyphicon-unchecked"></span>
                                 RequesttoReplace
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <div class=".col-xs-6 .col-sm-4">
-                                  <b>Florida DL or Florida ID card number: </b> {{ editData.FlDlNum }}
+                                  <b>Florida DL or Florida ID card number: </b> {{ editData.flDlNum }}
                                 </div>
                               </td>
 
                               <td>
                                 <div class=".col-xs-6 .col-sm-4">
-                                  <b>Florida DL Issued Date: </b> {{ editData.DlIssueDate | date }}
+                                  <b>Florida DL Issued Date: </b> {{ editData.dlIssueDate | date }}
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <div class=".col-xs-6 .col-sm-4">
-                                  <b>Last 4 digits of your Social Security Number: </b> {{ editData.SsnLast4 }}
+                                  <b>Last 4 digits of your Social Security Number: </b> {{ editData.ssnLast4 }}
                                 </div>
                               </td>
 
                               <td>
-                                <div class=".col-xs-6 .col-sm-4"><b>Date of Birth:</b> {{ editData.DateOfBirth | date }}</div>
+                                <div class=".col-xs-6 .col-sm-4"><b>Date of Birth:</b> {{ editData.dateOfBirth | date }}</div>
                               </td>
                             </tr>
                             <tr>
                               <td>
-                                <div class=".col-xs-6 .col-sm-4"><b>LastName:</b> {{ editData.LastName }}</div>
+                                <div class=".col-xs-6 .col-sm-4"><b>LastName:</b> {{ editData.lastName }}</div>
                               </td>
                               <td>
-                                <div class=".col-xs-6 .col-sm-4"><b>FirstName:</b> {{ editData.FirstName }}</div>
+                                <div class=".col-xs-6 .col-sm-4"><b>FirstName:</b> {{ editData.firstName }}</div>
                               </td>
                             </tr>
                             <tr>
                               <td>
-                                <div class=".col-xs-6 .col-sm-4"><b>MiddleName:</b> {{ editData.MiddleName }}</div>
+                                <div class=".col-xs-6 .col-sm-4"><b>MiddleName:</b> {{ editData.middleName }}</div>
                               </td>
                               <td>
-                                <div class=".col-xs-6 .col-sm-4"><b>NameSuffix: </b>{{ editData.NameSuffix }}</div>
+                                <div class=".col-xs-6 .col-sm-4"><b>NameSuffix: </b>{{ editData.nameSuffix }}</div>
                               </td>
                             </tr>
                           </tbody>
@@ -358,7 +356,7 @@
             <tab heading="Step3" [disabled]="true">              
               <app-step3></app-step3>              
             </tab>
-          </tabset>
+          </tabset>                    
         </div>
 
 
