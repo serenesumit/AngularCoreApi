@@ -1,10 +1,12 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OvrApp.API.Data;
 using OvrApp.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OvrApp.API.Controllers
 {
@@ -46,7 +48,7 @@ namespace OvrApp.API.Controllers
 
         [HttpPost]
         // [Route("addEligibility")]
-        public IActionResult CreateEligibility([FromBody] OvrApplication item)
+        public async Task<IActionResult> CreateEligibility([FromBody] OvrApplication item)
         {
             // set bad request if contact data is not provided in body
             if (item == null)
@@ -56,8 +58,8 @@ namespace OvrApp.API.Controllers
 
             var dbOvrApplication = _mapper.Map<OvrApplication>(item);
             dbOvrApplication.SessionId = Guid.NewGuid().ToString();
-            _context.OvrApplications.Add(dbOvrApplication);
-            _context.SaveChanges();
+            await _context.OvrApplications.AddAsync(dbOvrApplication);
+            await _context.SaveChangesAsync();
             var data = GetOvrApplicationById(dbOvrApplication.OvrApplicationId);
             return new ObjectResult(data);
         }
@@ -65,7 +67,7 @@ namespace OvrApp.API.Controllers
 
         [HttpPut]
         [Route("{id:int}")]
-        public IActionResult UpdateEligibility(long id, [FromBody] OvrApplication model)
+        public async Task<IActionResult> UpdateEligibility(long id, [FromBody] OvrApplication model)
         {
             // set bad request if contact data is not provided in body
             if (id == 0 || id != model.OvrApplicationId)
@@ -81,7 +83,7 @@ namespace OvrApp.API.Controllers
             dbOvrApplication = _mapper.Map<OvrApplication>(model);
 
             _context.Update(dbOvrApplication);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return new ObjectResult(GetOvrApplicationById(dbOvrApplication.OvrApplicationId));
         }
@@ -89,7 +91,16 @@ namespace OvrApp.API.Controllers
 
         private OvrApplication GetOvrApplicationById(long id)
         {
-            return _context.OvrApplications.FirstOrDefault(t => t.OvrApplicationId == id);
+            return _context.OvrApplications.AsNoTracking().FirstOrDefault(t => t.OvrApplicationId == id);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
     }

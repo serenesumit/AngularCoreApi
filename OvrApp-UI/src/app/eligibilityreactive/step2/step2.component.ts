@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef,EventEmitter,Input,Output,NgModule } from '@angular/core';
+import { Component, HostListener, OnInit, TemplateRef,EventEmitter,Input,Output,NgModule } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EligibilityService } from 'src/app/services/eligibility.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,12 +11,6 @@ import { FormsModule } from '@angular/forms';
 import { LocalStorageService } from '../../services/localstorage.service';
 import { IEligibility, CommonSetting } from '../../model/eligibility';
 
-@NgModule({
-  imports: [ BrowserModule,FormsModule ],
-  declarations: [ Step2Component ],
-  bootstrap: [ Step2Component ]
-})
-
 
 @Component({
   selector: 'app-step2',
@@ -24,13 +18,28 @@ import { IEligibility, CommonSetting } from '../../model/eligibility';
   styleUrls: ['./step2.component.css']
 })
 export class Step2Component implements OnInit {
+
+  clearLocalStorage(event){
+    this.sessionEService.RemoveEligibilityFromSession();
+    this.sessionEService.RemoveStepFromSession();
+  }
+
   RdFrm: FormGroup;
   technologies = [];
   partys = [];
+
+ 
   mailingAddSameAsResi = true;
   constructor(private fb: FormBuilder, private service: EligibilityService, private route: ActivatedRoute,
     private router: Router,private modalService: BsModalService,
-    private sessionEService: LocalStorageService) { }
+    private sessionEService: LocalStorageService) {
+      var eligibility = this.sessionEService.getEligibilityFromSession();
+      if(eligibility == null || eligibility.ovrApplicationId < 0)
+     {
+         this.router.navigateByUrl('/eligibilityreactive');
+     }
+
+     }
 
     formErrors = {
       'resStreetNumber': '',
@@ -148,6 +157,52 @@ export class Step2Component implements OnInit {
       var modelFromSession = this.sessionEService.getEligibilityFromSession(); 
       if (modelFromSession != null && modelFromSession.ovrApplicationId>0) {
         this.service.getOneEligibility(modelFromSession.ovrApplicationId).subscribe((x)=>{
+
+         this.RdFrm.get('partyAffiliation').setValue(x.partyAffiliation);
+        this.RdFrm.get('resStreetNumberSuffix').setValue(x.resStreetNumberSuffix);
+        this.RdFrm.get('resStreetNumber').setValue(x.resStreetNumber);
+        this.RdFrm.get('resStreetPreDirection').setValue(x.resStreetPreDirection);
+        this.RdFrm.get('resStreetPreDirection').setValue(x.resStreetPreDirection);
+        this.RdFrm.get('resStreetName').setValue(x.resStreetName);
+        this.RdFrm.get('resStreetType').setValue(x.resStreetType);
+        this.RdFrm.get('resStreetPostDirection').setValue(x.resStreetPostDirection);
+
+        this.RdFrm.get('resUnitType').setValue(x.resUnitType);
+        this.RdFrm.get('resUnitNumber').setValue(x.resUnitNumber);
+        this.RdFrm.get('resZipCodePlus4').setValue(x.resZipCodePlus4);
+        this.RdFrm.get('resZipCode').setValue(x.resZipCode);
+        this.RdFrm.get('countyOfResidence').setValue(x.countyOfResidence);
+        this.RdFrm.get('mailingAddSameAsResi').setValue(x.mailingAddSameAsResi==true? "1":"0");
+        this.RdFrm.get('mailAddrLine1').setValue(x.mailAddrLine1);
+        this.RdFrm.get('mailAddrLine2').setValue(x.mailAddrLine2);
+        this.RdFrm.get('mailAddrLine3').setValue(x.mailAddrLine3);
+        this.RdFrm.get('mailAddrCity').setValue(x.mailAddrCity);
+        this.RdFrm.get('mailAddrZip').setValue(x.mailAddrZip);
+        this.RdFrm.get('mailAddrState').setValue(x.mailAddrState);
+        this.RdFrm.get('mailAddrCountry').setValue(x.mailAddrCountry);
+
+
+        this.RdFrm.get('formerAddrLine1').setValue(x.formerAddrLine1);
+        this.RdFrm.get('formerAddrLine2').setValue(x.formerAddrLine2);
+        this.RdFrm.get('fromerAddrLine3').setValue(x.fromerAddrLine3);
+        this.RdFrm.get('formerAddrCity').setValue(x.formerAddrCity);
+        this.RdFrm.get('formerAddrZip').setValue(x.formerAddrZip);
+        this.RdFrm.get('formerAddrState').setValue(x.formerAddrState);
+        this.RdFrm.get('formerAddrCountry').setValue(x.formerAddrCountry);
+        this.RdFrm.get('formerFirstName').setValue(x.formerFirstName);
+        this.RdFrm.get('formerLastName').setValue(x.formerLastName);
+        this.RdFrm.get('formerMiddleName').setValue(x.formerMiddleName);
+        this.RdFrm.get('raceId').setValue(x.raceId);
+
+        this.RdFrm.get('placeOfBirth').setValue(x.placeOfBirth);
+        this.RdFrm.get('military').setValue(x.military==true? "1":"0");
+        this.RdFrm.get('gender').setValue(x.gender);
+        this.RdFrm.get('daytimePhone').setValue(x.daytimePhone);
+        this.RdFrm.get('publicEmailAddress').setValue(x.publicEmailAddress);
+        this.RdFrm.get('emailConfirmation').setValue(x.emailConfirmation);
+        this.RdFrm.get('votingAssistRequired').setValue(x.votingAssistRequired==true? "1":"0");
+        this.RdFrm.get('pollWorkerVolunteer').setValue(x.pollWorkerVolunteer==true? "1":"0");
+
           
         });      
       }
@@ -155,15 +210,6 @@ export class Step2Component implements OnInit {
 
       this.technologies = Global.technologies;
       this.partys = Global.partys;
-
-
-
-
-      this.RdFrm.get('mailingAddSameAsResi').setValue('1');
-      this.RdFrm.get('gender').setValue('1');
-      this.RdFrm.get('votingAssistRequired').setValue('1');
-      this.RdFrm.get('pollWorkerVolunteer').setValue('1');
-      
     }
 
 
@@ -209,31 +255,33 @@ export class Step2Component implements OnInit {
     var modelFromSession = this.sessionEService.getEligibilityFromSession(); 
     debugger;   
     const contactData = this.mapDateData(formData.value);
-     if(contactData.ovrApplicationId !=null && typeof contactData.ovrApplicationId !=="undefined"
-        && contactData.ovrApplicationId >0)
+    contactData.mentalIncompStatus = this.RdFrm.get('votingAssistRequired').value=='1'?true:false;
+    contactData.notAFelon = this.RdFrm.get('pollWorkerVolunteer').value=='1'?true:false;
+    contactData.mailingAddSameAsResi = this.RdFrm.get('mailingAddSameAsResi').value=='1'?true:false;
+    contactData.ovrApplicationId = modelFromSession.ovrApplicationId;
+
+
+     if(modelFromSession.ovrApplicationId !=null && typeof modelFromSession.ovrApplicationId !=="undefined"
+        && modelFromSession.ovrApplicationId > 0)
         {
-          var appId = contactData.ovrApplicationId;
+          var appId = modelFromSession.ovrApplicationId;
           this.service.updateEligibility(appId,contactData).subscribe(
             (data: IEligibility) => {
              
               this.service.sharedEligibility = data;
-              data.currentTabId =1;
               this.sessionEService.SaveEligibilityToSession(data);
             }
           );
         }
+        else
+        {
+          // this.sessionEService.RemoveEligibilityFromSession();
+          // this.router.navigateByUrl('/eligibilityreactive');
+        }
   }
 
   mapDateData(customer: IEligibility): IEligibility {
-    if (customer.dateOfBirth != null && customer.dateOfBirth != "") {
-      customer.dateOfBirth = new Date(customer.dateOfBirth).toISOString();
-    }
-
-    if (customer.dlIssueDate != null && customer.dlIssueDate != "") {
-      customer.dlIssueDate = new Date(customer.dlIssueDate).toISOString();
-    }
-
-    
+   
     return customer;
   }
 

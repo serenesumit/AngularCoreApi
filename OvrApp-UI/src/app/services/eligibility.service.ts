@@ -21,7 +21,6 @@ export class EligibilityService {
 
 constructor(private http: HttpClient) { }
 
-// getAllEligibility(url: string): Observable<IEligibility[]> {
   getAllEligibility(url: string): Observable<IEligibility[]> {
   return this.http.get<IEligibility[]>(Global.BASE_USER_ENDPOINT+'ovrapp/getAllEligibility')
     .pipe(
@@ -41,7 +40,6 @@ getOneEligibility(id: number): Observable<IEligibility> {
 
 // insert new contact details
 addEligibility(ieligibility: IEligibility): Observable<any> {  
-  alert("called");
   return this.http.post<IEligibility>(Global.BASE_USER_ENDPOINT+'ovrapp', ieligibility, httpOptions)
     .pipe(
       catchError(this.handleError)
@@ -63,8 +61,7 @@ postEligibility(ieligibility: IEligibility): Observable<HttpResponse<IEligibilit
 
 
 
-updateEligibility(id:number,ieligibility: IEligibility): Observable<IEligibility> {  
-  alert("called");
+updateEligibility(id:number,ieligibility: IEligibility): Observable<IEligibility> {
   return this.http.put<IEligibility>(Global.BASE_USER_ENDPOINT+'ovrapp/'+id, ieligibility, httpOptions)
     .pipe(
       catchError(this.handleError)

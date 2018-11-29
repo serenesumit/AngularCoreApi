@@ -14,9 +14,26 @@ constructor(){};
     localStorage.removeItem('eligibility');
   }
 
+  getStepFromSession(){    
+   return localStorage.getItem('step');
+  } 
+
+
+  SaveStepToSession(aU: string) {
+    localStorage.setItem('step',aU);
+  }
+
+  RemoveStepFromSession() {    
+    localStorage.removeItem('step');
+  }
+
   getEligibilityFromSession(){    
     var item = localStorage.getItem('eligibility');
     var jsonObject: IEligibility = JSON.parse(item);
     return jsonObject;
-  }  
+  } 
+
+
+  
+  
 }

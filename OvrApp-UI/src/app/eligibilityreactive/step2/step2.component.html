@@ -1,8 +1,6 @@
-
-
+<div class="container" style="padding-top: 260px;">
+ <form [formGroup]="RdFrm" class="form-horizontal" (ngSubmit)="onSubmit(RdFrm)">
 <div class="panel panel-default col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-    <form [formGroup]="RdFrm" class="form-horizontal" (ngSubmit)="onSubmit(RdFrm)">
   <div class="panel-body">
     <fieldset>
       <h3>Political Party Preference</h3>
@@ -500,60 +498,73 @@
 
             
     </fieldset>
-  </div>
-  </form>  
-
-  <ng-template #ngtemplate>
-    
-      <div class="modal-body text-center">              
-        <h4>Find My Address</h4>
-        <hr />
-
-        <p>
-
-          By exiting this application, you will lose all of the data you entered?</p>
-          <div class='row' id="">
-            <div class='col-sm-12'>
-                <div class='form-group'>
   
-                    <label for="LegalAddressNumber">StreetNumber </label>
-                    &nbsp;&nbsp;&nbsp;
-                    <input type="text" class="form-control">
-                </div>
-  
-            </div>
-            <div class='col-sm-12'>
-                <div class='form-group'>
-  
-                    <label for="LegalAddressNameSuffix">Street Number NameSuffix</label>
-                    <input type="text" class="form-control">
-                </div>
-  
-            </div>
-            <div class='col-sm-12'>
-                <div class='form-group'>
-  
-                    <label for="LegalAddressDirection">Pre Direction</label>
-                    <input type="text" class="form-control">
-                </div>
-  
-            </div>
-            <div class='col-sm-12'>
-                <div class='form-group'>
-  
-                    <label for="LegalAddressStreetName">Street Name </label>
-                    &nbsp;&nbsp;&nbsp;
-                    <input type="text" class="form-control">
-  
-                </div>
-  
-            </div>                                      
-  </div>
-          
-  
-        <button type="button" class="btn btn-primary" (click)="confirm()">Use this address</button> &nbsp;
-        <button type="button" class="btn btn-primary" (click)="decline()">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="decline()">I can't find my address</button>
-      </div>
-    </ng-template>
 </div>
+
+<div class="panel-footer">
+        <div class="btn-toolbar">
+          
+          <button class="btn btn-primary pull-right"  [disabled]="!(RdFrm.valid)"
+            type="submit">Continue</button>
+
+        </div>
+      </div>
+      <ng-template #ngtemplate>
+    
+        <div class="modal-body text-center">              
+          <h4>Find My Address</h4>
+          <hr />
+  
+          <p>
+  
+            By exiting this application, you will lose all of the data you entered?</p>
+            <div class='row' id="">
+              <div class='col-sm-12'>
+                  <div class='form-group'>
+    
+                      <label for="LegalAddressNumber">StreetNumber </label>
+                      &nbsp;&nbsp;&nbsp;
+                      <input type="text" class="form-control">
+                  </div>
+    
+              </div>
+              <div class='col-sm-12'>
+                  <div class='form-group'>
+    
+                      <label for="LegalAddressNameSuffix">Street Number NameSuffix</label>
+                      <input type="text" class="form-control">
+                  </div>
+    
+              </div>
+              <div class='col-sm-12'>
+                  <div class='form-group'>
+    
+                      <label for="LegalAddressDirection">Pre Direction</label>
+                      <input type="text" class="form-control">
+                  </div>
+    
+              </div>
+              <div class='col-sm-12'>
+                  <div class='form-group'>
+    
+                      <label for="LegalAddressStreetName">Street Name </label>
+                      &nbsp;&nbsp;&nbsp;
+                      <input type="text" class="form-control">
+    
+                  </div>
+    
+              </div>                                      
+    </div>
+            
+    
+          <button type="button" class="btn btn-primary" (click)="confirm()">Use this address</button> &nbsp;
+          <button type="button" class="btn btn-primary" (click)="decline()">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="decline()">I can't find my address</button>
+        </div>
+      </ng-template>
+
+    </div>
+  </form>  
+</div>
+
+
