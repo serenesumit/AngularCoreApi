@@ -22,9 +22,6 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LocalStorageService } from './services/localstorage.service';
 import { RecaptchaModule } from 'ng-recaptcha';
-import { Step1Component } from './eligibilityreactive/step1/step1.component';
-import { Step2Component } from './eligibilityreactive/step2/step2.component';
-import { Step3Component } from './eligibilityreactive/step3/step3.component';
 
 @NgModule({
    declarations: [
@@ -35,10 +32,7 @@ import { Step3Component } from './eligibilityreactive/step3/step3.component';
       GetlistComponent,
       FooterComponent,
       RevieweligibilityComponent,
-      RdFormComponent,
-      Step1Component,
-      Step2Component,
-      Step3Component
+      RdFormComponent
    ],
    imports: [
       BrowserModule,

@@ -1,9 +1,5 @@
 ﻿using AutoMapper;
 using OvrApp.API.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OvrApp.API.Helpers
 {
@@ -12,6 +8,8 @@ namespace OvrApp.API.Helpers
         public AutoMapperProfile()
         {
             CreateMap<OvrApplication, OvrApplication>();
+            CreateMap<OvrApplication, RegisterDetailsModel>();
+            CreateMap<RegisterDetailsModel, OvrApplication>();
         }
     }
 

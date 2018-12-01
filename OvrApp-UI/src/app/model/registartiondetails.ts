@@ -1,60 +1,26 @@
-
-export interface IEligibility
+export interface IRegistartiondetails 
 {
-  ovrApplicationId :number;
+    ovrApplicationId :number;
+    gender  :string;
 
+    raceId :number;
+ 
+ 
+    publicEmailAddress  :string;
+ 
+     
+     emailConfirmation  :string;
+ 
+      requestSampleBallotByEmail :boolean;
+ 
+ 
+    daytimeAreaCode  :string;
+ 
    
-     sessionId :string;
-
-    usCitizen :boolean;
-    
-     notAFelon  :boolean;
-
-    mentalIncompStatus :boolean;
-
-
-    lastName  :string;
-
-
-    firstName  :string;
-
-  
-   middleName  :string;
-
-
-   nameSuffix  : string;
-
-   dateOfBirth : string; 
-
-
-     gender  :string;
-
-   raceId :number;
-
-
-   publicEmailAddress  :string;
-
-    
-    emailConfirmation  :string;
-
-     requestSampleBallotByEmail :boolean;
-
-
-   daytimeAreaCode  :string;
-
-  
-    daytimePhone  :string;
-
-    
-   daytimePhoneExtension  :string;
-
-
-    flDlNum  :string;
-
-  dlIssueDate: string; 
-
-
-   ssnLast4  :string;
+     daytimePhone  :string;
+ 
+     
+    daytimePhoneExtension  :string;
 
     voterClaimsNoSsnOrDln? : boolean;
 
@@ -215,9 +181,3 @@ newRegistration? :boolean;
   currentTabId:number;
 
 }
-
-
-
-
-
-

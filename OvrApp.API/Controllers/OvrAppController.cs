@@ -66,7 +66,7 @@ namespace OvrApp.API.Controllers
 
 
         [HttpPut]
-        [Route("{id:int}")]
+        [Route("{id:int}/eligibility")]
         public async Task<IActionResult> UpdateEligibility(long id, [FromBody] OvrApplication model)
         {
             // set bad request if contact data is not provided in body
@@ -87,6 +87,41 @@ namespace OvrApp.API.Controllers
 
             return new ObjectResult(GetOvrApplicationById(dbOvrApplication.OvrApplicationId));
         }
+
+
+        [HttpPut]
+        [Route("{id:int}/registerDetails")]
+        public async Task<IActionResult> RegisterDetail(long id, [FromBody] RegisterDetailsModel model)
+        {
+            // set bad request if contact data is not provided in body
+            if (id == 0 || id != model.OvrApplicationId)
+            {
+                return BadRequest();
+            }
+
+            var dbOvrApplication = this.GetOvrApplicationById(id);
+            if (dbOvrApplication == null || model == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                dbOvrApplication = _mapper.Map<OvrApplication>(model);
+                dbOvrApplication.PartyAffiliation = "FDP";
+
+                _context.Update(dbOvrApplication);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            return new ObjectResult(GetOvrApplicationById(dbOvrApplication.OvrApplicationId));
+        }
+
+
 
 
         private OvrApplication GetOvrApplicationById(long id)

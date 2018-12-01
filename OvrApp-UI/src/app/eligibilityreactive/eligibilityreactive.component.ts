@@ -4,7 +4,8 @@ import { Component, OnInit, ViewChild, TemplateRef,EventEmitter,Input,Output,NgM
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Validators } from '@angular/forms';
-import { IEligibility, CommonSetting } from '../model/eligibility';
+import { IEligibility} from '../model/eligibility';
+import {CommonSetting } from '../model/commonsetting';
 import { TabsetComponent } from 'ngx-bootstrap';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -13,7 +14,6 @@ import { LocalStorageService } from '../services/localstorage.service';
 import { RecaptchaComponent } from 'ng-recaptcha';
 import {BrowserModule} from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import {Step2Component} from './step2/step2.component';
 
 @Component({
   selector: 'app-eligibilityreactive',
@@ -54,7 +54,7 @@ export class EligibilityreactiveComponent implements OnInit {
         {
          if(stepInfo =="2")
          {
-           this.router.navigateByUrl('/personalInformation');
+           this.router.navigateByUrl('/rdform');
          }
        }
   }
@@ -256,7 +256,7 @@ debugger;
               this.sessionEService.SaveEligibilityToSession(data);
                
               this.sessionEService.SaveStepToSession("2");
-               this.router.navigateByUrl('/personalInformation');
+               this.router.navigateByUrl('/rdform');
               //this.router.navigateByUrl('/review');
             }
           );
@@ -268,7 +268,7 @@ debugger;
               data.currentTabId =1;
               this.sessionEService.SaveEligibilityToSession(data);
               this.sessionEService.SaveStepToSession("2");
-              this.router.navigateByUrl('/personalInformation');
+              this.router.navigateByUrl('/rdform');
             }
           );
         }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { IEligibility } from '../model/eligibility';
+import { IRegistartiondetails } from '../model/registartiondetails';
 import { catchError } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 import { Global } from '../shared/Global';
@@ -62,7 +63,15 @@ postEligibility(ieligibility: IEligibility): Observable<HttpResponse<IEligibilit
 
 
 updateEligibility(id:number,ieligibility: IEligibility): Observable<IEligibility> {
-  return this.http.put<IEligibility>(Global.BASE_USER_ENDPOINT+'ovrapp/'+id, ieligibility, httpOptions)
+  return this.http.put<IEligibility>(Global.BASE_USER_ENDPOINT+'ovrapp/'+id + '/eligibility', ieligibility, httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    );
+}
+
+updateRegisterDetails(id:number,registartiondetails: IRegistartiondetails): Observable<IEligibility> {
+ const url = Global.BASE_USER_ENDPOINT+'ovrapp/'+ id + '/registerDetails';
+  return this.http.put<IEligibility>(url, registartiondetails, httpOptions)
     .pipe(
       catchError(this.handleError)
     );
