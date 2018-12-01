@@ -57,8 +57,35 @@ export class RdFormComponent implements OnInit {
       'publicEmailAddress':'',
       'emailConfirmation':'',
       'VotingAssistRequired':'',
-'pollWorkerVolunteer':''
-    };
+'pollWorkerVolunteer':'',
+'resStreetNumberSuffix':'',
+'resStreetType':'',
+'resStreetPostDirection':'',
+'resUnitType':'',
+'resUnitNumber':'',
+'resZipCodePlus4':'',
+'countyOfResidence':'',
+'mailAddrLine1':'',
+'mailAddrLine2':'',
+'mailAddrLine3':'',
+
+'mailAddrCity':'',
+'mailAddrZip':'',
+'mailAddrState':'',
+'mailAddrCountry':'',
+'formerAddrLine1':'',
+'formerAddrLine2':'',
+'formerAddrLine3':'',
+'formerAddrCity':'',
+
+
+'formerAddrZip':'',
+'formerAddrState':'',
+'formerAddrCountry':'',
+'formerFirstName':'',
+'formerLastName':'',
+'formerMiddleName':''
+   };
     // This object contains all the validation messages for this form
   validationMessages = {    
     'resStreetNumber': {
@@ -103,8 +130,111 @@ export class RdFormComponent implements OnInit {
     },
     'pollWorkerVolunteer':{
       'required': 'Selection is required.'      
-    }
+    },
 
+    'resStreetNumberSuffix' :
+    {
+      'maxlength': 'Street number suffix must be less than 4 characters.'
+    },
+    'resStreetPreDirection' :
+    {
+      'maxlength': 'Street pre direction must be less than 2 characters.'
+    },
+
+    'resStreetType' :
+    {
+      'maxlength': 'Street type must be less than 4 characters.'
+    },
+
+    'resStreetPostDirection' :
+    {
+      'maxlength': 'Street pre direction must be less than 2 characters.'
+    },
+
+    'resUnitType' :
+    {
+      'maxlength': 'Street pre direction must be less than 2 characters.'
+    },
+    'resUnitNumber' :
+    {
+      'maxlength': 'Street pre direction must be less than 2 characters.'
+    },
+    'resZipCodePlus4' :
+    {
+      'maxlength': 'Street pre direction must be less than 2 characters.'
+    },
+    'countyOfResidence' :
+    {
+      'maxlength': 'Street pre direction must be less than 2 characters.'
+    },
+    'mailAddrLine1' :
+    {
+      'maxlength': 'Address line 1 must be less than 40 characters.'
+    },
+    'mailAddrLine2' :
+    {
+      'maxlength': 'Address line 2 must be less than 40 characters.'
+    },
+    'mailAddrLine3' :
+    {
+      'maxlength': 'Address line 3 must be less than 40 characters.'
+    },
+    'mailAddrCity' :
+    {
+      'maxlength': 'City must be less than 40 characters.'
+    },
+    'mailAddrZip' :
+    {
+      'maxlength': 'Mail zip must be less than 15 characters.'
+    },
+    'mailAddrState' :
+    {
+      'maxlength': 'mail state must be less than 2 characters.'
+    },
+    'mailAddrCountry' :
+    {
+      'maxlength': 'Mail country must be less than 25 characters.'
+    },
+    'formerAddrLine1' :
+    {
+      'maxlength': 'Address line 1 must be less than 40 characters.'
+    },
+    'formerAddrLine2' :
+    {
+      'maxlength': 'Address line 2 must be less than 40 characters.'
+    },
+    'formerAddrLine3' :
+    {
+      'maxlength': 'Address line 3 must be less than 40 characters.'
+    },
+    'formerAddrCity' :
+    {
+      'maxlength': 'City must be less than 40 characters.'
+    },
+    'formerAddrZip' :
+    {
+      'maxlength': 'Former zip must be less than 15 characters.'
+    },
+    'formerAddrState' :
+    {
+      'maxlength': 'former state must be less than 2 characters.'
+    },
+    'formerAddrCountry' :
+    {
+      'maxlength': 'Former country must be less than 25 characters.'
+    },
+    'formerFirstName' :
+    {
+      'maxlength': 'First name must be less than 29 characters.'
+    },
+    'formerLastName' :
+    {
+      'maxlength': 'Last name must be less than 29 characters.'
+    },
+    'formerMiddleName' :
+    {
+      'maxlength': 'Middle name must be less than 29 characters.'
+    }
     
   };
   
@@ -113,47 +243,46 @@ export class RdFormComponent implements OnInit {
     ngOnInit() {      
       this.RdFrm = this.fb.group({
         partyAffiliation: ['', Validators.required],
-        resStreetNumberSuffix :[''],
+        resStreetNumberSuffix :['',Validators.maxLength(4)],
         resStreetNumber: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(13)]],
-        resStreetPreDirection :[''],
-        resStreetName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-        resStreetType :[''],
-        resStreetPostDirection :[''],
-        resUnitType :[''],
-        resUnitNumber :[''],
-        resZipCodePlus4 :[''],
-        resUspsCityName: ['', Validators.required],
-        resZipCode: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],        
-        countyOfResidence :[''],
+        resStreetPreDirection :['',Validators.maxLength(2)],
+        resStreetName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(45)]],
+        resStreetType :['',Validators.maxLength(4)],
+        resStreetPostDirection :['',Validators.maxLength(2)],
+        resUnitType :['',Validators.maxLength(6)],
+        resUnitNumber :['',Validators.maxLength(20)],
+        resZipCodePlus4 :['',Validators.maxLength(4)],
+        resUspsCityName: ['', [Validators.required,Validators.maxLength(40)]],
+        resZipCode: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],        
+        countyOfResidence :['',Validators.maxLength(3)],
         mailingAddSameAsResi: [''],
-        mailAddrLine1:[''],
-        mailAddrLine2:[''],
-        mailAddrLine3:[''],
-        mailAddrCity:[''],
-        mailAddrZip:[''],
-        mailAddrState:[''],
-        mailAddrCountry:[''],
+        mailAddrLine1:['',Validators.maxLength(40)],
+        mailAddrLine2:['',Validators.maxLength(40)],
+        mailAddrLine3:['',Validators.maxLength(40)],
+        mailAddrCity:['',Validators.maxLength(40)],
+        mailAddrZip:['',Validators.maxLength(15)],
+        mailAddrState:['',Validators.maxLength(2)],
+        mailAddrCountry:['',Validators.maxLength(25)],
 
-        formerAddrLine1:[''],
-        formerAddrLine2:[''],
-        fromerAddrLine3:[''],
-        formerAddrCity:[''],
-        formerAddrZip:[''],
-        formerAddrState:[''],
-        formerAddrCountry:[''],
-        formerFirstName:[''],
-        formerLastName:[''],
-        formerMiddleName:[''],
+        formerAddrLine1:['',Validators.maxLength(40)],
+        formerAddrLine2:['',Validators.maxLength(40)],
+        fromerAddrLine3:['',Validators.maxLength(40)],
+        formerAddrCity:['',Validators.maxLength(40)],
+        formerAddrZip:['',Validators.maxLength(15)],
+        formerAddrState:['',Validators.maxLength(2)],
+        formerAddrCountry:['',Validators.maxLength(25)],
+        formerFirstName:['',Validators.maxLength(29)],
+        formerLastName:['',Validators.maxLength(29)],
+        formerMiddleName:['',Validators.maxLength(29)],
         raceId:[''],
 
         placeOfBirth:[''],
-        military:[false],
+        military:[''],
         
-        
-        gender : ['', Validators.required],
-        daytimePhone:['', null],
-        publicEmailAddress:['', Validators.email],
-        emailConfirmation:['', Validators.email],
+        gender : ['', [Validators.required,Validators.maxLength(1)]],
+        daytimePhone:['', Validators.maxLength(7)],
+        publicEmailAddress:['', [Validators.email,Validators.maxLength(100)]],
+        emailConfirmation:['', [Validators.email,Validators.maxLength(100)]],
         votingAssistRequired:[false,Validators.required],
         pollWorkerVolunteer:[false,Validators.required]
       });
@@ -170,6 +299,8 @@ export class RdFormComponent implements OnInit {
         this.RdFrm.get('resStreetName').setValue(x.resStreetName);
         this.RdFrm.get('resStreetType').setValue(x.resStreetType);
         this.RdFrm.get('resStreetPostDirection').setValue(x.resStreetPostDirection);
+        this.RdFrm.get('resUspsCityName').setValue(x.resUspsCityName);
+        
 
         this.RdFrm.get('resUnitType').setValue(x.resUnitType);
         this.RdFrm.get('resUnitNumber').setValue(x.resUnitNumber);
@@ -184,7 +315,6 @@ export class RdFormComponent implements OnInit {
         this.RdFrm.get('mailAddrZip').setValue(x.mailAddrZip);
         this.RdFrm.get('mailAddrState').setValue(x.mailAddrState);
         this.RdFrm.get('mailAddrCountry').setValue(x.mailAddrCountry);
-        this.RdFrm.get('resUspsCityName').setValue(x.resUspsCityName);
 
 
         this.RdFrm.get('formerAddrLine1').setValue(x.formerAddrLine1);

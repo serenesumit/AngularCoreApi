@@ -72,20 +72,26 @@
 
              
           </div>
-          <div class='col-sm-3'>
+          <div class='col-sm-3' [ngClass]="{'has-error' : formErrors.resStreetNumberSuffix}">
               <div class='form-group'>
 
                   <label for="LegalAddressNameSuffix">Street Number NameSuffix</label>
-                  <input type="text" class="form-control" formControlName="resStreetNumberSuffix">
-              </div>
+                  <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="resStreetNumberSuffix">
+                  <span class="help-block" *ngIf="formErrors.resStreetNumberSuffix">
+                    {{formErrors.resStreetNumberSuffix}}
+                  </span>
+                </div>
 
           </div>
-          <div class='col-sm-3'>
+          <div class='col-sm-3' [ngClass]="{'has-error' : formErrors.resStreetPreDirection}">
               <div class='form-group'>
 
                   <label for="LegalAddressDirection">Pre Direction</label>
-                  <input type="text" class="form-control" formControlName="resStreetPreDirection">
-              </div>
+                  <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="resStreetPreDirection">
+                  <span class="help-block" *ngIf="formErrors.resStreetPreDirection">
+                    {{formErrors.resStreetPreDirection}}
+                  </span>
+                </div>
 
           </div>         
 
@@ -102,35 +108,46 @@
               </div>
 
           </div>
-          <div class='col-sm-3'>
+          <div class='col-sm-3' [ngClass]="{'has-error' : formErrors.resStreetType}">
               <div class='form-group'>
 
                   <label for="LegalAddressType">Type</label>
-                  <input type="text" class="form-control" formControlName="resStreetType">
-              </div>
+                  <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="resStreetType">
+                  <span class="help-block" *ngIf="formErrors.resStreetType">
+                    {{formErrors.resStreetType}}
+                  </span>
+                </div>
 
           </div>
-          <div class='col-sm-3'>
+          <div class='col-sm-3' [ngClass]="{'has-error' : formErrors.resStreetPostDirection}">
               <div class='form-group'>
 
                   <label for="LegalAddressDirNameSuffix">Post Direction</label>
-                  <input type="text" class="form-control" formControlName="resStreetPostDirection">
-              </div>
+                  <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="resStreetPostDirection">
+                  <span class="help-block" *ngIf="formErrors.resStreetPostDirection">
+                    {{formErrors.resStreetPostDirection}}
+                  </span>
+                </div>
 
           </div>
-          <div class='col-sm-3'>
+          <div class='col-sm-3' [ngClass]="{'has-error' : formErrors.resUnitType}">
               <div class='form-group'>
 
                   <label for="LegalAddressUnitType">Unit Type</label>
-                  <input type="text" class="form-control" formControlName="resUnitType">
-              </div>
+                  <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="resUnitType">
+                  <span class="help-block" *ngIf="formErrors.resUnitType">
+                    {{formErrors.resUnitType}}
+                  </span>
+                </div>
           </div>
-          <div class='col-sm-3'>
+          <div class='col-sm-3' [ngClass]="{'has-error' : formErrors.resUnitNumber}">
               <div class='form-group'>
 
                   <label for="LegalAddressUnitNumber">Unit Number</label>
-                  <input type="text" class="form-control" formControlName="resUnitNumber">
-
+                  <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="resUnitNumber">
+                  <span class="help-block" *ngIf="formErrors.resUnitNumber">
+                    {{formErrors.resUnitNumber}}
+                  </span>
               </div>
 
           </div>
@@ -165,18 +182,24 @@
           </div>
 
 
-          <div class='col-sm-3'>
+          <div class='col-sm-3' [ngClass]="{'has-error' : formErrors.resZipCodePlus4}">
               <div class='form-group'>
                   <label for="LegalAddressZipCode4">Zip CodePlus4</label>
-                  <input type="text" class="form-control" formControlName="resZipCodePlus4">
-              </div>
+                  <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="resZipCodePlus4">
+                  <span class="help-block" *ngIf="formErrors.resZipCodePlus4">
+                    {{formErrors.resZipCodePlus4}}
+                  </span>
+                </div>
           </div>
-          <div class='col-sm-3'>
+          <div class='col-sm-3' [ngClass]="{'has-error' : formErrors.countyOfResidence}">
               <div class='form-group'>
 
                   <label for="LegalAddressCounty">County</label>
-                  <input type="text" class="form-control" formControlName="countyOfResidence">
-              </div>
+                  <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="countyOfResidence">
+                  <span class="help-block" *ngIf="formErrors.countyOfResidence">
+                    {{formErrors.countyOfResidence}}
+                  </span>
+                </div>
           </div>
 </div>
 <br />
@@ -210,54 +233,74 @@
   <hr style="border-color:black;" />
   <div class='row'>
       <div class='col-sm-4'>
-          <div class='form-group'>
+          <div class='form-group' [ngClass]="{'has-error' : formErrors.mailAddrLine1}">
 
               <label for="MAddressLine1">Address Line 1</label>
-              <input type="text" class="form-control" formControlName="mailAddrLine1">
-          </div>
+              <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="mailAddrLine1">
+              <span class="help-block" *ngIf="formErrors.mailAddrLine1">
+                {{formErrors.mailAddrLine1}}
+              </span>
+            </div>
       </div>
-      <div class='col-sm-4'>
+      <div class='col-sm-4' [ngClass]="{'has-error' : formErrors.mailAddrLine2}">
           <div class='form-group'>
 
               <label for="MAddressLine2">Address Line 2</label>
-              <input type="text" class="form-control" formControlName="mailAddrLine2">
-          </div>
+              <input type="text" class="form-control"  (blur)="logValidationErrors()" formControlName="mailAddrLine2">
+              <span class="help-block" *ngIf="formErrors.mailAddrLine2">
+                {{formErrors.mailAddrLine2}}
+              </span>
+            </div>
       </div>
-      <div class='col-sm-4'>
+      <div class='col-sm-4' [ngClass]="{'has-error' : formErrors.mailAddrLine3}">
           <div class='form-group'>
 
               <label for="MAddressLine3">Address Line 3</label>
-              <input type="text" class="form-control" formControlName="mailAddrLine3">
-          </div>
+              <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="mailAddrLine3">
+              <span class="help-block" *ngIf="formErrors.mailAddrLine3">
+                {{formErrors.mailAddrLine3}}
+              </span>
+            </div>
       </div>
-      <div class='col-sm-4'>
+      <div class='col-sm-4' [ngClass]="{'has-error' : formErrors.mailAddrCity}">
           <div class='form-group'>
 
               <label for="MailingCity">City</label>
-              <input type="text" class="form-control" formControlName="mailAddrCity">
-          </div>
+              <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="mailAddrCity">
+              <span class="help-block" *ngIf="formErrors.mailAddrCity">
+                {{formErrors.mailAddrCity}}
+              </span>
+            </div>
       </div>
-      <div class='col-sm-4'>
+      <div class='col-sm-4' [ngClass]="{'has-error' : formErrors.mailAddrState}">
           <div class='form-group'>
 
               <label for="MailingState">State</label>
-              <input type="text" class="form-control" formControlName="mailAddrState">
-
+              <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="mailAddrState">
+              <span class="help-block" *ngIf="formErrors.mailAddrState">
+                {{formErrors.mailAddrState}}
+              </span>
           </div>
       </div>
-      <div class='col-sm-4'>
+      <div class='col-sm-4' [ngClass]="{'has-error' : formErrors.mailAddrZip}">
           <div class='form-group'>
 
               <label for="MailingZipCode">Zip Code</label>
-              <input type="text" class="form-control" formControlName="mailAddrZip">
-          </div>
+              <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="mailAddrZip">
+              <span class="help-block" *ngIf="formErrors.mailAddrZip">
+                {{formErrors.mailAddrZip}}
+              </span>
+            </div>
       </div>
-      <div class='col-sm-4'>
+      <div class='col-sm-4' [ngClass]="{'has-error' : formErrors.mailAddrCountry}">
           <div class='form-group'>
 
               <label for="MCountryOutsideUS">Country if outside US</label>
-              <input type="text" class="form-control" formControlName="mailAddrCountry">
-          </div>
+              <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="mailAddrCountry">
+              <span class="help-block" *ngIf="formErrors.mailAddrCountry">
+                {{formErrors.mailAddrCountry}}
+              </span>
+            </div>
       </div>
   </div>
 </div>
@@ -266,72 +309,98 @@
                 <h5>(This information is not required.)</h5>
                 <hr style="border-color:black;" />
                 <div class='row'>
-                  <div class='col-sm-4'>
+                  <div class='col-sm-4' [ngClass]="{'has-error' : formErrors.formerAddrLine1}">
                       <div class='form-group'>
 
                           <label for="FAddressLine1">Address Line 1</label>
-                          <input type="text" class="form-control" formControlName="formerAddrLine1">
-                      </div>
+                          <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="formerAddrLine1">
+                          <span class="help-block" *ngIf="formErrors.formerAddrLine1">
+                            {{formErrors.formerAddrLine1}}
+                          </span>
+                        </div>
                   </div>
                   <div class='col-sm-4'>
-                      <div class='form-group'>
+                      <div class='form-group' [ngClass]="{'has-error' : formErrors.formerAddrLine2}">
 
                           <label for="FAddressLine2">Address Line 2</label>
-                          <input type="text" class="form-control" formControlName="formerAddrLine2">
-                      </div>
+                          <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="formerAddrLine2">
+                          <span class="help-block" *ngIf="formErrors.formerAddrLine2">
+                            {{formErrors.formerAddrLine2}}
+                          </span>
+                        </div>
                   </div>
-                  <div class='col-sm-4'>
+                  <div class='col-sm-4' [ngClass]="{'has-error' : formErrors.fromerAddrLine3}">
                       <div class='form-group'>
 
                           <label for="FAddressLine3">Address Line 3</label>
-                          <input type="text" class="form-control" formControlName="fromerAddrLine3">
-                      </div>
+                          <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="fromerAddrLine3">
+                          <span class="help-block" *ngIf="formErrors.fromerAddrLine3">
+                            {{formErrors.fromerAddrLine3}}
+                          </span>
+                        </div>
                   </div>
-                  <div class='col-sm-4'>
+                  <div class='col-sm-4' [ngClass]="{'has-error' : formErrors.formerAddrCity}">
                       <div class='form-group'>
 
                           <label for="FormerCity">City</label>
-                          <input type="text" class="form-control" formControlName="formerAddrCity">
-                      </div>
+                          <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="formerAddrCity">
+                          <span class="help-block" *ngIf="formErrors.formerAddrCity">
+                            {{formErrors.formerAddrCity}}
+                          </span>
+                        </div>
                   </div>
-                  <div class='col-sm-4'>
+                  <div class='col-sm-4' [ngClass]="{'has-error' : formErrors.formerAddrState}">
                       <div class='form-group'>
 
                           <label for="FormerState">State</label>
 
-                          <input type="text" class="form-control" formControlName="formerAddrState">
-
+                          <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="formerAddrState">
+                          <span class="help-block" *ngIf="formErrors.formerAddrState">
+                            {{formErrors.formerAddrState}}
+                          </span>
                       </div>
                   </div>
 
 
-                  <div class='col-sm-4'>
+                  <div class='col-sm-4' [ngClass]="{'has-error' : formErrors.formerAddrZip}">
                       <div class='form-group'>
 
                           <label for="FormerZipCode">Zip Code</label>
-                          <input type="text" class="form-control" formControlName="formerAddrZip">
-                      </div>
+                          <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="formerAddrZip">
+                          <span class="help-block" *ngIf="formErrors.formerAddrZip">
+                            {{formErrors.formerAddrZip}}
+                          </span>
+                        </div>
                   </div>
-                  <div class='col-sm-4'>
+                  <div class='col-sm-4' [ngClass]="{'has-error' : formErrors.formerFirstName}">
                       <div class='form-group'>
 
                           <label for="FormerFirstName">Former First Name</label>
-                          <input type="text" class="form-control" formControlName="formerFirstName">
-                      </div>
+                          <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="formerFirstName">
+                          <span class="help-block" *ngIf="formErrors.formerFirstName">
+                            {{formErrors.formerFirstName}}
+                          </span>
+                        </div>
                   </div>
                   <div class='col-sm-4'>
-                      <div class='form-group'>
+                      <div class='form-group' [ngClass]="{'has-error' : formErrors.formerMiddleName}">
 
                           <label for="FormerMiddleName">Former Middle Name</label>
-                          <input type="text" class="form-control" formControlName="formerMiddleName">
-                      </div>
+                          <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="formerMiddleName">
+                          <span class="help-block" *ngIf="formErrors.formerMiddleName">
+                            {{formErrors.formerMiddleName}}
+                          </span>
+                        </div>
                   </div>
-                  <div class='col-sm-4'>
+                  <div class='col-sm-4' [ngClass]="{'has-error' : formErrors.formerLastName}">
                       <div class='form-group'>
 
                           <label for="FormerLastName">Former Last Name</label>
-                          <input type="text" class="form-control" formControlName="formerLastName">
-                      </div>
+                          <input type="text" class="form-control" (blur)="logValidationErrors()" formControlName="formerLastName">
+                          <span class="help-block" *ngIf="formErrors.formerLastName">
+                            {{formErrors.formerLastName}}
+                          </span>
+                        </div>
                   </div>
               </div>
 
@@ -418,7 +487,7 @@
                       <div class='form-group'>
 
                           <label for="PlaceOfBirth"> State or Country of Birth</label>
-                          <input type="text" class="form-control" formControlName="placeOfBirth">
+                          <input type="text" class="form-control"  formControlName="placeOfBirth">
                       </div>
                   </div>
 
