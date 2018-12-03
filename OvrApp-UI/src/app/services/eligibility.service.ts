@@ -16,8 +16,8 @@ const httpOptions = {
 @Injectable()
 export class EligibilityService {
 
-
   public sharedEligibility = {};
+  public sharedReview = {};
 
 
 constructor(private http: HttpClient) { }

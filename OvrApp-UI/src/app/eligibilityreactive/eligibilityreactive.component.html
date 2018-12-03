@@ -119,8 +119,8 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
                       <label>
-                        <input name="isSSNAvailable" id="isSSNAvailable"
-                          (change)="setSSNDetail()" type="checkbox" formControlName="isSSNAvailable">
+                        <input name="isSSNAvailable" id="isSSNAvailable" [checked]="check"
+                        (change)="setSSNDetail($event, check)"  type="checkbox" formControlName="isSSNAvailable">
                         I do not have Florida SSN 
                       </label>
                     </div>

@@ -180,6 +180,8 @@ export class EligibilityreactiveComponent implements OnInit {
       this.service.getOneEligibility(modelFromSession.ovrApplicationId).subscribe((x)=>{
 debugger;
         console.log(x);  
+        this.service.sharedEligibility = x;
+
         this.eligibilityFrm.get('usCitizen').setValue(x.usCitizen ==true? "1":"0");
         this.eligibilityFrm.get('notAFelon').setValue(x.notAFelon== true?"1":"0");
         this.eligibilityFrm.get('mentalIncompStatus').setValue(x.mentalIncompStatus== true?"1":"0");
@@ -243,6 +245,11 @@ debugger;
       contactData.mentalIncompStatus = this.eligibilityFrm.get('mentalIncompStatus').value=='1'?true:false;
       contactData.notAFelon = this.eligibilityFrm.get('notAFelon').value=='1'?true:false;
       contactData.usCitizen = this.eligibilityFrm.get('usCitizen').value=='1'?true:false;
+      contactData.recordUpdate = this.eligibilityFrm.get('recordUpdate').value;
+      contactData.requesttoReplace = this.eligibilityFrm.get('requesttoReplace').value;
+      contactData.recordUpdate = this.eligibilityFrm.get('recordUpdate').value;
+    
+      console.log("Eligibility: " +this.eligibilityFrm.value);
 
      if(contactData.ovrApplicationId !=null && typeof contactData.ovrApplicationId !=="undefined"
         && contactData.ovrApplicationId >0)
@@ -255,8 +262,9 @@ debugger;
               data.currentTabId =1;
               this.sessionEService.SaveEligibilityToSession(data);
                
-              this.sessionEService.SaveStepToSession("2");
-               this.router.navigateByUrl('/rdform');
+              // this.sessionEService.SaveStepToSession("2");
+              //  this.router.navigateByUrl('/rdform');
+              
               //this.router.navigateByUrl('/review');
             }
           );
@@ -267,8 +275,8 @@ debugger;
               this.service.sharedEligibility = data;
               data.currentTabId =1;
               this.sessionEService.SaveEligibilityToSession(data);
-              this.sessionEService.SaveStepToSession("2");
-              this.router.navigateByUrl('/rdform');
+            //  this.sessionEService.SaveStepToSession("2");
+             // this.router.navigateByUrl('/rdform');
             }
           );
         }
@@ -360,7 +368,7 @@ debugger;
     this.eligibilityFrm.controls['dlIssueDate'].updateValueAndValidity(); 
   }
   hideSSNDetail:boolean= true;
-  setSSNDetail(){
+  setSSNDetail(event: any, check:any){
     this.hideSSNDetail = !this.hideSSNDetail;
     if(!this.hideSSNDetail){      
       this.eligibilityFrm.controls['ssnLast4'].setValidators(null);                  

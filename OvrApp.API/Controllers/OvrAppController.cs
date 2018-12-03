@@ -80,8 +80,21 @@ namespace OvrApp.API.Controllers
             {
                 return NotFound();
             }
-            dbOvrApplication = _mapper.Map<OvrApplication>(model);
 
+            dbOvrApplication.UsCitizen = model.UsCitizen;
+            dbOvrApplication.NotAFelon = model.NotAFelon;
+            dbOvrApplication.MentalIncompStatus = model.MentalIncompStatus;
+            dbOvrApplication.NewRegistration = model.NewRegistration;
+            dbOvrApplication.RecordUpdate = model.RecordUpdate;
+            dbOvrApplication.RequesttoReplace = model.RequesttoReplace;
+            dbOvrApplication.FlDlNum = model.FlDlNum;
+            dbOvrApplication.SsnLast4 = model.SsnLast4;
+            dbOvrApplication.DlIssueDate = model.DlIssueDate;
+            dbOvrApplication.LastName = model.LastName;
+            dbOvrApplication.FirstName = model.FirstName;
+            dbOvrApplication.MiddleName = model.MiddleName;
+            dbOvrApplication.NameSuffix = model.NameSuffix;
+            dbOvrApplication.DateOfBirth = model.DateOfBirth;
             _context.Update(dbOvrApplication);
             await _context.SaveChangesAsync();
 
@@ -106,7 +119,60 @@ namespace OvrApp.API.Controllers
             }
             try
             {
-                dbOvrApplication = _mapper.Map<OvrApplication>(model);
+
+                dbOvrApplication.Gender = model.Gender;
+                dbOvrApplication.RaceId = model.RaceId;
+                dbOvrApplication.PublicEmailAddress = model.PublicEmailAddress;
+                dbOvrApplication.EmailConfirmation = model.EmailConfirmation;
+                dbOvrApplication.RequestSampleBallotByEmail = model.RequestSampleBallotByEmail;
+                dbOvrApplication.DaytimeAreaCode = model.DaytimeAreaCode;
+                dbOvrApplication.DaytimePhone = model.DaytimePhone;
+                dbOvrApplication.DaytimePhoneExtension = model.DaytimePhoneExtension;
+                dbOvrApplication.VoterClaimsNoSsnOrDln = model.VoterClaimsNoSsnOrDln;
+                dbOvrApplication.ResStreetNumber = model.ResStreetNumber;
+                dbOvrApplication.ResStreetNumberSuffix = model.ResStreetNumberSuffix;
+                dbOvrApplication.ResStreetPreDirection = model.ResStreetPreDirection;
+                dbOvrApplication.ResStreetName = model.ResStreetName;
+                dbOvrApplication.ResStreetType = model.ResStreetType;
+                dbOvrApplication.ResStreetPostDirection = model.ResStreetPostDirection;
+                dbOvrApplication.ResUnitType = model.ResUnitType;
+                dbOvrApplication.ResUnitNumber = model.ResUnitNumber;
+                dbOvrApplication.ResUspsCityName = model.ResUspsCityName;
+                dbOvrApplication.ResZipCode = model.ResZipCode;
+                dbOvrApplication.ResZipCodePlus4 = model.ResZipCodePlus4;
+                dbOvrApplication.CountyOfResidence = model.CountyOfResidence;
+                dbOvrApplication.MailingAddSameAsResi = model.MailingAddSameAsResi;
+                dbOvrApplication.MailAddrLine1 = model.MailAddrLine1;
+                dbOvrApplication.MailAddrLine2 = model.MailAddrLine2;
+                dbOvrApplication.MailAddrLine3 = model.MailAddrLine3;
+                dbOvrApplication.MailAddrCity = model.MailAddrCity;
+                dbOvrApplication.MailAddrZip = model.MailAddrZip;
+                dbOvrApplication.MailAddrState = model.MailAddrState;
+                dbOvrApplication.MailAddrCountry = model.MailAddrCountry;
+                dbOvrApplication.FormerAddrLine1 = model.FormerAddrLine1;
+                dbOvrApplication.FormerAddrLine2 = model.FormerAddrLine2;
+                dbOvrApplication.FromerAddrLine3 = model.FromerAddrLine3;
+                dbOvrApplication.FormerAddrCity = model.FormerAddrCity;
+                dbOvrApplication.FormerAddrZip = model.FormerAddrZip;
+                dbOvrApplication.FormerAddrState = model.FormerAddrState;
+                dbOvrApplication.FormerAddrCountry = model.FormerAddrCountry;
+                dbOvrApplication.FormerFirstName = model.FormerFirstName;
+                dbOvrApplication.FormerLastName = model.FormerLastName;
+
+
+                dbOvrApplication.FormerMiddleName = model.FormerMiddleName;
+                dbOvrApplication.PlaceOfBirth = model.PlaceOfBirth;
+                dbOvrApplication.PartyAffiliation = model.PartyAffiliation;
+                dbOvrApplication.VotingAssistRequired = model.VotingAssistRequired;
+                dbOvrApplication.PollWorkerVolunteer = model.PollWorkerVolunteer;
+                dbOvrApplication.Military = model.Military;
+                dbOvrApplication.MilitaryDependent = model.MilitaryDependent;
+                dbOvrApplication.OverseasFlag = model.OverseasFlag;
+                dbOvrApplication.FvrsStreetSegmentId = model.FvrsStreetSegmentId;
+                dbOvrApplication.RegDate = model.RegDate;
+                dbOvrApplication.Hashcode = model.Hashcode;
+                dbOvrApplication.OVRStatus = model.OVRStatus;
+
                 dbOvrApplication.PartyAffiliation = "FDP";
 
                 _context.Update(dbOvrApplication);

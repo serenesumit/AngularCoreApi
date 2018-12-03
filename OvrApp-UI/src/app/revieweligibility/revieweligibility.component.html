@@ -14,14 +14,14 @@
     </thead>
     <tbody *ngIf="getcustomer != null">
       <tr>
-        <td>{{ getcustomer.FlDlNum }}</td>
+        <td>{{ getcustomer.DLNumber }}</td>
         <td>
-          {{ getcustomer.DateOfBirth | date }}
+          {{ getcustomer.Dob | date }}
         </td>
         <td>{{ getcustomer.FirstName }}</td>
-        <td>{{ getcustomer.DlIssueDate }}</td>
+        <td>{{ getcustomer.IssueDate }}</td>
         <td>{{ getcustomer.LastName }}</td>
-        <td>{{ getcustomer.SsnLast4 }}</td>
+        <td>{{ getcustomer.LastSSN }}</td>
         <td>{{ getcustomer.MiddleName }}</td>
       </tr>
     </tbody>
@@ -76,41 +76,41 @@
               <tr>
                 <td>
                   <div class=".col-xs-6 .col-sm-4">
-                    <b>Florida DL or Florida ID card number: </b> {{ getcustomer.FlDlNum }}
+                    <b>Florida DL or Florida ID card number: </b> {{ getcustomer.flDlNum }}
                   </div>
                 </td>
 
                 <td>
                   <div class=".col-xs-6 .col-sm-4">
-                    <b>Florida DL Issued Date: </b> {{ getcustomer.DlIssueDate }}
+                    <b>Florida DL Issued Date: </b> {{ getcustomer.dlIssueDate }}
                   </div>
                 </td>
               </tr>
               <tr>
                 <td>
                   <div class=".col-xs-6 .col-sm-4">
-                    <b>Last 4 digits of your Social Security Number: </b> {{ getcustomer.SsnLast4 }}
+                    <b>Last 4 digits of your Social Security Number: </b> {{ getcustomer.ssnLast4 }}
                   </div>
                 </td>
 
                 <td>
-                  <div class=".col-xs-6 .col-sm-4"><b>Date of Birth:</b> {{ getcustomer.DateOfBirth | date }}</div>
+                  <div class=".col-xs-6 .col-sm-4"><b>Date of Birth:</b> {{ getcustomer.dateOfBirth | date }}</div>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div class=".col-xs-6 .col-sm-4"><b>LastName:</b> {{ getcustomer.LastName }}</div>
+                  <div class=".col-xs-6 .col-sm-4"><b>LastName:</b> {{ getcustomer.lastName }}</div>
                 </td>
                 <td>
-                  <div class=".col-xs-6 .col-sm-4"><b>FirstName:</b> {{ getcustomer.FirstName }}</div>
+                  <div class=".col-xs-6 .col-sm-4"><b>FirstName:</b> {{ getcustomer.firstName }}</div>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div class=".col-xs-6 .col-sm-4"><b>MiddleName:</b> {{ getcustomer.MiddleName }}</div>
+                  <div class=".col-xs-6 .col-sm-4"><b>MiddleName:</b> {{ getcustomer.middleName }}</div>
                 </td>
                 <td>
-                  <div class=".col-xs-6 .col-sm-4"><b>NameSuffix: </b></div>
+                  <div class=".col-xs-6 .col-sm-4"><b>Suffix: </b> {{ getcustomer.nameSuffix }}</div>
                 </td>
               </tr>
             </tbody>
@@ -119,12 +119,21 @@
       </fieldset>
 
       <div class="pull-right">
-        <button
-          class="btn btn-primary btn-ok"
-          data-toggle="modal" (click)="navigatetoRd()"
-        >
-          Continue
-        </button>
+        <div class="row">
+<div class="col-sm-6">
+    <button
+    class="btn btn-primary btn-ok"
+    data-toggle="modal" (click)="navigatetoRd()"
+  >
+    Continue
+  </button>
+</div>
+<div class="col-sm-6">
+    <button  class="btn btn-primary " (click)="editContact(getcustomer.ovrApplicationId)">Edit</button>
+  </div>
+
+        </div>
+      
       </div>
     </div>
   </div>
