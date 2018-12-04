@@ -1,4 +1,13 @@
 <div class="container" style="padding-top: 260px;">
+    <div class="text-center">
+        <span id="btnhome"   class="btn btn-arrow-right btn-primary2" style="font-weight:bold">Step 1<span class="vh">(Current)</span></span>
+       <a> <span id="step2"   class="btn btn-grey btn-arrow-right" style="cursor:default"> Step 2</span>  </a>
+        <span id="step3"  class="btn btn-grey btn-arrow-right" style="cursor:default">Step 3</span>
+    </div>
+    
+</div>
+
+<div class="container" style="padding-top: 15px;">
   <form [formGroup]="eligibilityFrm" class="form-horizontal" (ngSubmit)="onSubmit(eligibilityFrm)">
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -345,10 +354,9 @@
 
           <button class="btn btn-primary pull-right" *ngIf=" pTabId==2" [disabled]="!(eligibilityFrm.valid) && !isRecaptaValid"
             type="submit" (click)="setDefaultValues()">Continue</button>
+            <button class="btn btn-danger pull-right" type="button" *ngIf=" pTabId==2" (click)="openModal(template)">Exit</button>
 
-
-          <!-- <button class="btn btn-primary" type="button"
-            (click)="onLoadDataClick()">Load Data</button>-->
+        
         </div>
       </div>
       <ng-template #template>
