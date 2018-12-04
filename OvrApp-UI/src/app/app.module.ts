@@ -22,6 +22,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LocalStorageService } from './services/localstorage.service';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { ReviewformComponent } from './reviewform/reviewform.component';
 
 @NgModule({
    declarations: [
@@ -32,7 +33,8 @@ import { RecaptchaModule } from 'ng-recaptcha';
       GetlistComponent,
       FooterComponent,
       RevieweligibilityComponent,
-      RdFormComponent
+      RdFormComponent,
+      ReviewformComponent
    ],
    imports: [
       BrowserModule,

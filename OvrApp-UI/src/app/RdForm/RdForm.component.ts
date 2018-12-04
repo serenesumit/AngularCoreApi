@@ -404,7 +404,7 @@ export class RdFormComponent implements OnInit {
              
               this.service.sharedEligibility = data;
               this.sessionEService.SaveEligibilityToSession(data);
-              this.router.navigateByUrl('/review');
+              this.router.navigateByUrl('/reviewform');
             }
           );
         }

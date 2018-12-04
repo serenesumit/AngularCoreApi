@@ -22,7 +22,7 @@ export class EligibilityService {
 
 constructor(private http: HttpClient) { }
 
-  getAllEligibility(url: string): Observable<IEligibility[]> {
+  getAllEligibility(): Observable<IEligibility[]> {
   return this.http.get<IEligibility[]>(Global.BASE_USER_ENDPOINT+'ovrapp/getAllEligibility')
     .pipe(
       catchError(this.handleError)

@@ -64,7 +64,7 @@
 
                   <label for="resStreetNumber">Street Number <span style="color:#e80000;">*</span></label>
                   &nbsp;&nbsp;&nbsp;
-                  <input type="text" id="resStreetNumber"  (blur)="logValidationErrors()" formControlName="resStreetNumber"  class="form-control">
+                  <input type="number" id="resStreetNumber"  (blur)="logValidationErrors()" formControlName="resStreetNumber"  class="form-control">
                   <span class="help-block" *ngIf="formErrors.resStreetNumber">
                       {{formErrors.resStreetNumber}}
                     </span>
@@ -420,9 +420,9 @@
                       <div class='form-group' [ngClass]="{'has-error' : formErrors.gender}">
 
                           <label> Gender <br/>
-                          <input name="gender" type="radio" value="1" formControlName="gender" (blur)="logValidationErrors()">
+                          <input name="gender" type="radio" value="M" formControlName="gender" (blur)="logValidationErrors()">
                            Male</label> &nbsp;
-                           <input name="gender" type="radio" value="2" formControlName="gender" (blur)="logValidationErrors()"> <label for="gender"> Female</label>
+                           <input name="gender" type="radio" value="F" formControlName="gender" (blur)="logValidationErrors()"> <label for="gender"> Female</label>
                            <span class="help-block" *ngIf="formErrors.gender">
                               {{formErrors.gender}}
                             </span>
@@ -432,7 +432,7 @@
                       <div class='form-group'>
                           <label for="Race">Race/Ethnicity</label>
 
-                          <input type="text" class="form-control" formControlName="raceId">
+                          <input type="number" class="form-control" formControlName="raceId">
                       </div>
                   </div>
                   <div class='row'>
@@ -505,13 +505,13 @@
                       <div style="font-weight:bold"  [ngClass]="{'has-error' : formErrors.votingAssistRequired}">
                           <fieldset>
                               <legend style="font-size:14px; border-bottom:0px; padding-left:0px; float: left; width:30%">I will need assistance with voting.</legend>
-                              <input name="votingAssistRequired" type="radio" value="1" formControlName="votingAssistRequired" (blur)="logValidationErrors()">
+                             
                               <label for="votingAssistRequired">
+                                    <input name="votingAssistRequired" type="radio" value="1" formControlName="votingAssistRequired" (blur)="logValidationErrors()">
                                   Yes
                               </label>
-
-                              <input name="votingAssistRequired" type="radio" value="2" formControlName="votingAssistRequired" (blur)="logValidationErrors()"> 
-                                                            <label for="VotingAssistRequiredNo">
+                        <label for="VotingAssistRequiredNo">
+                       <input name="votingAssistRequired" type="radio" value="0" formControlName="votingAssistRequired" (blur)="logValidationErrors()"> 
                                   No
                               </label>
                               <span class="help-block" *ngIf="formErrors.votingAssistRequired">
@@ -523,13 +523,15 @@
                       <div style="font-weight:bold" [ngClass]="{'has-error' : formErrors.pollWorkerVolunteer}">
                           <fieldset>
                               <legend style="font-size:14px; border-bottom:0px; padding-left:0px; float: left; width:30%">I am interested in becoming a poll worker.</legend>
-                              <input name="pollWorkerVolunteer" type="radio" value="1" formControlName="pollWorkerVolunteer" (blur)="logValidationErrors()">
+                              
                               <label for="pollWorkerVolunteer">
+                                    <input name="pollWorkerVolunteer" type="radio" value="1" formControlName="pollWorkerVolunteer" (blur)="logValidationErrors()">
                                   Yes
                               </label>
 
-                              <input name="pollWorkerVolunteer" type="radio" value="2" formControlName="pollWorkerVolunteer" (blur)="logValidationErrors()"> 
+                              
                               <label for="pollWorkerVolunteer">
+                                    <input name="pollWorkerVolunteer" type="radio" value="0" formControlName="pollWorkerVolunteer" (blur)="logValidationErrors()"> 
                                   No
                               </label>
                               <span class="help-block" *ngIf="formErrors.pollWorkerVolunteer">

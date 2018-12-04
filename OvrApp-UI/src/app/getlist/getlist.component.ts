@@ -21,7 +21,7 @@ export class GetlistComponent implements OnInit {
 
   getEligibilitys() {
 
-    this.service.getAllEligibility('http://localhost:5000/api/customer/getAllCustomers').subscribe( response => {
+    this.service.getAllEligibility().subscribe( response => {
       this.customers = response;
        console.log(this.customers);
       // this.savecustomerform.reset();

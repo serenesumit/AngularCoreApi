@@ -4,11 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {LocalStorageService} from '../services/localstorage.service'
 
 @Component({
-  selector: 'app-revieweligibility',
-  templateUrl: './revieweligibility.component.html',
-  styleUrls: ['./revieweligibility.component.css']
+  selector: 'app-reviewform',
+  templateUrl: './reviewform.component.html',
+  styleUrls: ['./reviewform.component.css']
 })
-export class RevieweligibilityComponent implements OnInit {
+export class ReviewformComponent implements OnInit {
+
   public getcustomer: any;
   myData: any;
 
@@ -35,13 +36,12 @@ debugger;
     
   }
   navigatetoRd() {
-    this.sessionEService.SaveStepToSession("2");
     this.router.navigateByUrl('/rdform');
 }
 
 editContact(id: number) {
   console.log('edit contact id is ' + id);
-  this.sessionEService.SaveStepToSession("1");
+  this.sessionEService.SaveStepToSession("2");
 // const contactData = this.service.sharedEligibility;
 // console.log(contactData);
 // this.service.sharedReview = contactData;
@@ -65,4 +65,6 @@ this.service.getOneEligibility(id).subscribe( response => {
 }, error => {
   console.log(error);
 });
-}}
+}
+
+}

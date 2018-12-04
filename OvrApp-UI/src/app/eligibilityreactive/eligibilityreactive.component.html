@@ -75,7 +75,7 @@
                 <div class="col-md-11">
                   <label>
                     <input name="newRegistration" id="newRegistration" [attr.disabled]="isNewRegistration == true ? true : null"
-                      type="checkbox" (change)="setNewRegistrationStatus()" formControlName="newRegistration"> New
+                      type="checkbox" [(ngModel)]="newRegistration" (change)="setNewRegistrationStatus()" formControlName="newRegistration"> New
                     Registration
                   </label>
                 </div>
@@ -85,18 +85,26 @@
                   <div class="col-md-1"></div>
                   <div class="col-md-11">
                     <label>
-                      <input name="RecordUpdate" id="RecordUpdate" [attr.disabled]="isNewrecordUpdate == true ? true : null"
-                        type="checkbox" (change)="setNewRegistrationStatusFalse()" formControlName="recordUpdate">
+                      <input name="recordUpdate" id="recordUpdate"  [attr.disabled]="isNewrecordUpdate == true ? true : null"
+                        type="checkbox" [checked]="recordUpdate" (change)="setNewRegistrationStatusFalse($event, check)" formControlName="recordUpdate">
                       Record Update/Change (e.g., Address, Party Affiliation, Name, Signature)
                     </label>
+
+                  
                   </div>
                 </div>
+
+                
+
                 <div class="form-group">
                   <div class="col-md-1"></div>
                   <div class="col-md-11">
                     <label>
-                      <input name="RequesttoReplace" [attr.disabled]="isNewrecordUpdate == true ? true : null" id="requesttoReplace"
-                        (change)="setNewRegistrationStatusFalse()" type="checkbox" formControlName="requesttoReplace">
+                       
+                      <input id="requesttoReplace"  name="requesttoReplace" [attr.disabled]="isNewrecordUpdate == true ? true : null" 
+                      [(checked)]="requesttoReplace" (change)="setNewRegistrationStatusFalse($event, check)"  formControlName="requesttoReplace"  type="checkbox" 
+                     >
+                      
                       Request to Replace Voter Information Card
                     </label>
                   </div>
@@ -109,8 +117,8 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
                       <label>
-                        <input name="isDLAvailable" id="isDLAvailable" 
-                          type="checkbox" (change)="setDLDetail()" formControlName="isDLAvailable">
+                        <input data-md-icheck name="isDLAvailable" id="isDLAvailable" 
+                          type="checkbox" [(ngModel)]="isDLAvailable" (change)="setSSNDetail($event, check)" formControlName="isDLAvailable">
                         I do not have Florida DL
                       </label>
                     </div>
@@ -119,7 +127,7 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
                       <label>
-                        <input name="isSSNAvailable" id="isSSNAvailable" [checked]="check"
+                        <input name="isSSNAvailable" id="isSSNAvailable"  [(ngModel)]="isSSNAvailable"
                         (change)="setSSNDetail($event, check)"  type="checkbox" formControlName="isSSNAvailable">
                         I do not have Florida SSN 
                       </label>
@@ -335,7 +343,7 @@
         <div class="btn-toolbar">
           <button class="btn btn-primary pull-right" type="button" *ngIf="pTabId==1" (click)="selectTab(pTabId)">Continue</button>
 
-          <button class="btn btn-primary pull-right" *ngIf=" pTabId==2" [disabled]="!(eligibilityFrm.valid && isRecaptaValid)"
+          <button class="btn btn-primary pull-right" *ngIf=" pTabId==2" [disabled]="!(eligibilityFrm.valid) && !isRecaptaValid"
             type="submit" (click)="setDefaultValues()">Continue</button>
 
 

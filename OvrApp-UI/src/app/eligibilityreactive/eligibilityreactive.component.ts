@@ -139,7 +139,6 @@ export class EligibilityreactiveComponent implements OnInit {
     
   };
 
-
   public DLPattern = { 'A': { pattern: new RegExp('^[A-Za-z]$') }, '0': { pattern: new RegExp('^[0-9]$') } };
   public SSNPattern = { '0': { pattern: new RegExp('^[0-9]$') } };
   ngOnInit() {
@@ -174,13 +173,19 @@ export class EligibilityreactiveComponent implements OnInit {
       this.logValidationErrors(this.eligibilityFrm);
     });
 
+   
     var modelFromSession = this.sessionEService.getEligibilityFromSession(); 
     debugger;   
     if (modelFromSession != null && modelFromSession.ovrApplicationId>0) {
+      this.IsEligibilityOn = true; 
+      this.isRecaptaValid =false;     
+      this.isStep1Valid = false;
+
       this.service.getOneEligibility(modelFromSession.ovrApplicationId).subscribe((x)=>{
 debugger;
         console.log(x);  
         this.service.sharedEligibility = x;
+       
 
         this.eligibilityFrm.get('usCitizen').setValue(x.usCitizen ==true? "1":"0");
         this.eligibilityFrm.get('notAFelon').setValue(x.notAFelon== true?"1":"0");
@@ -188,6 +193,7 @@ debugger;
         this.eligibilityFrm.get('newRegistration').setValue(x.newRegistration);
         this.eligibilityFrm.get('recordUpdate').setValue(x.recordUpdate);
         this.eligibilityFrm.get('requesttoReplace').setValue(x.requesttoReplace);
+        this.eligibilityFrm.get('nameSuffix').setValue(x.nameSuffix);
         this.eligibilityFrm.get('flDlNum').setValue(x.flDlNum);
         this.eligibilityFrm.get('ssnLast4').setValue(x.ssnLast4);
         this.eligibilityFrm.get('lastName').setValue(x.lastName);
@@ -197,9 +203,7 @@ debugger;
         this.eligibilityFrm.get('dlIssueDate').setValue(x.dlIssueDate);    
         this.eligibilityFrm.get('ovrApplicationId').setValue(x.ovrApplicationId);  
 
-        this.IsEligibilityOn = true; 
-        this.isRecaptaValid =false;     
-        this.isStep1Valid = false;
+      
           
         this.enableEligibilityForm();
         this.sessionEService.SaveEligibilityToSession(x); 
@@ -228,7 +232,7 @@ debugger;
   }
 
   onSubmit(formData: any) {
-
+   
     var modelFromSession = this.sessionEService.getEligibilityFromSession();
    
     var isEValid = (this.eligibilityFrm.get('usCitizen').value == 1) && (this.eligibilityFrm.get('notAFelon').value == 1)
@@ -240,16 +244,13 @@ debugger;
 
       contactData.newRegistration = this.eligibilityFrm.get('newRegistration').value;      
       contactData.recordUpdate = this.eligibilityFrm.get('recordUpdate').value;
+      
       contactData.requesttoReplace = this.eligibilityFrm.get('requesttoReplace').value;
 
       contactData.mentalIncompStatus = this.eligibilityFrm.get('mentalIncompStatus').value=='1'?true:false;
       contactData.notAFelon = this.eligibilityFrm.get('notAFelon').value=='1'?true:false;
       contactData.usCitizen = this.eligibilityFrm.get('usCitizen').value=='1'?true:false;
-      contactData.recordUpdate = this.eligibilityFrm.get('recordUpdate').value;
-      contactData.requesttoReplace = this.eligibilityFrm.get('requesttoReplace').value;
-      contactData.recordUpdate = this.eligibilityFrm.get('recordUpdate').value;
-    
-      console.log("Eligibility: " +this.eligibilityFrm.value);
+  
 
      if(contactData.ovrApplicationId !=null && typeof contactData.ovrApplicationId !=="undefined"
         && contactData.ovrApplicationId >0)
@@ -264,8 +265,8 @@ debugger;
                
               // this.sessionEService.SaveStepToSession("2");
               //  this.router.navigateByUrl('/rdform');
-              
-              //this.router.navigateByUrl('/review');
+
+              this.router.navigateByUrl('/review');
             }
           );
         }
@@ -277,6 +278,7 @@ debugger;
               this.sessionEService.SaveEligibilityToSession(data);
             //  this.sessionEService.SaveStepToSession("2");
              // this.router.navigateByUrl('/rdform');
+             this.router.navigateByUrl('/review');
             }
           );
         }
@@ -321,13 +323,11 @@ debugger;
     return customer;
   }
   setDefaultValues() {
-    this.eligibilityFrm.patchValue({ newRegistration: false, recordUpdate: false, requesttoReplace: false });
-    // this.eligibilityFrm.setValue({ NewRegistration: false, RecordUpdate: false, RequesttoReplace: false });
+   // this.eligibilityFrm.patchValue({ newRegistration: false, recordUpdate: false, requesttoReplace: false });
+  // this.eligibilityFrm.setValue({ NewRegistration: false, RecordUpdate: false, RequesttoReplace: false });
   }
 
   setNewRegistrationStatus() {
-    //this.isNewRegistration = this.eligibilityFrm.get('NewRegistration').value;
-
     if (this.eligibilityFrm.get('newRegistration').value == true) {
       this.eligibilityFrm.get('requesttoReplace').setValue(false);
       this.eligibilityFrm.get('recordUpdate').setValue(false);
@@ -338,7 +338,7 @@ debugger;
     }
   }
 
-  setNewRegistrationStatusFalse() {
+  setNewRegistrationStatusFalse(event: any, check:any) {
     this.recordUpdate = this.eligibilityFrm.get('recordUpdate').value;
     this.requesttoReplace = this.eligibilityFrm.get('requesttoReplace').value;
     if (this.recordUpdate == true || this.requesttoReplace == true) {

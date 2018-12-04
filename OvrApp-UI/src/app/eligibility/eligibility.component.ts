@@ -40,7 +40,7 @@ export class EligibilityComponent implements OnInit {
   onFormSubmit() {
     this.dataSaved = false;
     const eligibility = this.eligibilityForm.value;
-    this.eligibilityService.getAllEligibility('').subscribe(eligibilitys => {
+    this.eligibilityService.getAllEligibility().subscribe(eligibilitys => {
       this.createEligibility(eligibility);
     });
     this.eligibilityForm.reset();
@@ -60,7 +60,7 @@ export class EligibilityComponent implements OnInit {
     );
   }
   loadAllEligibilitys() {
-    this.allEligibility$ = this.eligibilityService.getAllEligibility('');
+    this.allEligibility$ = this.eligibilityService.getAllEligibility();
  }
 
 //  get UsCitizen() {

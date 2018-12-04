@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EligibilityreactiveComponent } from './eligibilityreactive/eligibilityreactive.component';
 import { GetlistComponent } from './getlist/getlist.component';
 import { RdFormComponent } from './RdForm/RdForm.component';
+import { ReviewformComponent } from './reviewform/reviewform.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/eligibilityreactive', pathMatch: 'full'},
@@ -12,7 +13,8 @@ const appRoutes: Routes = [
   { path: 'eligibility', component: EligibilityComponent },
   { path: 'getlist', component: GetlistComponent },
   { path: 'review', component: RevieweligibilityComponent },
-  { path: 'rdform', component: RdFormComponent }
+  { path: 'rdform', component: RdFormComponent },
+  { path: 'reviewform', component: ReviewformComponent }
 ];
 
 @NgModule({
