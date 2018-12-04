@@ -148,7 +148,7 @@ export class EligibilityreactiveComponent implements OnInit {
       usCitizen: ['', Validators.required],
       notAFelon: ['', Validators.required],
       mentalIncompStatus: ['', Validators.required],
-
+      voterClaimsNoSsnOrDln:[''],
       newRegistration: [''],
       recordUpdate: [''],
       requesttoReplace: [''],
@@ -182,11 +182,7 @@ export class EligibilityreactiveComponent implements OnInit {
       this.isStep1Valid = false;
 
       this.service.getOneEligibility(modelFromSession.ovrApplicationId).subscribe((x)=>{
-debugger;
-        console.log(x);  
         this.service.sharedEligibility = x;
-       
-
         this.eligibilityFrm.get('usCitizen').setValue(x.usCitizen ==true? "1":"0");
         this.eligibilityFrm.get('notAFelon').setValue(x.notAFelon== true?"1":"0");
         this.eligibilityFrm.get('mentalIncompStatus').setValue(x.mentalIncompStatus== true?"1":"0");
@@ -201,9 +197,7 @@ debugger;
         this.eligibilityFrm.get('middleName').setValue(x.middleName);
         this.eligibilityFrm.get('dateOfBirth').setValue(x.dateOfBirth);
         this.eligibilityFrm.get('dlIssueDate').setValue(x.dlIssueDate);    
-        this.eligibilityFrm.get('ovrApplicationId').setValue(x.ovrApplicationId);  
-
-      
+        this.eligibilityFrm.get('ovrApplicationId').setValue(x.ovrApplicationId); 
           
         this.enableEligibilityForm();
         this.sessionEService.SaveEligibilityToSession(x); 
@@ -240,6 +234,14 @@ debugger;
       && this.eligibilityFrm.valid && this.isRecaptaValid;
     if (isEValid) {
       this.isStep1Valid = false;
+      if(this.eligibilityFrm.get("isDLAvailable").value ==true || this.eligibilityFrm.get("isSSNAvailable").value== true ) 
+      {
+        this.eligibilityFrm.get("voterClaimsNoSsnOrDln").setValue(true);
+        this.eligibilityFrm.get('flDlNum').setValue('');
+        this.eligibilityFrm.get('ssnLast4').setValue('');
+
+      }
+
       const contactData = this.mapDateData(formData.value);
 
       contactData.newRegistration = this.eligibilityFrm.get('newRegistration').value;      
@@ -262,10 +264,8 @@ debugger;
               this.service.sharedEligibility = data;
               data.currentTabId =1;
               this.sessionEService.SaveEligibilityToSession(data);
-               
               // this.sessionEService.SaveStepToSession("2");
               //  this.router.navigateByUrl('/rdform');
-
               this.router.navigateByUrl('/review');
             }
           );
