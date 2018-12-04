@@ -389,9 +389,8 @@ debugger;
 
   confirm(): void {
     this.sessionEService.RemoveEligibilityFromSession();
+    this.sessionEService.RemoveStepFromSession();
     this.ngOnInit();
-    this.showNextButton = true;
-    this.IsReviewMode = false; 
        
     this.modalRef.hide();    
     this.reCaptcha.reset(); //to reset captcha on cancel 
@@ -399,8 +398,6 @@ debugger;
   }
 
   decline(): void {
-
-
     this.modalRef.hide();
 
   }

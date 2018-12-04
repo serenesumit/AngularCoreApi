@@ -371,12 +371,19 @@ export class RdFormComponent implements OnInit {
     modalRef: BsModalRef;
   message: string;
 
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+
   openAddressModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
   confirm(): void {  
+    this.sessionEService.RemoveEligibilityFromSession();
+  this.sessionEService.RemoveStepFromSession();
     this.modalRef.hide();    
+    this.router.navigateByUrl('/eligibilityreactive');
   }
 
   decline(): void {

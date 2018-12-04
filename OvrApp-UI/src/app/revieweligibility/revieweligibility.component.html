@@ -120,7 +120,10 @@
 
       <div class="pull-right">
         <div class="row">
-<div class="col-sm-6">
+            <div class="col-sm-4">
+                <button class="btn btn-danger pull-right" type="button" (click)="openModal(template)">Exit</button>
+              </div>
+<div class="col-sm-4">
     <button
     class="btn btn-primary btn-ok"
     data-toggle="modal" (click)="navigatetoRd()"
@@ -128,13 +131,33 @@
     Continue
   </button>
 </div>
-<div class="col-sm-6">
+<div class="col-sm-4">
     <button  class="btn btn-primary " (click)="editContact(getcustomer.ovrApplicationId)">Edit</button>
   </div>
+
+ 
 
         </div>
       
       </div>
     </div>
   </div>
+
+
+  <ng-template #template>
+      <div class="modal-body text-center">
+
+
+        <h4>Exit Confirmation</h4>
+        <hr />
+
+        <p>
+
+          By exiting this application, you will lose all of the data you entered?</p>
+        <button type="button" class="btn btn-default" (click)="confirm()">Yes</button> &nbsp;
+        <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+      </div>
+    </ng-template>
+
+
 </div>

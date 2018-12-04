@@ -50,7 +50,6 @@ export class EligibilityComponent implements OnInit {
     this.eligibilityService.addEligibility(eligibility).subscribe(
       // tslint:disable-next-line:no-shadowed-variable
       eligibility => {
-        console.log(eligibility);
         this.dataSaved = true;
         this.loadAllEligibilitys();
       },

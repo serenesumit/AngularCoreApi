@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import { EligibilityService } from '../services/eligibility.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {LocalStorageService} from '../services/localstorage.service'
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-revieweligibility',
@@ -16,6 +18,7 @@ export class RevieweligibilityComponent implements OnInit {
   modalBtnTitle: string;
   constructor(private service: EligibilityService, private route: ActivatedRoute,
     private router: Router,
+     private modalService: BsModalService,
     private sessionEService: LocalStorageService) { }
 
    
@@ -24,8 +27,7 @@ export class RevieweligibilityComponent implements OnInit {
    
     if (modelFromSession != null && modelFromSession.ovrApplicationId>0) {
       this.service.getOneEligibility(modelFromSession.ovrApplicationId).subscribe((x)=>{
-debugger;
-        console.log(x);  
+
         this.service.sharedEligibility = x;
        this.getcustomer = x;
        console.log(this.getcustomer);
@@ -65,4 +67,28 @@ this.service.getOneEligibility(id).subscribe( response => {
 }, error => {
   console.log(error);
 });
-}}
+}
+
+modalRef: BsModalRef;
+message: string;
+
+openModal(template: TemplateRef<any>) {
+  this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+}
+
+confirm(): void {
+  this.sessionEService.RemoveEligibilityFromSession();
+  this.sessionEService.RemoveStepFromSession();
+  this.modalRef.hide();
+  this.router.navigateByUrl('/eligibilityreactive');   
+}
+
+decline(): void {
+  this.modalRef.hide();
+
+}
+
+
+
+
+}
