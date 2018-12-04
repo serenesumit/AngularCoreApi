@@ -394,7 +394,17 @@ export class RdFormComponent implements OnInit {
 
   onSubmit(formData: any) {
 
-    var modelFromSession = this.sessionEService.getEligibilityFromSession(); 
+    var modelFromSession = this.sessionEService.getEligibilityFromSession();   
+    if(this.RdFrm.get('mailingAddSameAsResi').value=='1')
+    {
+      this.RdFrm.get('mailAddrLine1').setValue('');
+      this.RdFrm.get('mailAddrLine2').setValue('');
+      this.RdFrm.get('mailAddrLine3').setValue('');
+      this.RdFrm.get('mailAddrCity').setValue('');
+      this.RdFrm.get('mailAddrZip').setValue('');
+      this.RdFrm.get('mailAddrState').setValue('');
+      this.RdFrm.get('mailAddrCountry').setValue('');
+    }
     const contactData = this.mapDateData(formData.value);
     contactData.mailingAddSameAsResi = this.RdFrm.get('mailingAddSameAsResi').value=='1'?true:false;
     contactData.military = this.RdFrm.get('military').value=='1'?true:false;
