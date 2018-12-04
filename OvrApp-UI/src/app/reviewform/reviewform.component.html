@@ -100,21 +100,17 @@
 
       <div class="pull-right">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
+                <button  class="btn btn-primary " (click)="editContact(getcustomer.ovrApplicationId)">Edit</button>
+              </div>
+
+              <div class="col-sm-6">
+                  <button  class="btn btn-primary"> Print Paper Application</button>
+                </div>
+
+            <div class="col-sm-3">
                 <button class="btn btn-danger pull-right" type="button" (click)="openModal(template)">Exit</button>
             </div>
-<div class="col-sm-4">
-    <button
-    class="btn btn-primary btn-ok"
-    data-toggle="modal" (click)="navigatetoRd()"
-  >
-    Continue
-  </button>
-</div>
-<div class="col-sm-4">
-    <button  class="btn btn-primary " (click)="editContact(getcustomer.ovrApplicationId)">Edit</button>
-  </div>
-
         </div>
       
       </div>
