@@ -352,7 +352,7 @@
         <div class="btn-toolbar">
           <button class="btn btn-primary pull-right" type="button" *ngIf="pTabId==1" (click)="selectTab(pTabId)">Continue</button>
 
-          <button class="btn btn-primary pull-right" *ngIf=" pTabId==2" [disabled]="!(eligibilityFrm.valid) && !isRecaptaValid"
+          <button class="btn btn-primary pull-right" *ngIf=" pTabId==2" [disabled]="!(eligibilityFrm.valid  && isRecaptaValid)"
             type="submit" (click)="setDefaultValues()">Continue</button>
             <button class="btn btn-danger pull-right" type="button" *ngIf=" pTabId==2" (click)="openModal(template)">Exit</button>
 

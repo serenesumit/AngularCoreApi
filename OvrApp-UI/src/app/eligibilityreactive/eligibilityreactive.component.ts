@@ -1,6 +1,6 @@
 import { Global } from './../shared/Global';
 import { EligibilityService } from './../services/eligibility.service';
-import { Component, OnInit, ViewChild, TemplateRef,EventEmitter,Input,Output,NgModule, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, EventEmitter, Input, Output, NgModule, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Validators } from '@angular/forms';
@@ -23,67 +23,28 @@ import { FormsModule } from '@angular/forms';
 export class EligibilityreactiveComponent implements OnInit {
   eligibilityFrm: FormGroup;
   citizens = [];
-  pTabId=1;
+  pTabId = 1;
   showNextButton = true;
   isNewRegistration = false;
   isNewrecordUpdate = false;
   recordUpdate = false;
   requesttoReplace = false;
   RecaptaSiteKey: string = CommonSetting.RecaptaSiteKey;
-  isRecaptaValid: boolean = false;
-  IsReviewMode:boolean = false;
-  IsEligibilityOn:boolean = false;
-  nameSuffix:string ='';
-  //startDate = new Date(1990, 0, 1);
+  isRecaptaValid = false;
+  IsReviewMode = false;
+  IsEligibilityOn = false;
+  nameSuffix = '';
+  hideDLDetail = true;
+  hideSSNDetail = true;
+  modalRef: BsModalRef;
+  message: string;
+  editData: IEligibility;
   todayDate = new Date();
-  startDate =new Date(this.todayDate.getFullYear()-18, this.todayDate.getMonth()-1, this.todayDate.getDate());
-  NameSuffixList: string[] = ['I', 'II', 'III','IV','IX','JR','SR','V','VI','VII','VIII'];  
+  startDate = new Date(this.todayDate.getFullYear() - 18, this.todayDate.getMonth() - 1, this.todayDate.getDate());
+  NameSuffixList: string[] = ['I', 'II', 'III', 'IV', 'IX', 'JR', 'SR', 'V', 'VI', 'VII', 'VIII'];
 
-  
-  @ViewChild('reCaptcha') reCaptcha: RecaptchaComponent;
-
-  constructor(private fb: FormBuilder
-    , private service: EligibilityService
-    , private route: ActivatedRoute,
-    private router: Router
-    , private modalService: BsModalService
-    , private sessionEService: LocalStorageService) {
-      var eligibility = this.sessionEService.getEligibilityFromSession();
-        var stepInfo = this.sessionEService.getStepFromSession();
-        if(eligibility !=null && stepInfo != null && typeof stepInfo !=="undefined" && stepInfo !=="")
-        {
-         if(stepInfo =="2")
-         {
-           this.router.navigateByUrl('/rdform');
-         }
-       }
-  }
-  
-  isStep1Valid = false;
-  isStep2Valid = false;
-
-
-
-  validateEligibility() {
-    var isEValid = (this.eligibilityFrm.get('usCitizen').value == 1) && (this.eligibilityFrm.get('notAFelon').value == 1)
-      && (this.eligibilityFrm.get('mentalIncompStatus').value == 1);
-    if (isEValid) {
-     
-    } else {
-     
-    }
-  }
-
-
-  updateModelIntoSession(tabId: number) {
-    const contactData = this.mapDateData(this.eligibilityFrm.value);
-    contactData.newRegistration = this.eligibilityFrm.get('newRegistration').value;
-    contactData.recordUpdate = this.eligibilityFrm.get('recordUpdate').value;
-    contactData.requesttoReplace = this.eligibilityFrm.get('requesttoReplace').value;
-    //const contactData = new Eligibility(this.eligibilityFrm.get('UsCitizen').value, this.eligibilityFrm.get('NotAFelon').value, this.eligibilityFrm.get('MentalIncompStatus').value);
-    contactData.currentTabId = tabId;
-    this.sessionEService.SaveEligibilityToSession(contactData);
-  }
+  public DLPattern = { 'A': { pattern: new RegExp('^[A-Za-z]$') }, '0': { pattern: new RegExp('^[0-9]$') } };
+  public SSNPattern = { '0': { pattern: new RegExp('^[0-9]$') } };
 
 
   formErrors = {
@@ -96,7 +57,7 @@ export class EligibilityreactiveComponent implements OnInit {
     'firstName': '',
     'middleName': '',
     'dateOfBirth': '',
-    'dlIssueDate':''
+    'dlIssueDate': ''
     // 'proficiency': ''
   };
   // This object contains all the validation messages for this form
@@ -135,12 +96,53 @@ export class EligibilityreactiveComponent implements OnInit {
     'dlIssueDate': {
       'required': 'DL issue date is required.'
     }
-    
-    
   };
 
-  public DLPattern = { 'A': { pattern: new RegExp('^[A-Za-z]$') }, '0': { pattern: new RegExp('^[0-9]$') } };
-  public SSNPattern = { '0': { pattern: new RegExp('^[0-9]$') } };
+
+
+
+  @ViewChild('reCaptcha') reCaptcha: RecaptchaComponent;
+
+  constructor(private fb: FormBuilder
+    , private service: EligibilityService
+    , private route: ActivatedRoute,
+    private router: Router
+    , private modalService: BsModalService
+    , private sessionEService: LocalStorageService) {
+      const eligibility = this.sessionEService.getEligibilityFromSession();
+        const stepInfo = this.sessionEService.getStepFromSession();
+        if (eligibility != null && stepInfo != null && typeof stepInfo !== 'undefined' && stepInfo !== '') {
+         if (stepInfo === '2') {
+           this.router.navigateByUrl('/rdform');
+         }
+       }
+  }
+  isStep1Valid = false;
+  isStep2Valid = false;
+
+
+
+  validateEligibility() {
+    const isEValid = (this.eligibilityFrm.get('usCitizen').value === 1) && (this.eligibilityFrm.get('notAFelon').value === 1)
+      && (this.eligibilityFrm.get('mentalIncompStatus').value === 1);
+    if (isEValid) {
+    } else {
+    }
+  }
+
+
+  updateModelIntoSession(tabId: number) {
+    const contactData = this.mapDateData(this.eligibilityFrm.value);
+    contactData.newRegistration = this.eligibilityFrm.get('newRegistration').value;
+    contactData.recordUpdate = this.eligibilityFrm.get('recordUpdate').value;
+    contactData.requesttoReplace = this.eligibilityFrm.get('requesttoReplace').value;
+    contactData.currentTabId = tabId;
+    this.sessionEService.SaveEligibilityToSession(contactData);
+  }
+
+
+
+
   ngOnInit() {
 
     this.eligibilityFrm = this.fb.group({
@@ -148,44 +150,42 @@ export class EligibilityreactiveComponent implements OnInit {
       usCitizen: ['', Validators.required],
       notAFelon: ['', Validators.required],
       mentalIncompStatus: ['', Validators.required],
-      voterClaimsNoSsnOrDln:[''],
+      voterClaimsNoSsnOrDln: [''],
       newRegistration: [''],
       recordUpdate: [''],
       requesttoReplace: [''],
-      isDLAvailable:[''],
-      isSSNAvailable:[''],
+      isDLAvailable: [''],
+      isSSNAvailable: [''],
       //  FlDlNum: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10), Validators.pattern(this.unamePattern)]],
       flDlNum: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(13)]],
       ssnLast4: ['', [Validators.required, Validators.maxLength(4)]],
       lastName: ['', Validators.required],
       firstName: ['', Validators.required],
       middleName: ['', Validators.required],
-      nameSuffix :[''],
+      nameSuffix : [''],
       // DateOfBirth: ['']
       dateOfBirth: ['', Validators.required],
-      dlIssueDate:['', Validators.required]   
+      dlIssueDate: ['', Validators.required]
     });
     this.citizens = Global.citizens;
 
-    this.isRecaptaValid =false;
+    this.isRecaptaValid = false;
 
     this.eligibilityFrm.valueChanges.subscribe((data) => {
       this.logValidationErrors(this.eligibilityFrm);
     });
 
-   
-    var modelFromSession = this.sessionEService.getEligibilityFromSession(); 
-    debugger;   
-    if (modelFromSession != null && modelFromSession.ovrApplicationId>0) {
-      this.IsEligibilityOn = true; 
-      this.isRecaptaValid =false;     
+    const modelFromSession = this.sessionEService.getEligibilityFromSession();
+    if (modelFromSession != null && modelFromSession.ovrApplicationId > 0) {
+      this.IsEligibilityOn = true;
+      this.isRecaptaValid = false;
       this.isStep1Valid = false;
 
-      this.service.getOneEligibility(modelFromSession.ovrApplicationId).subscribe((x)=>{
+      this.service.getOneEligibility(modelFromSession.ovrApplicationId).subscribe((x) => {
         this.service.sharedEligibility = x;
-        this.eligibilityFrm.get('usCitizen').setValue(x.usCitizen ==true? "1":"0");
-        this.eligibilityFrm.get('notAFelon').setValue(x.notAFelon== true?"1":"0");
-        this.eligibilityFrm.get('mentalIncompStatus').setValue(x.mentalIncompStatus== true?"1":"0");
+        this.eligibilityFrm.get('usCitizen').setValue(x.usCitizen === true ? '1' : '0');
+        this.eligibilityFrm.get('notAFelon').setValue(x.notAFelon === true ? '1' : '0');
+        this.eligibilityFrm.get('mentalIncompStatus').setValue(x.mentalIncompStatus === true ? '1' : '0');
         this.eligibilityFrm.get('newRegistration').setValue(x.newRegistration);
         this.eligibilityFrm.get('recordUpdate').setValue(x.recordUpdate);
         this.eligibilityFrm.get('requesttoReplace').setValue(x.requesttoReplace);
@@ -196,14 +196,12 @@ export class EligibilityreactiveComponent implements OnInit {
         this.eligibilityFrm.get('firstName').setValue(x.firstName);
         this.eligibilityFrm.get('middleName').setValue(x.middleName);
         this.eligibilityFrm.get('dateOfBirth').setValue(x.dateOfBirth);
-        this.eligibilityFrm.get('dlIssueDate').setValue(x.dlIssueDate);    
-        this.eligibilityFrm.get('ovrApplicationId').setValue(x.ovrApplicationId); 
-          
+        this.eligibilityFrm.get('dlIssueDate').setValue(x.dlIssueDate);
+        this.eligibilityFrm.get('ovrApplicationId').setValue(x.ovrApplicationId);
         this.enableEligibilityForm();
-        this.sessionEService.SaveEligibilityToSession(x); 
-      });      
-    } 
-           
+        this.sessionEService.SaveEligibilityToSession(x);
+      });
+    }
   }
 
   logValidationErrors(group: FormGroup = this.eligibilityFrm): void {
@@ -226,17 +224,14 @@ export class EligibilityreactiveComponent implements OnInit {
   }
 
   onSubmit(formData: any) {
-   
-    var modelFromSession = this.sessionEService.getEligibilityFromSession();
-   
-    var isEValid = (this.eligibilityFrm.get('usCitizen').value == 1) && (this.eligibilityFrm.get('notAFelon').value == 1)
-      && (this.eligibilityFrm.get('mentalIncompStatus').value == 1)
+    const modelFromSession = this.sessionEService.getEligibilityFromSession();
+    const isEValid = (this.eligibilityFrm.get('usCitizen').value === 1) && (this.eligibilityFrm.get('notAFelon').value === 1)
+      && (this.eligibilityFrm.get('mentalIncompStatus').value === 1)
       && this.eligibilityFrm.valid && this.isRecaptaValid;
     if (isEValid) {
       this.isStep1Valid = false;
-      if(this.eligibilityFrm.get("isDLAvailable").value ==true || this.eligibilityFrm.get("isSSNAvailable").value== true ) 
-      {
-        this.eligibilityFrm.get("voterClaimsNoSsnOrDln").setValue(true);
+      if (this.eligibilityFrm.get('isDLAvailable').value === true || this.eligibilityFrm.get('isSSNAvailable').value === true ) {
+        this.eligibilityFrm.get('voterClaimsNoSsnOrDln').setValue(true);
         this.eligibilityFrm.get('flDlNum').setValue('');
         this.eligibilityFrm.get('ssnLast4').setValue('');
 
@@ -244,37 +239,32 @@ export class EligibilityreactiveComponent implements OnInit {
 
       const contactData = this.mapDateData(formData.value);
 
-      contactData.newRegistration = this.eligibilityFrm.get('newRegistration').value;      
+      contactData.newRegistration = this.eligibilityFrm.get('newRegistration').value;
       contactData.recordUpdate = this.eligibilityFrm.get('recordUpdate').value;
-      
       contactData.requesttoReplace = this.eligibilityFrm.get('requesttoReplace').value;
 
-      contactData.mentalIncompStatus = this.eligibilityFrm.get('mentalIncompStatus').value=='1'?true:false;
-      contactData.notAFelon = this.eligibilityFrm.get('notAFelon').value=='1'?true:false;
-      contactData.usCitizen = this.eligibilityFrm.get('usCitizen').value=='1'?true:false;
-  
+      contactData.mentalIncompStatus = this.eligibilityFrm.get('mentalIncompStatus').value === '1' ? true : false;
+      contactData.notAFelon = this.eligibilityFrm.get('notAFelon').value === '1' ? true : false;
+      contactData.usCitizen = this.eligibilityFrm.get('usCitizen').value === '1' ? true : false;
 
-     if(contactData.ovrApplicationId !=null && typeof contactData.ovrApplicationId !=="undefined"
-        && contactData.ovrApplicationId >0)
-        {
-          var appId = contactData.ovrApplicationId;
-          this.service.updateEligibility(appId,contactData).subscribe(
+     if (contactData.ovrApplicationId !== null && typeof contactData.ovrApplicationId !== 'undefined'
+        && contactData.ovrApplicationId > 0) {
+          const appId = contactData.ovrApplicationId;
+          this.service.updateEligibility(appId, contactData).subscribe(
             (data: IEligibility) => {
-            
               this.service.sharedEligibility = data;
-              data.currentTabId =1;
+              data.currentTabId = 1;
               this.sessionEService.SaveEligibilityToSession(data);
               // this.sessionEService.SaveStepToSession("2");
               //  this.router.navigateByUrl('/rdform');
               this.router.navigateByUrl('/review');
             }
           );
-        }
-        else{
+        }  else {
           this.service.addEligibility(contactData).subscribe(
             (data: IEligibility) => {
               this.service.sharedEligibility = data;
-              data.currentTabId =1;
+              data.currentTabId = 1;
               this.sessionEService.SaveEligibilityToSession(data);
             //  this.sessionEService.SaveStepToSession("2");
              // this.router.navigateByUrl('/rdform');
@@ -284,42 +274,37 @@ export class EligibilityreactiveComponent implements OnInit {
         }
 
     } else {
-     
       return false;
     }
   }
 
   selectTab(tabId: number) {
-    if (tabId == 1) {
-      //Eligiblity validation
-      var isEValid = (this.eligibilityFrm.get('usCitizen').value == 1) && (this.eligibilityFrm.get('notAFelon').value == 1)
-        && (this.eligibilityFrm.get('mentalIncompStatus').value == 1);
+    if (tabId === 1) {
+      const isEValid = (this.eligibilityFrm.get('usCitizen').value === 1) && (this.eligibilityFrm.get('notAFelon').value === 1)
+        && (this.eligibilityFrm.get('mentalIncompStatus').value === 1);
       if (isEValid) {
-        this.IsEligibilityOn = isEValid;      
+        this.IsEligibilityOn = isEValid;
         this.isStep1Valid = !isEValid;
         this.updateModelIntoSession(tabId);
         this.pTabId = tabId + 1;
 
       } else {
-        this.IsEligibilityOn = false;  
+        this.IsEligibilityOn = false;
         this.isStep1Valid = true;
         this.pTabId = 1;
         return false;
       }
     }
-   
   }
 
   mapDateData(customer: IEligibility): IEligibility {
-    if (customer.dateOfBirth != null && customer.dateOfBirth != "") {
+    if (customer.dateOfBirth != null && customer.dateOfBirth !== '') {
       customer.dateOfBirth = new Date(customer.dateOfBirth).toISOString();
     }
 
-    if (customer.dlIssueDate != null && customer.dlIssueDate != "") {
+    if (customer.dlIssueDate != null && customer.dlIssueDate !== '') {
       customer.dlIssueDate = new Date(customer.dlIssueDate).toISOString();
     }
-
-    
     return customer;
   }
   setDefaultValues() {
@@ -328,7 +313,7 @@ export class EligibilityreactiveComponent implements OnInit {
   }
 
   setNewRegistrationStatus() {
-    if (this.eligibilityFrm.get('newRegistration').value == true) {
+    if (this.eligibilityFrm.get('newRegistration').value === true) {
       this.eligibilityFrm.get('requesttoReplace').setValue(false);
       this.eligibilityFrm.get('recordUpdate').setValue(false);
       this.isNewrecordUpdate = true;
@@ -338,10 +323,10 @@ export class EligibilityreactiveComponent implements OnInit {
     }
   }
 
-  setNewRegistrationStatusFalse(event: any, check:any) {
+  setNewRegistrationStatusFalse(event: any, check: any) {
     this.recordUpdate = this.eligibilityFrm.get('recordUpdate').value;
     this.requesttoReplace = this.eligibilityFrm.get('requesttoReplace').value;
-    if (this.recordUpdate == true || this.requesttoReplace == true) {
+    if (this.recordUpdate === true || this.requesttoReplace === true) {
       this.isNewRegistration = true;
       this.eligibilityFrm.get('newRegistration').setValue(false);
     } else {
@@ -350,38 +335,32 @@ export class EligibilityreactiveComponent implements OnInit {
 
   }
 
-  hideDLDetail:boolean= true;
-
-  setDLDetail(){    
+  setDLDetail() {
     this.hideDLDetail = !this.hideDLDetail;
 
-    if(!this.hideDLDetail){      
+    if (!this.hideDLDetail) {
       this.eligibilityFrm.controls['flDlNum'].setValidators(null);
       this.eligibilityFrm.controls['dlIssueDate'].setValidators(null);
-      
-      
-    }else{
-      this.eligibilityFrm.controls['flDlNum'].setValidators([Validators.required, Validators.minLength(2), Validators.maxLength(13)]);      
-      this.eligibilityFrm.controls['dlIssueDate'].setValidators([Validators.required]); 
-    }   
-    this.eligibilityFrm.controls['flDlNum'].updateValueAndValidity(); 
-    this.eligibilityFrm.controls['dlIssueDate'].updateValueAndValidity(); 
+    } else {
+      this.eligibilityFrm.controls['flDlNum'].setValidators([Validators.required, Validators.minLength(2), Validators.maxLength(13)]);
+      this.eligibilityFrm.controls['dlIssueDate'].setValidators([Validators.required]);
+    }
+    this.eligibilityFrm.controls['flDlNum'].updateValueAndValidity();
+    this.eligibilityFrm.controls['dlIssueDate'].updateValueAndValidity();
   }
-  hideSSNDetail:boolean= true;
-  setSSNDetail(event: any, check:any){
+  setSSNDetail(event: any, check: any) {
     this.hideSSNDetail = !this.hideSSNDetail;
-    if(!this.hideSSNDetail){      
-      this.eligibilityFrm.controls['ssnLast4'].setValidators(null);                  
-    }else{      
-      this.eligibilityFrm.controls['ssnLast4'].setValidators([Validators.required,Validators.maxLength(4)]); 
-    }  
+    if (!this.hideSSNDetail) {
+      this.eligibilityFrm.controls['ssnLast4'].setValidators(null);
+    } else {
+      this.eligibilityFrm.controls['ssnLast4'].setValidators([Validators.required, Validators.maxLength(4)]);
+    }
 
-    this.eligibilityFrm.controls['ssnLast4'].updateValueAndValidity(); 
+    this.eligibilityFrm.controls['ssnLast4'].updateValueAndValidity();
   }
 
 
-  modalRef: BsModalRef;
-  message: string;
+
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
@@ -391,10 +370,9 @@ export class EligibilityreactiveComponent implements OnInit {
     this.sessionEService.RemoveEligibilityFromSession();
     this.sessionEService.RemoveStepFromSession();
     this.ngOnInit();
-       
-    this.modalRef.hide();    
-    this.reCaptcha.reset(); //to reset captcha on cancel 
-    this.resolvedCaptcha(null);    
+    this.modalRef.hide();
+    this.reCaptcha.reset(); // to reset captcha on cancel
+    this.resolvedCaptcha(null);
   }
 
   decline(): void {
@@ -402,35 +380,29 @@ export class EligibilityreactiveComponent implements OnInit {
 
   }
 
-  resolvedCaptcha(captchaResponse: string) {    
+  resolvedCaptcha(captchaResponse: string) {
     if (captchaResponse != null) {
       this.isRecaptaValid = true;
-    }else{
+    } else {
       this.isRecaptaValid = false;
     }
   }
 
 
-
-
-  editData:IEligibility;
-  EditMode(){
-    this.IsReviewMode=!this.IsReviewMode;
-    // this.isRecaptaValid = false;    
+  EditMode() {
+    this.IsReviewMode = !this.IsReviewMode;
+     this.isRecaptaValid = false;
     const contactData = this.mapDateData(this.eligibilityFrm.value);
     contactData.newRegistration = this.eligibilityFrm.get('newRegistration').value;
     contactData.recordUpdate = this.eligibilityFrm.get('recordUpdate').value;
     contactData.requesttoReplace = this.eligibilityFrm.get('requesttoReplace').value;
-    console.log(contactData);    
     this.editData = contactData;
   }
 
-  enableEligibilityForm(){    
-    var isEValidp = (this.eligibilityFrm.get('usCitizen').value == 1) && (this.eligibilityFrm.get('notAFelon').value == 1)
-        && (this.eligibilityFrm.get('mentalIncompStatus').value == 1); 
-     if(isEValidp)
-     {
-       
+  enableEligibilityForm() {
+    const isEValidp = (this.eligibilityFrm.get('usCitizen').value === 1) && (this.eligibilityFrm.get('notAFelon').value === 1)
+        && (this.eligibilityFrm.get('mentalIncompStatus').value === 1);
+     if (isEValidp) {
      }
   }
 }

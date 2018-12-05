@@ -1,218 +1,170 @@
 
-export interface IEligibility
-{
-  ovrApplicationId :number;
+export interface IEligibility {
+  ovrApplicationId: number;
 
-   
-     sessionId :string;
+     sessionId: string;
 
-    usCitizen :boolean;
-    
-     notAFelon  :boolean;
+    usCitizen: boolean;
+     notAFelon: boolean;
 
-    mentalIncompStatus :boolean;
+    mentalIncompStatus: boolean;
+    lastName: string;
 
 
-    lastName  :string;
+    firstName: string;
 
+   middleName: string;
 
-    firstName  :string;
 
-  
-   middleName  :string;
+   nameSuffix: string;
 
+   dateOfBirth: string;
 
-   nameSuffix  : string;
 
-   dateOfBirth : string; 
+     gender: string;
 
+   raceId: number;
+   publicEmailAddress: string;
+   emailConfirmation: string;
 
-     gender  :string;
+     requestSampleBallotByEmail: boolean;
 
-   raceId :number;
 
+   daytimeAreaCode: string;
 
-   publicEmailAddress  :string;
+ daytimePhone: string;
 
-    
-    emailConfirmation  :string;
+   daytimePhoneExtension: string;
+    flDlNum: string;
 
-     requestSampleBallotByEmail :boolean;
+  dlIssueDate: string;
 
 
-   daytimeAreaCode  :string;
+   ssnLast4: string;
 
-  
-    daytimePhone  :string;
+  voterClaimsNoSsnOrDln?: boolean;
 
-    
-   daytimePhoneExtension  :string;
 
+  resStreetNumber?: number;
 
-    flDlNum  :string;
+    resStreetNumberSuffix: string;
 
-  dlIssueDate: string; 
 
+   resStreetPreDirection: string;
 
-   ssnLast4  :string;
+     resStreetName: string;
 
-    voterClaimsNoSsnOrDln? : boolean;
+  resStreetType: string;
+    resStreetPostDirection: string;
+   resUnitType: string;
+     resUnitNumber: string;
 
+    resUspsCityName: string;
 
-  resStreetNumber? :number;
+  resZipCode: string;
 
-    
-    resStreetNumberSuffix :string;
+ resZipCodePlus4: string;
 
+     countyOfResidence: string;
 
-   resStreetPreDirection  :string;
+    mailingAddSameAsResi?: boolean;
 
- 
-     resStreetName  :string;
+     mailAddrLine1: string;
 
-  
-   resStreetType :string;
+    mailAddrLine2: string;
 
-    
-    resStreetPostDirection  :string;
+  mailAddrLine3: string;
+ mailAddrCity: string;
 
-  
-   resUnitType  :string;
 
-  
-     resUnitNumber  :string;
+ mailAddrZip: string;
 
-    resUspsCityName :string;
+ mailAddrState: string;
 
-  
-  resZipCode  :string;
 
- 
-    resZipCodePlus4 :string;
+ mailAddrCountry: string;
 
-   
-     countyOfResidence :string;
+  formerAddrLine1: string;
 
-    mailingAddSameAsResi? :boolean;
 
-    
-     mailAddrLine1  :string;
+ formerAddrLine2: string;
+ fromerAddrLine3: string;
+  formerAddrCity: string;
+ formerAddrZip: string;
 
-    mailAddrLine2  :string;
+formerAddrState: string;
 
-  
-     mailAddrLine3  :string;
+formerAddrCountry: string;
 
-    
- mailAddrCity  :string;
+formerFirstName: string;
+  formerLastName: string;
+   formerMiddleName: string;
+   placeOfBirth: string;
 
 
- mailAddrZip  :string;
+    partyAffiliation: string;
 
-   
- mailAddrState  :string;
+    votingAssistRequired?: boolean;
 
+  pollWorkerVolunteer?: boolean;
 
- mailAddrCountry :string;
+   military?: boolean;
 
- 
-  formerAddrLine1  :string;
+  militaryDependent?: boolean;
 
+  overseasFlag ?: boolean;
 
- formerAddrLine2 :string;
+   fvrsStreetSegmentId?: number;
 
-  
- fromerAddrLine3  :string;
+     regDate: string;
 
-  
-  formerAddrCity :string;
+   hashcode: string;
 
-   
- formerAddrZip :string;
+    oVRStatus?: number;
 
- 
-    formerAddrState  :string;
+   createdTs?: Date;
 
-   
-formerAddrCountry  :string;
+ lastModifiedTs?: Date;
 
- 
-formerFirstName  :string;
+ submittedTs?: Date;
 
-  
-  formerLastName :string;
+     clientId: string;
 
+    clientAttribute: string;
 
-   formerMiddleName  :string;
+     webBrowser: string;
 
- 
-   placeOfBirth  :string;
+     browserVersion: string;
 
+   referralSourceType: string;
 
-    partyAffiliation  :string;
+   referralSourceId: string;
 
-    votingAssistRequired?:boolean;
+    referralCampaign: string;
 
-  pollWorkerVolunteer?:boolean;
+hsmvMatchStatus?: number;
 
-   military?:boolean;
+  hsmvMatchId?: number;
 
-  militaryDependent?:boolean;
+   hsmvMatchDatetime?: Date;
 
-  overseasFlag ?:boolean;
+  transferID: string;
 
-   fvrsStreetSegmentId?:number; 
+  hSMVRetries?: number;
 
-     regDate : string; 
+ isManualAddress?: boolean;
 
-   hashcode  :string;
+  applicationType?: number;
 
-    oVRStatus?:number; 
+newRegistration?: boolean;
 
-   createdTs? :Date;
+ recordUpdate?: boolean;
 
- lastModifiedTs? :Date;
+  requesttoReplace?: boolean;
 
- submittedTs? :Date;
+  hsmvMatchSignatureDate?: Date;
 
-  
-     clientId :string;
-
-    clientAttribute :string;
-
-     webBrowser  :string;
-
-     browserVersion :string;
-
-   referralSourceType  :string;
-
-   referralSourceId  :string;
-
-    referralCampaign :string;
-
-hsmvMatchStatus?:number;
-
-  hsmvMatchId?:number;
-
-   hsmvMatchDatetime?:Date;
-
-  transferID :string;
-
-  hSMVRetries?:number;
-
- isManualAddress ?:boolean;
-
-  applicationType?:number;
-
-newRegistration? :boolean;
-
- recordUpdate?:boolean;
-
-  requesttoReplace?:boolean;
-
-  hsmvMatchSignatureDate?:Date;
-
-  currentTabId:number;
+  currentTabId: number;
 
 }
 

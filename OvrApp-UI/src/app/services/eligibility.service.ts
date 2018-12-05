@@ -23,7 +23,7 @@ export class EligibilityService {
 constructor(private http: HttpClient) { }
 
   getAllEligibility(): Observable<IEligibility[]> {
-  return this.http.get<IEligibility[]>(Global.BASE_USER_ENDPOINT+'ovrapp/getAllEligibility')
+  return this.http.get<IEligibility[]>(Global.BASE_USER_ENDPOINT + 'ovrapp/getAllEligibility')
     .pipe(
       catchError(this.handleError)
     );
@@ -31,8 +31,7 @@ constructor(private http: HttpClient) { }
 
 // Get Customer By Id
 getOneEligibility(id: number): Observable<IEligibility> {
-  
-  const newurl = Global.BASE_USER_ENDPOINT+'ovrapp/' + id;
+  const newurl = Global.BASE_USER_ENDPOINT + 'ovrapp/' + id;
  return this.http.get<IEligibility>(newurl)
  .pipe(
    catchError(this.handleError)
@@ -40,8 +39,8 @@ getOneEligibility(id: number): Observable<IEligibility> {
 }
 
 // insert new contact details
-addEligibility(ieligibility: IEligibility): Observable<any> {  
-  return this.http.post<IEligibility>(Global.BASE_USER_ENDPOINT+'ovrapp', ieligibility, httpOptions)
+addEligibility(ieligibility: IEligibility): Observable<any> {
+  return this.http.post<IEligibility>(Global.BASE_USER_ENDPOINT + 'ovrapp', ieligibility, httpOptions)
     .pipe(
       catchError(this.handleError)
     );
@@ -52,7 +51,7 @@ postEligibility(ieligibility: IEligibility): Observable<HttpResponse<IEligibilit
   const httpHeaders = new HttpHeaders({
        'Content-Type' : 'application/json'
   });
-  return this.http.post<IEligibility>(Global.BASE_USER_ENDPOINT+'ovrapp', ieligibility,
+  return this.http.post<IEligibility>(Global.BASE_USER_ENDPOINT + 'ovrapp', ieligibility,
       {
         headers: httpHeaders,
         observe: 'response'
@@ -62,15 +61,15 @@ postEligibility(ieligibility: IEligibility): Observable<HttpResponse<IEligibilit
 
 
 
-updateEligibility(id:number,ieligibility: IEligibility): Observable<IEligibility> {
-  return this.http.put<IEligibility>(Global.BASE_USER_ENDPOINT+'ovrapp/'+id + '/eligibility', ieligibility, httpOptions)
+updateEligibility(id: number, ieligibility: IEligibility): Observable<IEligibility> {
+  return this.http.put<IEligibility>(Global.BASE_USER_ENDPOINT + 'ovrapp/' + id + '/eligibility', ieligibility, httpOptions)
     .pipe(
       catchError(this.handleError)
     );
 }
 
-updateRegisterDetails(id:number,registartiondetails: IRegistartiondetails): Observable<IEligibility> {
- const url = Global.BASE_USER_ENDPOINT+'ovrapp/'+ id + '/registerDetails';
+updateRegisterDetails(id: number, registartiondetails: IRegistartiondetails): Observable<IEligibility> {
+ const url = Global.BASE_USER_ENDPOINT + 'ovrapp/' + id + '/registerDetails';
   return this.http.put<IEligibility>(url, registartiondetails, httpOptions)
     .pipe(
       catchError(this.handleError)
