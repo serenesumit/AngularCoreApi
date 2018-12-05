@@ -45,7 +45,7 @@ import { ReviewformComponent } from './reviewform/reviewform.component';
       // BsDatepickerModule.forRoot(),
       BrowserAnimationsModule,
       AppMaterialModule,
-      NgxMaskModule.forRoot(),TabsModule.forRoot(),AlertModule.forRoot(),ModalModule.forRoot(),
+      NgxMaskModule.forRoot(), TabsModule.forRoot(), AlertModule.forRoot(), ModalModule.forRoot(),
       RecaptchaModule
    ],
    providers: [

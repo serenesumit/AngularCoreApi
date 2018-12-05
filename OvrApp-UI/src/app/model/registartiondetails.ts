@@ -1,7 +1,6 @@
 export interface IRegistartiondetails {
     ovrApplicationId: number;
     gender: string;
-
     raceId: number;
     publicEmailAddress: string;
      emailConfirmation: string;
@@ -9,10 +8,7 @@ export interface IRegistartiondetails {
     daytimeAreaCode: string;
      daytimePhone: string;
     daytimePhoneExtension: string;
-
     voterClaimsNoSsnOrDln?: boolean;
-
-
   resStreetNumber?: number;
     resStreetNumberSuffix: string;
    resStreetPreDirection: string;
@@ -36,18 +32,10 @@ export interface IRegistartiondetails {
 
      mailAddrLine3: string;
  mailAddrCity: string;
-
-
  mailAddrZip: string;
-
  mailAddrState: string;
-
-
  mailAddrCountry: string;
-
-  formerAddrLine1: string;
-
-
+formerAddrLine1: string;
  formerAddrLine2: string;
  fromerAddrLine3: string;
 
@@ -115,20 +103,12 @@ hsmvMatchStatus?: number;
    hsmvMatchDatetime?: Date;
 
   transferID: string;
-
   hSMVRetries?: number;
-
  isManualAddress ?: boolean;
-
   applicationType?: number;
-
 newRegistration?: boolean;
-
  recordUpdate?: boolean;
-
   requesttoReplace?: boolean;
-
   hsmvMatchSignatureDate?: Date;
-
   currentTabId: number;
 }

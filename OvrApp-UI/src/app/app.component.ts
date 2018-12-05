@@ -1,4 +1,4 @@
-import { Component,HostListener } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { LocalStorageService } from './services/localstorage.service';
 
 @Component({
@@ -9,11 +9,6 @@ import { LocalStorageService } from './services/localstorage.service';
 })
 export class AppComponent {
   title = 'OvrApp-UI';
-  constructor(private sessionEService: LocalStorageService){}
+  constructor(private sessionEService: LocalStorageService) {}
 
-  @HostListener("window:onbeforeunload",["$event"])
-  clearLocalStorage(event){
-    this.sessionEService.RemoveEligibilityFromSession();
-    this.sessionEService.RemoveStepFromSession();
-  }
 }
