@@ -85,6 +85,7 @@ namespace OvrApp.API.Controllers
             dbOvrApplication.NotAFelon = model.NotAFelon;
             dbOvrApplication.MentalIncompStatus = model.MentalIncompStatus;
             dbOvrApplication.NewRegistration = model.NewRegistration;
+            dbOvrApplication.VoterClaimsNoSsnOrDln = model.VoterClaimsNoSsnOrDln;
             dbOvrApplication.RecordUpdate = model.RecordUpdate;
             dbOvrApplication.RequesttoReplace = model.RequesttoReplace;
             dbOvrApplication.FlDlNum = model.FlDlNum;
@@ -128,7 +129,6 @@ namespace OvrApp.API.Controllers
                 dbOvrApplication.DaytimeAreaCode = model.DaytimeAreaCode;
                 dbOvrApplication.DaytimePhone = model.DaytimePhone;
                 dbOvrApplication.DaytimePhoneExtension = model.DaytimePhoneExtension;
-                dbOvrApplication.VoterClaimsNoSsnOrDln = model.VoterClaimsNoSsnOrDln;
                 dbOvrApplication.ResStreetNumber = model.ResStreetNumber;
                 dbOvrApplication.ResStreetNumberSuffix = model.ResStreetNumberSuffix;
                 dbOvrApplication.ResStreetPreDirection = model.ResStreetPreDirection;

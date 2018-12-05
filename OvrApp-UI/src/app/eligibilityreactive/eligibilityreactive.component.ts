@@ -183,6 +183,20 @@ export class EligibilityreactiveComponent implements OnInit {
 
       this.service.getOneEligibility(modelFromSession.ovrApplicationId).subscribe((x) => {
         this.service.sharedEligibility = x;
+        if (x.voterClaimsNoSsnOrDln === true) {
+          this.eligibilityFrm.get('voterClaimsNoSsnOrDln').setValue(true);
+          if (x.flDlNum === '' || x.flDlNum === null) {
+          this.eligibilityFrm.get('isDLAvailable').setValue(true);
+          this.setDLDetail();
+          }
+           if (x.ssnLast4 === '' || x.ssnLast4 === null) {
+            this.eligibilityFrm.get('isSSNAvailable').setValue(true);
+            this.setSSNDetail();
+          }
+
+        }
+
+
         this.eligibilityFrm.get('usCitizen').setValue(x.usCitizen === true ? '1' : '0');
         this.eligibilityFrm.get('notAFelon').setValue(x.notAFelon === true ? '1' : '0');
         this.eligibilityFrm.get('mentalIncompStatus').setValue(x.mentalIncompStatus === true ? '1' : '0');
@@ -190,7 +204,6 @@ export class EligibilityreactiveComponent implements OnInit {
         this.eligibilityFrm.get('recordUpdate').setValue(x.recordUpdate);
         this.eligibilityFrm.get('requesttoReplace').setValue(x.requesttoReplace);
         this.eligibilityFrm.get('nameSuffix').setValue(x.nameSuffix);
-        this.eligibilityFrm.get('flDlNum').setValue(x.flDlNum);
         this.eligibilityFrm.get('ssnLast4').setValue(x.ssnLast4);
         this.eligibilityFrm.get('lastName').setValue(x.lastName);
         this.eligibilityFrm.get('firstName').setValue(x.firstName);
@@ -230,11 +243,15 @@ export class EligibilityreactiveComponent implements OnInit {
       && this.eligibilityFrm.valid && this.isRecaptaValid;
     if (isEValid) {
       this.isStep1Valid = false;
-      if (this.eligibilityFrm.get('isDLAvailable').value === true || this.eligibilityFrm.get('isSSNAvailable').value === true ) {
+      if (this.eligibilityFrm.get('isDLAvailable').value === true) {
         this.eligibilityFrm.get('voterClaimsNoSsnOrDln').setValue(true);
         this.eligibilityFrm.get('flDlNum').setValue('');
-        this.eligibilityFrm.get('ssnLast4').setValue('');
+        this.eligibilityFrm.get('dlIssueDate').setValue('');
+      }
 
+      if (this.eligibilityFrm.get('isSSNAvailable').value === true) {
+        this.eligibilityFrm.get('voterClaimsNoSsnOrDln').setValue(true);
+        this.eligibilityFrm.get('ssnLast4').setValue('');
       }
 
       const contactData = this.mapDateData(formData.value);
@@ -349,7 +366,7 @@ export class EligibilityreactiveComponent implements OnInit {
     this.eligibilityFrm.controls['flDlNum'].updateValueAndValidity();
     this.eligibilityFrm.controls['dlIssueDate'].updateValueAndValidity();
   }
-  setSSNDetail(event: any, check: any) {
+  setSSNDetail() {
     this.hideSSNDetail = !this.hideSSNDetail;
     if (!this.hideSSNDetail) {
       this.eligibilityFrm.controls['ssnLast4'].setValidators(null);

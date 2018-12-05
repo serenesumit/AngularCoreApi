@@ -127,7 +127,7 @@
                     <div class="col-md-11">
                       <label>
                         <input data-md-icheck name="isDLAvailable" id="isDLAvailable" 
-                          type="checkbox" [(ngModel)]="isDLAvailable" (change)="setSSNDetail($event, check)" formControlName="isDLAvailable">
+                          type="checkbox" [(ngModel)]="isDLAvailable" (change)="setDLDetail($event, check)" formControlName="isDLAvailable">
                         I do not have Florida DL
                       </label>
                     </div>
@@ -160,7 +160,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="dlIssueDate">DL Issue Date </label>
-                <mat-form-field style="width:43%" class="col-sm-8">
+                <mat-form-field style="width:27%" class="col-sm-8">
                   <input  matInput [matDatepicker]="pickerDlIssueDate" placeholder="DL Issue Date" formControlName="dlIssueDate">
                   <mat-datepicker-toggle matSuffix [for]="pickerDlIssueDate"></mat-datepicker-toggle>
                   <mat-datepicker #pickerDlIssueDate></mat-datepicker>
@@ -238,7 +238,7 @@
             
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="dateOfBirth">Date of Birth (Min. 18 years) </label>
-                <mat-form-field style="width:43%"  class="col-sm-8">
+                <mat-form-field style="width:28%"  class="col-sm-8">
                   <input matInput [matDatepicker]="picker" [max]="startDate" placeholder="Date of Birth" formControlName="dateOfBirth">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker [startAt]="startDate" #picker></mat-datepicker>
@@ -262,88 +262,7 @@
             </div>
 
             </div>
-            <div *ngIf="IsReviewMode" class="">
-              <div class="panel panel-default col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="panel-body">
-                  <div style="text-align:center;">
-                    <h4><strong>Review Page</strong></h4>
-                  </div>
-
-                  <h3>Personal Identification Information</h3>
-                  <hr style="border-color:black;" />
-                  <fieldset disabled>
-                    <div class="row">
-                      <table class="table table-bordered" role="presentation">
-                        <tbody>
-                          <tr>
-                            <td colspan="2" style="border: 0px solid #ffffff; font-weight:bold">
-                              <span *ngIf="editData.newRegistration" class="glyphicon glyphicon-check"></span>
-                              <span *ngIf="!editData.newRegistration" class="glyphicon glyphicon-unchecked"></span>
-                               NewRegistration
-                            </td>
-                          </tr>
-                          <tr>
-                            <td colspan="2" style="border: 0px solid #ffffff; font-weight:bold">
-                                <span *ngIf="editData.recordUpdate" class="glyphicon glyphicon-check"></span>
-                                <span *ngIf="!editData.recordUpdate" class="glyphicon glyphicon-unchecked"></span>
-                              RecordUpdateOrChange
-                            </td>
-                          </tr>
-                          <tr>
-                            <td colspan="2" style="border: 0px solid #ffffff; font-weight:bold">
-                                <span *ngIf="editData.requesttoReplace" class="glyphicon glyphicon-check"></span>
-                                <span *ngIf="!editData.requesttoReplace" class="glyphicon glyphicon-unchecked"></span>
-                              RequesttoReplace
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class=".col-xs-6 .col-sm-4">
-                                <b>Florida DL or Florida ID card number: </b> {{ editData.flDlNum }}
-                              </div>
-                            </td>
-
-                            <td>
-                              <div class=".col-xs-6 .col-sm-4">
-                                <b>Florida DL Issued Date: </b> {{ editData.dlIssueDate | date }}
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class=".col-xs-6 .col-sm-4">
-                                <b>Last 4 digits of your Social Security Number: </b> {{ editData.ssnLast4 }}
-                              </div>
-                            </td>
-
-                            <td>
-                              <div class=".col-xs-6 .col-sm-4"><b>Date of Birth:</b> {{ editData.dateOfBirth | date }}</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class=".col-xs-6 .col-sm-4"><b>LastName:</b> {{ editData.lastName }}</div>
-                            </td>
-                            <td>
-                              <div class=".col-xs-6 .col-sm-4"><b>FirstName:</b> {{ editData.firstName }}</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class=".col-xs-6 .col-sm-4"><b>MiddleName:</b> {{ editData.middleName }}</div>
-                            </td>
-                            <td>
-                              <div class=".col-xs-6 .col-sm-4"><b>NameSuffix: </b>{{ editData.nameSuffix }}</div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </fieldset>
-
-                </div>
-              </div>
-            </div>
+            
                  
         </div>
 
