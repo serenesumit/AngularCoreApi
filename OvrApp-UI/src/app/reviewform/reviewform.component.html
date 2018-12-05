@@ -197,7 +197,7 @@
 
                                     <td colspan="3">
 
-                                            <span class="glyphicon glyphicon-check"
+                                            <span class="glyphicon" [ngClass]="(getcustomer?.military )?'glyphicon-check':'glyphicon-unchecked'"
                                             ><span class="vh">Checked</span></span> &nbsp; &nbsp; I am an active duty Uniformed Services or Merchant Marine member
 
                                     </td>
@@ -208,7 +208,7 @@
 
                                     <td colspan="3">
 
-                                            <span class="glyphicon glyphicon-check" 
+                                            <span class="glyphicon"  [ngClass]="(getcustomer?.militaryDependent )?'glyphicon-check':'glyphicon-unchecked'"
                                             ><span class="vh">Checked</span></span>  &nbsp; &nbsp; I am a spouse or a dependent of an active duty Uniformed Services or Merchant Marine member
 
 
@@ -220,7 +220,7 @@
 
                                     <td colspan="3">
 
-                                            <span class="glyphicon glyphicon-check" 
+                                            <span class="glyphicon"  [ngClass]="(getcustomer?.overseasFlag )?'glyphicon-check':'glyphicon-unchecked'"
                                             ><span class="vh">Checked</span></span> &nbsp; &nbsp; I am a U.S. citizen residing outside the U.S
 
 

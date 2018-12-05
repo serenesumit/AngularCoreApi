@@ -270,6 +270,8 @@ validationMessages = {
 
         placeOfBirth: [''],
         military: [''],
+        militaryDependent: [''],
+        overseasFlag: [''],
         gender : ['', [Validators.required, Validators.maxLength(1)]],
         daytimePhone: ['', Validators.maxLength(12)],
         publicEmailAddress: ['', [Validators.email, Validators.maxLength(100)]],
@@ -305,7 +307,9 @@ validationMessages = {
         this.RdFrm.get('mailAddrZip').setValue(x.mailAddrZip);
         this.RdFrm.get('mailAddrState').setValue(x.mailAddrState);
         this.RdFrm.get('mailAddrCountry').setValue(x.mailAddrCountry);
-
+        this.RdFrm.get('military').setValue(x.military === true ? '1' : '0');
+        this.RdFrm.get('militaryDependent').setValue(x.militaryDependent === true ? '1' : '0');
+        this.RdFrm.get('overseasFlag').setValue(x.overseasFlag === true ? '1' : '0');
 
         this.RdFrm.get('formerAddrLine1').setValue(x.formerAddrLine1);
         this.RdFrm.get('formerAddrLine2').setValue(x.formerAddrLine2);
@@ -320,7 +324,6 @@ validationMessages = {
         this.RdFrm.get('raceId').setValue(x.raceId);
 
         this.RdFrm.get('placeOfBirth').setValue(x.placeOfBirth);
-        this.RdFrm.get('military').setValue(x.military === true ? '1' : '0');
         this.RdFrm.get('gender').setValue(x.gender);
         this.RdFrm.get('daytimePhone').setValue(x.daytimePhone);
         this.RdFrm.get('publicEmailAddress').setValue(x.publicEmailAddress);
@@ -392,6 +395,8 @@ validationMessages = {
     const contactData = this.mapDateData(formData.value);
     contactData.mailingAddSameAsResi = this.RdFrm.get('mailingAddSameAsResi').value === '1' ? true : false;
     contactData.military = this.RdFrm.get('military').value === '1' ? true : false;
+    contactData.militaryDependent = this.RdFrm.get('militaryDependent').value === '1' ? true : false;
+    contactData.overseasFlag = this.RdFrm.get('overseasFlag').value === '1' ? true : false;
     contactData.pollWorkerVolunteer = this.RdFrm.get('pollWorkerVolunteer').value === '1' ? true : false;
     contactData.votingAssistRequired = this.RdFrm.get('votingAssistRequired').value === '1' ? true : false;
     contactData.ovrApplicationId = modelFromSession.ovrApplicationId;
@@ -416,6 +421,29 @@ validationMessages = {
     return customer;
   }
 
+  setMilitary() {
+    this.RdFrm.get('military').setValue('1');
+    this.RdFrm.get('militaryDependent').setValue('0');
+    this.RdFrm.get('overseasFlag').setValue('0');
+  }
+
+  setMilitaryDependent() {
+    this.RdFrm.get('military').setValue('0');
+    this.RdFrm.get('militaryDependent').setValue('1');
+    this.RdFrm.get('overseasFlag').setValue('0');
+  }
+
+  setOverseasFlag() {
+    this.RdFrm.get('military').setValue('0');
+    this.RdFrm.get('militaryDependent').setValue('0');
+    this.RdFrm.get('overseasFlag').setValue('1');
+  }
+
+  setNoneOption() {
+    this.RdFrm.get('military').setValue('0');
+    this.RdFrm.get('militaryDependent').setValue('0');
+    this.RdFrm.get('overseasFlag').setValue('0');
+  }
 
 
 }
