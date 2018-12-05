@@ -421,7 +421,15 @@ export class EligibilityreactiveComponent implements OnInit {
   enableEligibilityForm() {
     const isEValidp = (this.eligibilityFrm.get('usCitizen').value === '1') && (this.eligibilityFrm.get('notAFelon').value === '1')
         && (this.eligibilityFrm.get('mentalIncompStatus').value === '1');
-     if (isEValidp) {
-     }
+        if (isEValidp) {
+          this.IsEligibilityOn = isEValidp;
+          this.isStep1Valid = !isEValidp;
+          this.pTabId = 2;
+        } else {
+          this.IsEligibilityOn = false;
+          this.isStep1Valid = true;
+          this.pTabId = 1;
+          return false;
+        }
   }
 }
