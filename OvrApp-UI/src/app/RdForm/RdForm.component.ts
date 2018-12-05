@@ -271,7 +271,7 @@ validationMessages = {
         placeOfBirth: [''],
         military: [''],
         gender : ['', [Validators.required, Validators.maxLength(1)]],
-        daytimePhone: ['', Validators.maxLength(7)],
+        daytimePhone: ['', Validators.maxLength(12)],
         publicEmailAddress: ['', [Validators.email, Validators.maxLength(100)]],
         emailConfirmation: ['', [Validators.email, Validators.maxLength(100)]],
         votingAssistRequired: [false, Validators.required],

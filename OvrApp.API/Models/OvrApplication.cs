@@ -50,7 +50,7 @@ namespace OvrApp.API.Models
         [MaxLength(3)]
         public string DaytimeAreaCode  { get; set; }
 
-        [MaxLength(7)]
+        [MaxLength(12)]
         public string DaytimePhone { get; set; }
 
         [MaxLength(5)]
