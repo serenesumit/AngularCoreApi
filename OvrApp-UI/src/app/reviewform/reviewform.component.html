@@ -20,14 +20,16 @@
                         <tr>
                             <td colspan="3" style="font-weight:bold">
 
-                                        <span class="glyphicon glyphicon-check"><span class="vh">Checked</span></span> NewRegistration
+                                        <span class="glyphicon" [ngClass]="(getcustomer?.newRegistration )?'glyphicon-check':'glyphicon-unchecked'"
+                                        ><span class="vh">Checked</span></span> NewRegistration
 
                             </td>
                             </tr>
                         <tr>
                              <td colspan="3" style="font-weight:bold">
 
-                                         <span class="glyphicon glyphicon-check"><span class="vh">Checked</span></span> RecordUpdateOrChange
+                                         <span class="glyphicon" [ngClass]="(getcustomer?.recordUpdate )?'glyphicon-check':'glyphicon-unchecked'"> 
+                                             <span class="vh">Checked</span></span> RecordUpdateOrChange
 
                                  </td>
                                     </tr>
@@ -35,7 +37,8 @@
                             <td colspan="3" style="font-weight:bold">
 
 
-                                        <span class="glyphicon glyphicon-check"><span class="vh">Checked</span></span> RequesttoReplace
+                                        <span class="glyphicon" [ngClass]="(getcustomer?.requesttoReplace )?'glyphicon-check':'glyphicon-unchecked'"
+                                        ><span class="vh">Checked</span></span> RequesttoReplace
 
 
 
@@ -44,18 +47,18 @@
                         <tr>
                         <td>
 
-                                <div class=".col-xs-6 .col-sm-4"><b>LastName </b>  {{ getcustomer.lastName }} </div>
+                                <div class=".col-xs-6 .col-sm-4"><b>LastName </b>  {{ getcustomer?.lastName }} </div>
 
 
                         </td>
                             <td>
 
-                                <div class=".col-xs-6 .col-sm-4"><b>FirstName </b> {{ getcustomer.firstName }}</div>
+                                <div class=".col-xs-6 .col-sm-4"><b>FirstName </b> {{ getcustomer?.firstName }}</div>
                             </td>
 
 
                             <td>
-                                <div class=".col-sm-6"><b>MiddleName </b> {{ getcustomer.middleName }}</div>
+                                <div class=".col-sm-6"><b>MiddleName </b> {{ getcustomer?.middleName }}</div>
                             </td>
                          </tr>
                     </tbody>
@@ -73,7 +76,7 @@
                             <tbody>
                                 <tr>
                                     <td colspan="3">
-                                        <div class=".col-sm-6"><b>PartyAffiliation </b>  {{ getcustomer.partyAffiliation }}  </div>
+                                        <div class=".col-sm-6"><b>PartyAffiliation </b>  {{ getcustomer?.partyAffiliation }}  </div>
                                     </td>
                                 </tr>
 
@@ -81,14 +84,14 @@
                                     <td colspan="2">
                                         <div class=".col-xs-6 .col-sm-4">
                                             <b>Email me SAMPLE BALLOTS:</b>
-                                            {{ getcustomer.publicEmailAddress }}
+                                            {{ getcustomer?.publicEmailAddress }}
                                                 &nbsp; &nbsp;
 
                                         </div>
                                     </td>
                                     <td>
 
-                                <div class=".col-sm-6" style="word-wrap:break-word"><b>State or Country of Birth: </b> {{ getcustomer.placeOfBirth }} <div style="font-size:smaller"> </div></div>
+                                <div class=".col-sm-6" style="word-wrap:break-word"><b>State or Country of Birth: </b> {{ getcustomer?.placeOfBirth }} <div style="font-size:smaller"> </div></div>
 
                                      </td>
                                 </tr>
@@ -98,7 +101,12 @@
                                         <div class=".col-xs-6 .col-sm-4">
                                             <label>Legal Residential Address:   </label> <br>
                                             <div style="font-size:smaller; word-wrap:break-word">
-                                                {{ getcustomer.partyAffiliation }}
+                                                {{ getcustomer?.resStreetNumber }}
+                                                {{ getcustomer?.resStreetName }}
+                                                {{ getcustomer?.resStreetType }}
+                                                {{ getcustomer?.resUspsCityName }}
+                                                {{ getcustomer?.resZipCode }}
+                                                {{ getcustomer?.countyOfResidence }}
                                              </div>
                                             </div>
                                     </td>
@@ -106,14 +114,26 @@
                                             <div class=".col-xs-6 .col-sm-4">
                                                 <label>Mailing Address: </label><br>
                                                 <div style="font-size:smaller; word-wrap:break-word">
-                                                    {{ getcustomer.partyAffiliation }}
+                                                        {{ getcustomer?.mailAddrLine1 }}
+                                                        {{ getcustomer?.mailAddrLine2 }}
+                                                        {{ getcustomer?.mailAddrLine3 }}
+                                                        {{ getcustomer?.mailAddrCity }}
+                                                        {{ getcustomer?.mailAddrZip }}
+                                                        {{ getcustomer?.mailAddrState }}
+                                                        {{ getcustomer?.mailAddrCountry }}
                                              </div>
                                             </div>
                                         </td>
 
                                      <td style="word-wrap:break-word">
                                 <div class=".col-xs-6 .col-sm-4"><label>Former Address: </label><address><div style="font-size:smaller;">
-                                    {{ getcustomer.partyAffiliation }}
+                                        {{ getcustomer?.formerAddrLine1 }}
+                                        {{ getcustomer?.formerAddrLine2 }}
+                                        {{ getcustomer?.formerAddrLine3 }}
+                                        {{ getcustomer?.formerAddrCity }}
+                                        {{ getcustomer?.formerAddrZip }}
+                                        {{ getcustomer?.formerAddrState }}
+                                        {{ getcustomer?.formerAddrCountry }}
                                 </div><br></address></div>
                                     </td>
                                 </tr>
@@ -121,7 +141,7 @@
                                 <tr>
                                     <td colspan="2" style="word-wrap:break-word">
                                 <div class=".col-xs-6 .col-sm-4"><b>County: </b><div style="font-size:smaller;"> 
-                                    {{ getcustomer.partyAffiliation }} </div> </div>
+                                    {{ getcustomer?.partyAffiliation }} </div> </div>
 
                                     </td>
 
@@ -129,24 +149,24 @@
                                     <td style="word-wrap:break-word">
                                 <div class=".col-xs-6 .col-sm-4"><b>Former Name: </b><div style="font-size:smaller;">
                                 </div></div>
-                                {{ getcustomer.partyAffiliation }}
+                                {{ getcustomer?.formerFirstName }} {{ getcustomer?.formerMiddleName }} {{ getcustomer?.formerLastName }}
                                     </td>
 
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class=".col-xs-6 .col-sm-4">
-                                            <b>Gender: </b> {{ getcustomer.partyAffiliation }}
+                                            <b>Gender: </b> {{ getcustomer?.gender }}
                                         </div>
                                     </td>
                                     <td>
 
                                     <div class=".col-xs-6 .col-sm-4"><b>
-                                      Race/Ethnicity: </b> {{ getcustomer.partyAffiliation }} </div>
+                                      Race/Ethnicity: </b> {{ getcustomer?.raceId }} </div>
 
                                     </td>
                                     <td>
-                                        <div class=".col-xs-6 .col-sm-4"><b>TelephoneNumber </b> {{ getcustomer.partyAffiliation }} </div>
+                                        <div class=".col-xs-6 .col-sm-4"><b>TelephoneNumber </b> {{ getcustomer?.daytimePhone }} </div>
                                     </td>
 
                                 </tr>
@@ -156,7 +176,8 @@
                                 <tr>
                                     <td colspan="3">
 
-                                            <span class="glyphicon glyphicon-check"><span class="vh">Checked</span></span> &nbsp; &nbsp; I will need assistance with voting
+                                            <span class="glyphicon" [ngClass]="(getcustomer?.votingAssistRequired )?'glyphicon-check':'glyphicon-unchecked'"> 
+                                                <span class="vh">Checked</span></span> &nbsp; &nbsp; I will need assistance with voting
 
 
 
@@ -165,17 +186,8 @@
                                 <tr>
                                     <td colspan="3">
 
-                                            <span class="glyphicon glyphicon-check"><span class="vh">Checked</span></span> &nbsp; &nbsp; I am interested in becoming a poll worker
-
-                                    </td>
-
-                                </tr>
-
-                                <tr>
-
-                                    <td colspan="3">
-
-                                            <span class="glyphicon glyphicon-check"><span class="vh">Checked</span></span> &nbsp; &nbsp; I am an active duty Uniformed Services or Merchant Marine member
+                                            <span class="glyphicon" [ngClass]="(getcustomer?.pollWorkerVolunteer )?'glyphicon-check':'glyphicon-unchecked'"
+                                            ><span class="vh">Checked</span></span> &nbsp; &nbsp; I am interested in becoming a poll worker
 
                                     </td>
 
@@ -185,7 +197,19 @@
 
                                     <td colspan="3">
 
-                                            <span class="glyphicon glyphicon-check"><span class="vh">Checked</span></span>  &nbsp; &nbsp; I am a spouse or a dependent of an active duty Uniformed Services or Merchant Marine member
+                                            <span class="glyphicon glyphicon-check"
+                                            ><span class="vh">Checked</span></span> &nbsp; &nbsp; I am an active duty Uniformed Services or Merchant Marine member
+
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td colspan="3">
+
+                                            <span class="glyphicon glyphicon-check" 
+                                            ><span class="vh">Checked</span></span>  &nbsp; &nbsp; I am a spouse or a dependent of an active duty Uniformed Services or Merchant Marine member
 
 
                                     </td>
@@ -196,7 +220,8 @@
 
                                     <td colspan="3">
 
-                                            <span class="glyphicon glyphicon-check"><span class="vh">Checked</span></span> &nbsp; &nbsp; I am a U.S. citizen residing outside the U.S
+                                            <span class="glyphicon glyphicon-check" 
+                                            ><span class="vh">Checked</span></span> &nbsp; &nbsp; I am a U.S. citizen residing outside the U.S
 
 
                                     </td>
@@ -218,11 +243,11 @@
 
                 <div class="pull-right">
                         <div class="row">
-                    <div class="col-sm-4">
-                        <button  class="btn btn-primary " (click)="editContact(getcustomer.ovrApplicationId)">Edit</button>
+                    <div class="col-sm-3">
+                        <button  class="btn btn-primary " (click)="editContact(getcustomer?.ovrApplicationId)">Edit</button>
                       </div>
 
-                      <div class="col-sm-4">
+                      <div class="col-sm-6">
                         <button type="submit" class="btn btn-primary" id="submitapp">
                             Print Paper Application
                         </button>
@@ -230,7 +255,7 @@
                 
 
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <button class="btn btn-danger pull-right" type="button" (click)="openModal(template)">Exit</button>
                           </div>
 </div>
@@ -241,4 +266,21 @@
 
 
 </div>
+
+
+<ng-template #template>
+        <div class="modal-body text-center">
+  
+  
+          <h4>Exit Confirmation</h4>
+          <hr />
+  
+          <p>
+  
+            By exiting this application, you will lose all of the data you entered?</p>
+          <button type="button" class="btn btn-default" (click)="confirm()">Yes</button> &nbsp;
+          <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+        </div>
+      </ng-template>
+
 </div>

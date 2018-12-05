@@ -25,9 +25,9 @@
                   colspan="2"
                   style="border: 0px solid #ffffff; font-weight:bold"
                 >
-                  <span class="glyphicon glyphicon-check"
+                  <span class="glyphicon" [ngClass]="(getcustomer?.newRegistration )?'glyphicon-check':'glyphicon-unchecked'"
                     ></span
-                  > NewRegistration
+                    > NewRegistration
                 </td>
               </tr>
               <tr>
@@ -35,7 +35,7 @@
                   colspan="2"
                   style="border: 0px solid #ffffff; font-weight:bold"
                 >
-                  <span class="glyphicon glyphicon-check"
+                  <span class="glyphicon" [ngClass]="(getcustomer?.recordUpdate )?'glyphicon-check':'glyphicon-unchecked'"
                     ></span
                   >
                    RecordUpdateOrChange
@@ -46,7 +46,7 @@
                   colspan="2"
                   style="border: 0px solid #ffffff; font-weight:bold"
                 >
-                  <span class="glyphicon glyphicon-check"
+                  <span class="glyphicon"  [ngClass]="(getcustomer?.requesttoReplace )?'glyphicon-check':'glyphicon-unchecked'"
                     ></span
                   >
                    RequesttoReplace
@@ -55,41 +55,41 @@
               <tr>
                 <td>
                   <div class=".col-xs-6 .col-sm-4">
-                    <b>Florida DL or Florida ID card number: </b> {{ getcustomer.flDlNum }}
+                    <b>Florida DL or Florida ID card number: </b> {{ getcustomer?.flDlNum }}
                   </div>
                 </td>
 
                 <td>
                   <div class=".col-xs-6 .col-sm-4">
-                    <b>Florida DL Issued Date: </b> {{ getcustomer.dlIssueDate }}
+                    <b>Florida DL Issued Date: </b> {{ getcustomer?.dlIssueDate }}
                   </div>
                 </td>
               </tr>
               <tr>
                 <td>
                   <div class=".col-xs-6 .col-sm-4">
-                    <b>Last 4 digits of your Social Security Number: </b> {{ getcustomer.ssnLast4 }}
+                    <b>Last 4 digits of your Social Security Number: </b> {{ getcustomer?.ssnLast4 }}
                   </div>
                 </td>
 
                 <td>
-                  <div class=".col-xs-6 .col-sm-4"><b>Date of Birth:</b> {{ getcustomer.dateOfBirth | date }}</div>
+                  <div class=".col-xs-6 .col-sm-4"><b>Date of Birth:</b> {{ getcustomer?.dateOfBirth | date }}</div>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div class=".col-xs-6 .col-sm-4"><b>LastName:</b> {{ getcustomer.lastName }}</div>
+                  <div class=".col-xs-6 .col-sm-4"><b>LastName:</b> {{ getcustomer?.lastName }}</div>
                 </td>
                 <td>
-                  <div class=".col-xs-6 .col-sm-4"><b>FirstName:</b> {{ getcustomer.firstName }}</div>
+                  <div class=".col-xs-6 .col-sm-4"><b>FirstName:</b> {{ getcustomer?.firstName }}</div>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div class=".col-xs-6 .col-sm-4"><b>MiddleName:</b> {{ getcustomer.middleName }}</div>
+                  <div class=".col-xs-6 .col-sm-4"><b>MiddleName:</b> {{ getcustomer?.middleName }}</div>
                 </td>
                 <td>
-                  <div class=".col-xs-6 .col-sm-4"><b>Suffix: </b> {{ getcustomer.nameSuffix }}</div>
+                  <div class=".col-xs-6 .col-sm-4"><b>Suffix: </b> {{ getcustomer?.nameSuffix }}</div>
                 </td>
               </tr>
             </tbody>
@@ -111,7 +111,7 @@
   </button>
 </div>
 <div class="col-sm-4">
-    <button  class="btn btn-primary " (click)="editContact(getcustomer.ovrApplicationId)">Edit</button>
+    <button  class="btn btn-primary " (click)="editContact(getcustomer?.ovrApplicationId)">Edit</button>
   </div>
 
  

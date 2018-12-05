@@ -123,8 +123,8 @@ export class EligibilityreactiveComponent implements OnInit {
 
 
   validateEligibility() {
-    const isEValid = (this.eligibilityFrm.get('usCitizen').value === 1) && (this.eligibilityFrm.get('notAFelon').value === 1)
-      && (this.eligibilityFrm.get('mentalIncompStatus').value === 1);
+    const isEValid = (this.eligibilityFrm.get('usCitizen').value === '1') && (this.eligibilityFrm.get('notAFelon').value === '1')
+      && (this.eligibilityFrm.get('mentalIncompStatus').value === '1');
     if (isEValid) {
     } else {
     }
@@ -225,8 +225,8 @@ export class EligibilityreactiveComponent implements OnInit {
 
   onSubmit(formData: any) {
     const modelFromSession = this.sessionEService.getEligibilityFromSession();
-    const isEValid = (this.eligibilityFrm.get('usCitizen').value === 1) && (this.eligibilityFrm.get('notAFelon').value === 1)
-      && (this.eligibilityFrm.get('mentalIncompStatus').value === 1)
+    const isEValid = (this.eligibilityFrm.get('usCitizen').value === '1') && (this.eligibilityFrm.get('notAFelon').value === '1')
+      && (this.eligibilityFrm.get('mentalIncompStatus').value === '1')
       && this.eligibilityFrm.valid && this.isRecaptaValid;
     if (isEValid) {
       this.isStep1Valid = false;
@@ -280,8 +280,9 @@ export class EligibilityreactiveComponent implements OnInit {
 
   selectTab(tabId: number) {
     if (tabId === 1) {
-      const isEValid = (this.eligibilityFrm.get('usCitizen').value === 1) && (this.eligibilityFrm.get('notAFelon').value === 1)
-        && (this.eligibilityFrm.get('mentalIncompStatus').value === 1);
+      console.log(this.eligibilityFrm.get('usCitizen').value);
+      const isEValid = (this.eligibilityFrm.get('usCitizen').value === '1') && (this.eligibilityFrm.get('notAFelon').value === '1')
+        && (this.eligibilityFrm.get('mentalIncompStatus').value === '1');
       if (isEValid) {
         this.IsEligibilityOn = isEValid;
         this.isStep1Valid = !isEValid;
@@ -400,8 +401,8 @@ export class EligibilityreactiveComponent implements OnInit {
   }
 
   enableEligibilityForm() {
-    const isEValidp = (this.eligibilityFrm.get('usCitizen').value === 1) && (this.eligibilityFrm.get('notAFelon').value === 1)
-        && (this.eligibilityFrm.get('mentalIncompStatus').value === 1);
+    const isEValidp = (this.eligibilityFrm.get('usCitizen').value === '1') && (this.eligibilityFrm.get('notAFelon').value === '1')
+        && (this.eligibilityFrm.get('mentalIncompStatus').value === '1');
      if (isEValidp) {
      }
   }
