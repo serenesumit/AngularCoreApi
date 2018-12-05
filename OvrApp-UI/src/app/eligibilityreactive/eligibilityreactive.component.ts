@@ -180,6 +180,7 @@ export class EligibilityreactiveComponent implements OnInit {
       this.IsEligibilityOn = true;
       this.isRecaptaValid = false;
       this.isStep1Valid = false;
+      this.pTabId = 2;
 
       this.service.getOneEligibility(modelFromSession.ovrApplicationId).subscribe((x) => {
         this.service.sharedEligibility = x;
