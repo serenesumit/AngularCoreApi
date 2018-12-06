@@ -272,6 +272,7 @@ validationMessages = {
         military: [''],
         militaryDependent: [''],
         overseasFlag: [''],
+        noneFlag: [''],
         gender : ['', [Validators.required, Validators.maxLength(1)]],
         daytimePhone: ['', Validators.maxLength(12)],
         publicEmailAddress: ['', [Validators.email, Validators.maxLength(100)]],

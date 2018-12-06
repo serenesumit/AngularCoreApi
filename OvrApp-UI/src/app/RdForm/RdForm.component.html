@@ -572,7 +572,7 @@
                               I am a U.S. citizen residing outside the U.S.
                           </label><br>
                           <label>
-                              <input (change)="setNoneOption()" type="radio">  &nbsp;None of the above.
+                              <input (change)="setNoneOption($event,noneFlag)" value="1" type="radio" formControlName="noneFlag">  &nbsp;None of the above.
                           </label><br>
                       </fieldset>
                   </div>
