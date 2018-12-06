@@ -84,7 +84,7 @@
                 <div class="col-md-11">
                   <label>
                     <input name="newRegistration" id="newRegistration" [attr.disabled]="isNewRegistration == true ? true : null"
-                      type="checkbox" [(ngModel)]="newRegistration" (change)="setNewRegistrationStatus()" formControlName="newRegistration"> New
+                      type="checkbox"  (change)="setNewRegistrationStatus()" formControlName="newRegistration"> New
                     Registration
                   </label>
                 </div>
@@ -127,7 +127,7 @@
                     <div class="col-md-11">
                       <label>
                         <input data-md-icheck name="isDLAvailable" id="isDLAvailable" 
-                          type="checkbox" [(ngModel)]="isDLAvailable" (change)="setDLDetail($event, check)" formControlName="isDLAvailable">
+                          type="checkbox"  (change)="setDLDetail($event, check)" formControlName="isDLAvailable">
                         I do not have Florida DL
                       </label>
                     </div>
@@ -136,7 +136,7 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-11">
                       <label>
-                        <input name="isSSNAvailable" id="isSSNAvailable"  [(ngModel)]="isSSNAvailable"
+                        <input name="isSSNAvailable" id="isSSNAvailable"  
                         (change)="setSSNDetail($event, check)"  type="checkbox" formControlName="isSSNAvailable">
                         I do not have Florida SSN 
                       </label>
