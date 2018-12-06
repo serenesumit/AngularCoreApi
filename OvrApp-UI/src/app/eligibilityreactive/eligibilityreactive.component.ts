@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 import { IEligibility} from '../model/eligibility';
+import { IEligibilityModel} from '../model/eligibilitymodel';
 import {CommonSetting } from '../model/commonsetting';
 import { TabsetComponent } from 'ngx-bootstrap';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -38,7 +39,7 @@ export class EligibilityreactiveComponent implements OnInit {
   hideSSNDetail = true;
   modalRef: BsModalRef;
   message: string;
-  editData: IEligibility;
+  editData: IEligibilityModel;
   todayDate = new Date();
   startDate = new Date(this.todayDate.getFullYear() - 18, this.todayDate.getMonth() - 1, this.todayDate.getDate());
   NameSuffixList: string[] = ['I', 'II', 'III', 'IV', 'IX', 'JR', 'SR', 'V', 'VI', 'VII', 'VIII'];
@@ -136,8 +137,6 @@ export class EligibilityreactiveComponent implements OnInit {
     contactData.newRegistration = this.eligibilityFrm.get('newRegistration').value;
     contactData.recordUpdate = this.eligibilityFrm.get('recordUpdate').value;
     contactData.requesttoReplace = this.eligibilityFrm.get('requesttoReplace').value;
-    contactData.currentTabId = tabId;
-    this.sessionEService.SaveEligibilityToSession(contactData);
   }
 
 
@@ -206,6 +205,7 @@ export class EligibilityreactiveComponent implements OnInit {
         this.eligibilityFrm.get('requesttoReplace').setValue(x.requesttoReplace);
         this.eligibilityFrm.get('nameSuffix').setValue(x.nameSuffix);
         this.eligibilityFrm.get('ssnLast4').setValue(x.ssnLast4);
+        this.eligibilityFrm.get('flDlNum').setValue(x.flDlNum);
         this.eligibilityFrm.get('lastName').setValue(x.lastName);
         this.eligibilityFrm.get('firstName').setValue(x.firstName);
         this.eligibilityFrm.get('middleName').setValue(x.middleName);
@@ -316,7 +316,7 @@ export class EligibilityreactiveComponent implements OnInit {
     }
   }
 
-  mapDateData(customer: IEligibility): IEligibility {
+  mapDateData(customer: IEligibility): IEligibilityModel {
     if (customer.dateOfBirth != null && customer.dateOfBirth !== '') {
       customer.dateOfBirth = new Date(customer.dateOfBirth).toISOString();
     }
@@ -392,6 +392,7 @@ export class EligibilityreactiveComponent implements OnInit {
     this.modalRef.hide();
     this.reCaptcha.reset(); // to reset captcha on cancel
     this.resolvedCaptcha(null);
+    this.pTabId = 1;
   }
 
   decline(): void {

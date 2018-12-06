@@ -10,6 +10,8 @@ namespace OvrApp.API.Helpers
             CreateMap<OvrApplication, OvrApplication>();
             CreateMap<OvrApplication, RegisterDetailsModel>();
             CreateMap<RegisterDetailsModel, OvrApplication>();
+            CreateMap<Eligibility, OvrApplication>();
+            CreateMap<OvrApplication, Eligibility>();
         }
     }
 

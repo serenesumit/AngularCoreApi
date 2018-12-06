@@ -48,7 +48,7 @@ namespace OvrApp.API.Controllers
 
         [HttpPost]
         // [Route("addEligibility")]
-        public async Task<IActionResult> CreateEligibility([FromBody] OvrApplication item)
+        public async Task<IActionResult> CreateEligibility([FromBody] Eligibility item)
         {
             // set bad request if contact data is not provided in body
             if (item == null)
@@ -67,7 +67,7 @@ namespace OvrApp.API.Controllers
 
         [HttpPut]
         [Route("{id:int}/eligibility")]
-        public async Task<IActionResult> UpdateEligibility(long id, [FromBody] OvrApplication model)
+        public async Task<IActionResult> UpdateEligibility(long id, [FromBody] Eligibility model)
         {
             // set bad request if contact data is not provided in body
             if (id == 0 || id != model.OvrApplicationId)

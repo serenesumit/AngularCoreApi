@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { IEligibility } from '../model/eligibility';
+import { IEligibilityModel } from '../model/eligibilitymodel';
 import { IRegistartiondetails } from '../model/registartiondetails';
 import { catchError } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
@@ -39,7 +40,7 @@ getOneEligibility(id: number): Observable<IEligibility> {
 }
 
 // insert new contact details
-addEligibility(ieligibility: IEligibility): Observable<any> {
+addEligibility(ieligibility: IEligibilityModel): Observable<any> {
   return this.http.post<IEligibility>(Global.BASE_USER_ENDPOINT + 'ovrapp', ieligibility, httpOptions)
     .pipe(
       catchError(this.handleError)
@@ -47,7 +48,7 @@ addEligibility(ieligibility: IEligibility): Observable<any> {
 }
 
 
-postEligibility(ieligibility: IEligibility): Observable<HttpResponse<IEligibility>> {
+postEligibility(ieligibility: IEligibilityModel): Observable<HttpResponse<IEligibility>> {
   const httpHeaders = new HttpHeaders({
        'Content-Type' : 'application/json'
   });
@@ -61,7 +62,7 @@ postEligibility(ieligibility: IEligibility): Observable<HttpResponse<IEligibilit
 
 
 
-updateEligibility(id: number, ieligibility: IEligibility): Observable<IEligibility> {
+updateEligibility(id: number, ieligibility: IEligibilityModel): Observable<IEligibility> {
   return this.http.put<IEligibility>(Global.BASE_USER_ENDPOINT + 'ovrapp/' + id + '/eligibility', ieligibility, httpOptions)
     .pipe(
       catchError(this.handleError)
