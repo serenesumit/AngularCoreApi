@@ -224,8 +224,8 @@ validationMessages = {
   constructor(private fb: FormBuilder, private service: EligibilityService, private route: ActivatedRoute,
     private router: Router, private modalService: BsModalService,
     private sessionEService: LocalStorageService) {
-      const eligibility = this.sessionEService.getEligibilityFromSession();
-      if (eligibility == null || eligibility.ovrApplicationId < 0) {
+      const eligibility = this.sessionEService.getEligibilityIdFromSession();
+      if (eligibility == null || eligibility < 0) {
          this.router.navigateByUrl('/eligibilityreactive');
      }
 }
@@ -280,9 +280,9 @@ validationMessages = {
         pollWorkerVolunteer: [false, Validators.required]
       });
 
-      const modelFromSession = this.sessionEService.getEligibilityFromSession();
-      if (modelFromSession != null && modelFromSession.ovrApplicationId > 0) {
-        this.service.getOneEligibility(modelFromSession.ovrApplicationId).subscribe((x) => {
+      const modelFromSession = this.sessionEService.getEligibilityIdFromSession();
+      if (modelFromSession != null && modelFromSession > 0) {
+        this.service.getOneEligibility(modelFromSession).subscribe((x) => {
 
          this.RdFrm.get('partyAffiliation').setValue(x.partyAffiliation);
         this.RdFrm.get('resStreetNumberSuffix').setValue(x.resStreetNumberSuffix);
@@ -368,7 +368,7 @@ validationMessages = {
   }
 
   confirm(): void {
-    this.sessionEService.RemoveEligibilityFromSession();
+    this.sessionEService.RemoveEligibilityIdFromSession();
   this.sessionEService.RemoveStepFromSession();
     this.modalRef.hide();
     this.router.navigateByUrl('/eligibilityreactive');
@@ -382,7 +382,7 @@ validationMessages = {
 
   onSubmit(formData: any) {
 
-    const modelFromSession = this.sessionEService.getEligibilityFromSession();
+    const modelFromSession = this.sessionEService.getEligibilityIdFromSession();
     if (this.RdFrm.get('mailingAddSameAsResi').value === '1') {
       this.RdFrm.get('mailAddrLine1').setValue('');
       this.RdFrm.get('mailAddrLine2').setValue('');
@@ -399,15 +399,15 @@ validationMessages = {
     contactData.overseasFlag = this.RdFrm.get('overseasFlag').value === '1' ? true : false;
     contactData.pollWorkerVolunteer = this.RdFrm.get('pollWorkerVolunteer').value === '1' ? true : false;
     contactData.votingAssistRequired = this.RdFrm.get('votingAssistRequired').value === '1' ? true : false;
-    contactData.ovrApplicationId = modelFromSession.ovrApplicationId;
+    contactData.ovrApplicationId = modelFromSession;
 
-     if (modelFromSession.ovrApplicationId !== null && typeof modelFromSession.ovrApplicationId !== 'undefined'
-        && modelFromSession.ovrApplicationId > 0) {
-          const appId = modelFromSession.ovrApplicationId;
+     if (modelFromSession !== null && typeof modelFromSession !== 'undefined'
+        && modelFromSession > 0) {
+          const appId = modelFromSession;
           this.service.updateRegisterDetails(appId, contactData).subscribe(
             (data: IEligibility) => {
               this.service.sharedEligibility = data;
-              this.sessionEService.SaveEligibilityToSession(data);
+              this.sessionEService.SaveEligibilityIdToSession(data.ovrApplicationId);
               this.router.navigateByUrl('/reviewform');
             }
           );

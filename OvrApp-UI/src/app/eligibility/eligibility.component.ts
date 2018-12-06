@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { IEligibilityModel } from '../model/eligibilitymodel';
 
 @Component({
   selector: 'app-eligibility',
@@ -112,7 +113,7 @@ saveEligibility() {
 //  LastName: 'LastName', Firstname: 'FirstName', MiddleName: 'MiddleName', NameSuffix: 'Mr'};
  const eligibility = this.eligibilityForm.value;
      this.eligibilityService.postEligibility(eligibility).subscribe(res => {
-          const eligi: IEligibility = res.body;
+          const eligi: IEligibilityModel = res.body;
           this.loadAllEligibilitys();
         },
 (err: HttpErrorResponse) => {

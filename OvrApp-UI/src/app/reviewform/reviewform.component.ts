@@ -26,9 +26,9 @@ message: string;
     private sessionEService: LocalStorageService) { }
 
   ngOnInit() {
-    const modelFromSession = this.sessionEService.getEligibilityFromSession();
-    if (modelFromSession != null && modelFromSession.ovrApplicationId > 0) {
-      this.service.getOneEligibility(modelFromSession.ovrApplicationId).subscribe((x) => {
+    const modelFromSession = this.sessionEService.getEligibilityIdFromSession();
+    if (modelFromSession != null && modelFromSession > 0) {
+      this.service.getOneEligibility(modelFromSession).subscribe((x) => {
         this.service.sharedEligibility = x;
        this.getcustomer = x;
        console.log(this.getcustomer);
@@ -40,7 +40,6 @@ message: string;
 }
 
 editContact(id: number) {
-  console.log('edit contact id is ' + id);
   this.sessionEService.SaveStepToSession('2');
 // const contactData = this.service.sharedEligibility;
 // console.log(contactData);
@@ -69,7 +68,7 @@ openAddressModal(template: TemplateRef<any>) {
 }
 
 confirm(): void {
-  this.sessionEService.RemoveEligibilityFromSession();
+  this.sessionEService.RemoveEligibilityIdFromSession();
   this.sessionEService.RemoveStepFromSession();
     this.modalRef.hide();
     this.router.navigateByUrl('/eligibilityreactive');

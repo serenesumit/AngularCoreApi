@@ -110,7 +110,7 @@ export class EligibilityreactiveComponent implements OnInit {
     private router: Router
     , private modalService: BsModalService
     , private sessionEService: LocalStorageService) {
-      const eligibility = this.sessionEService.getEligibilityFromSession();
+      const eligibility = this.sessionEService.getEligibilityIdFromSession();
         const stepInfo = this.sessionEService.getStepFromSession();
         if (eligibility != null && stepInfo != null && typeof stepInfo !== 'undefined' && stepInfo !== '') {
          if (stepInfo === '2') {
@@ -174,14 +174,14 @@ export class EligibilityreactiveComponent implements OnInit {
       this.logValidationErrors(this.eligibilityFrm);
     });
 
-    const modelFromSession = this.sessionEService.getEligibilityFromSession();
-    if (modelFromSession != null && modelFromSession.ovrApplicationId > 0) {
+    const modelFromSession = this.sessionEService.getEligibilityIdFromSession();
+    if (modelFromSession != null && modelFromSession > 0) {
       this.IsEligibilityOn = true;
       this.isRecaptaValid = false;
       this.isStep1Valid = false;
       this.pTabId = 2;
 
-      this.service.getOneEligibility(modelFromSession.ovrApplicationId).subscribe((x) => {
+      this.service.getOneEligibility(modelFromSession).subscribe((x) => {
         this.service.sharedEligibility = x;
         if (x.voterClaimsNoSsnOrDln === true) {
           this.eligibilityFrm.get('voterClaimsNoSsnOrDln').setValue(true);
@@ -213,7 +213,7 @@ export class EligibilityreactiveComponent implements OnInit {
         this.eligibilityFrm.get('dlIssueDate').setValue(x.dlIssueDate);
         this.eligibilityFrm.get('ovrApplicationId').setValue(x.ovrApplicationId);
         this.enableEligibilityForm();
-        this.sessionEService.SaveEligibilityToSession(x);
+        this.sessionEService.SaveEligibilityIdToSession(x.ovrApplicationId);
       });
     }
   }
@@ -238,7 +238,7 @@ export class EligibilityreactiveComponent implements OnInit {
   }
 
   onSubmit(formData: any) {
-    const modelFromSession = this.sessionEService.getEligibilityFromSession();
+    const modelFromSession = this.sessionEService.getEligibilityIdFromSession();
     const isEValid = (this.eligibilityFrm.get('usCitizen').value === '1') && (this.eligibilityFrm.get('notAFelon').value === '1')
       && (this.eligibilityFrm.get('mentalIncompStatus').value === '1')
       && this.eligibilityFrm.valid && this.isRecaptaValid;
@@ -269,10 +269,9 @@ export class EligibilityreactiveComponent implements OnInit {
         && contactData.ovrApplicationId > 0) {
           const appId = contactData.ovrApplicationId;
           this.service.updateEligibility(appId, contactData).subscribe(
-            (data: IEligibility) => {
+            (data: IEligibilityModel) => {
               this.service.sharedEligibility = data;
-              data.currentTabId = 1;
-              this.sessionEService.SaveEligibilityToSession(data);
+              this.sessionEService.SaveEligibilityIdToSession(data.ovrApplicationId);
               // this.sessionEService.SaveStepToSession("2");
               //  this.router.navigateByUrl('/rdform');
               this.router.navigateByUrl('/review');
@@ -283,7 +282,7 @@ export class EligibilityreactiveComponent implements OnInit {
             (data: IEligibility) => {
               this.service.sharedEligibility = data;
               data.currentTabId = 1;
-              this.sessionEService.SaveEligibilityToSession(data);
+              this.sessionEService.SaveEligibilityIdToSession(data.ovrApplicationId);
             //  this.sessionEService.SaveStepToSession("2");
              // this.router.navigateByUrl('/rdform');
              this.router.navigateByUrl('/review');
@@ -316,7 +315,7 @@ export class EligibilityreactiveComponent implements OnInit {
     }
   }
 
-  mapDateData(customer: IEligibility): IEligibilityModel {
+  mapDateData(customer: IEligibilityModel): IEligibilityModel {
     if (customer.dateOfBirth != null && customer.dateOfBirth !== '') {
       customer.dateOfBirth = new Date(customer.dateOfBirth).toISOString();
     }
@@ -386,7 +385,7 @@ export class EligibilityreactiveComponent implements OnInit {
   }
 
   confirm(): void {
-    this.sessionEService.RemoveEligibilityFromSession();
+    this.sessionEService.RemoveEligibilityIdFromSession();
     this.sessionEService.RemoveStepFromSession();
     this.ngOnInit();
     this.modalRef.hide();

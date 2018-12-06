@@ -559,20 +559,20 @@
                           <legend class="text-primary" style="color:#3977ad; font-size:14px; border-bottom:0px;">
                               I am one of the following:
                           </legend>
-                          <input name="militaryOption" type="radio" (change)="setMilitary($event, check)" value="1" formControlName="military"> &nbsp;
+                          <input type="radio" (change)="setMilitary($event, military)" value="1" formControlName="military"> &nbsp;
                           <label for="Classification1">
                               I am an active duty Uniformed Services or Merchant Marine member.
                           </label><br>
-                          <input name="militaryOption" type="radio" value="1" (change)="setMilitaryDependent($event, check)" formControlName="militaryDependent"> &nbsp;
+                          <input  type="radio" value="1" (change)="setMilitaryDependent($event, militaryDependent)" formControlName="militaryDependent"> &nbsp;
                           <label for="Classification2">
                               I am a spouse or a dependent of an active duty Uniformed Services or Merchant Marine member.
                           </label><br>
-                          <input name="militaryOption" type="radio" value="1" (change)="setOverseasFlag($event, check)" formControlName="overseasFlag"> &nbsp;
+                          <input  type="radio" value="1" (change)="setOverseasFlag($event, overseasFlag)" formControlName="overseasFlag"> &nbsp;
                           <label for="Classification3">
                               I am a U.S. citizen residing outside the U.S.
                           </label><br>
                           <label>
-                              <input (change)="setNoneOption($event, check)"  name="militaryOption" type="radio">  &nbsp;None of the above.
+                              <input (change)="setNoneOption()" type="radio">  &nbsp;None of the above.
                           </label><br>
                       </fieldset>
                   </div>

@@ -6,12 +6,12 @@ export class LocalStorageService {
 constructor() {}
 
 
-  SaveEligibilityToSession(aU: IEligibility) {
-    localStorage.setItem('eligibility', JSON.stringify(aU));
+  SaveEligibilityIdToSession(overApplicationId: number ) {
+    localStorage.setItem('overApplicationId', JSON.stringify(overApplicationId));
   }
 
-  RemoveEligibilityFromSession() {
-    localStorage.removeItem('eligibility');
+  RemoveEligibilityIdFromSession() {
+    localStorage.removeItem('overApplicationId');
   }
 
   getStepFromSession() {
@@ -27,9 +27,7 @@ constructor() {}
     localStorage.removeItem('step');
   }
 
-  getEligibilityFromSession() {
-    const item = localStorage.getItem('eligibility');
-    const jsonObject: IEligibility = JSON.parse(item);
-    return jsonObject;
+  getEligibilityIdFromSession() {
+  return JSON.parse(localStorage.getItem('overApplicationId'));
   }
 }

@@ -41,18 +41,18 @@ getOneEligibility(id: number): Observable<IEligibility> {
 
 // insert new contact details
 addEligibility(ieligibility: IEligibilityModel): Observable<any> {
-  return this.http.post<IEligibility>(Global.BASE_USER_ENDPOINT + 'ovrapp', ieligibility, httpOptions)
+  return this.http.post<IEligibilityModel>(Global.BASE_USER_ENDPOINT + 'ovrapp', ieligibility, httpOptions)
     .pipe(
       catchError(this.handleError)
     );
 }
 
 
-postEligibility(ieligibility: IEligibilityModel): Observable<HttpResponse<IEligibility>> {
+postEligibility(ieligibility: IEligibilityModel): Observable<HttpResponse<IEligibilityModel>> {
   const httpHeaders = new HttpHeaders({
        'Content-Type' : 'application/json'
   });
-  return this.http.post<IEligibility>(Global.BASE_USER_ENDPOINT + 'ovrapp', ieligibility,
+  return this.http.post<IEligibilityModel>(Global.BASE_USER_ENDPOINT + 'ovrapp', ieligibility,
       {
         headers: httpHeaders,
         observe: 'response'
@@ -62,8 +62,8 @@ postEligibility(ieligibility: IEligibilityModel): Observable<HttpResponse<IEligi
 
 
 
-updateEligibility(id: number, ieligibility: IEligibilityModel): Observable<IEligibility> {
-  return this.http.put<IEligibility>(Global.BASE_USER_ENDPOINT + 'ovrapp/' + id + '/eligibility', ieligibility, httpOptions)
+updateEligibility(id: number, ieligibility: IEligibilityModel): Observable<IEligibilityModel> {
+  return this.http.put<IEligibilityModel>(Global.BASE_USER_ENDPOINT + 'ovrapp/' + id + '/eligibility', ieligibility, httpOptions)
     .pipe(
       catchError(this.handleError)
     );
