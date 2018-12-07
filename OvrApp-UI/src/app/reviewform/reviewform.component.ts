@@ -31,7 +31,6 @@ message: string;
       this.service.getOneEligibility(modelFromSession).subscribe((x) => {
         this.service.sharedEligibility = x;
        this.getcustomer = x;
-       console.log(this.getcustomer);
       });
     }
   }

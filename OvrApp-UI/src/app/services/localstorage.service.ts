@@ -7,27 +7,26 @@ constructor() {}
 
 
   SaveEligibilityIdToSession(overApplicationId: number ) {
-    localStorage.setItem('overApplicationId', JSON.stringify(overApplicationId));
+    sessionStorage.setItem('overApplicationId', JSON.stringify(overApplicationId));
   }
 
   RemoveEligibilityIdFromSession() {
-    localStorage.removeItem('overApplicationId');
+    sessionStorage.removeItem('overApplicationId');
   }
 
   getStepFromSession() {
-   return localStorage.getItem('step');
+   return sessionStorage.getItem('step');
   }
 
-
   SaveStepToSession(aU: string) {
-    localStorage.setItem('step', aU);
+    sessionStorage.setItem('step', aU);
   }
 
   RemoveStepFromSession() {
-    localStorage.removeItem('step');
+    sessionStorage.removeItem('step');
   }
 
   getEligibilityIdFromSession() {
-  return JSON.parse(localStorage.getItem('overApplicationId'));
+  return JSON.parse(sessionStorage.getItem('overApplicationId'));
   }
 }

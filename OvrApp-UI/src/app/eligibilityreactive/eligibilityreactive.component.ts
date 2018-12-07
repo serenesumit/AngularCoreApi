@@ -37,6 +37,8 @@ export class EligibilityreactiveComponent implements OnInit {
   nameSuffix = '';
   hideDLDetail = true;
   hideSSNDetail = true;
+  isStep1Valid = false;
+  isStep2Valid = false;
   modalRef: BsModalRef;
   message: string;
   editData: IEligibilityModel;
@@ -99,11 +101,7 @@ export class EligibilityreactiveComponent implements OnInit {
     }
   };
 
-
-
-
-  @ViewChild('reCaptcha') reCaptcha: RecaptchaComponent;
-
+ @ViewChild('reCaptcha') reCaptcha: RecaptchaComponent;
   constructor(private fb: FormBuilder
     , private service: EligibilityService
     , private route: ActivatedRoute,
@@ -118,8 +116,7 @@ export class EligibilityreactiveComponent implements OnInit {
          }
        }
   }
-  isStep1Valid = false;
-  isStep2Valid = false;
+
 
 
 
